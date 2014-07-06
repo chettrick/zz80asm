@@ -27,7 +27,7 @@
 #define SRCEXT		".asm"	/* filename extension source */
 #define OBJEXTBIN	".bin"	/* filename extension object */
 #define OBJEXTHEX	".hex"	/* filename extension hex */
-#define LSTEXT		".lis"	/* filename extension listing */
+#define LSTEXT		".lst"	/* filename extension listing */
 #define OUTBIN		1	/* format of object: binary */
 #define OUTMOS		2	/*		     Mostek binary */
 #define OUTHEX		3	/*		     Intel hex */

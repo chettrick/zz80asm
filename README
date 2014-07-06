@@ -24,7 +24,7 @@ Format of the output file:
 
 Option l:
 Without this option no list file will be generated. With -l a list
-file with the name of the source file but extension ".lis" will be
+file with the name of the source file but extension ".lst" will be
 generated. An optional file name with path (2048 characters maximum)
 may be added to this option.
 
