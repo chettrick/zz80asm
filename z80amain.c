@@ -394,9 +394,9 @@ void open_o_files(char *source)
 		strcpy(objfn, source);
 	if ((p = strrchr(objfn, '.')) != NULL) {
 		if (out_form == OUTHEX)
-			strcpy(p, OBJEXTHEX);
+			strlcpy(p, OBJEXTHEX, sizeof(p));
 		else
-			strcpy(p, OBJEXTBIN);
+			strlcpy(p, OBJEXTBIN, sizeof(p));
 	} else {
 		if (out_form == OUTHEX)
 			strcat(objfn, OBJEXTHEX);
@@ -414,7 +414,7 @@ void open_o_files(char *source)
 		if (*lstfn == '\0')
 			strcpy(lstfn, source);
 		if ((p = strrchr(lstfn, '.')) != NULL)
-			strcpy(p, LSTEXT);
+			strlcpy(p, LSTEXT, sizeof(p));
 		else
 			strcat(lstfn, LSTEXT);
 		if ((lstfp = fopen(lstfn, WRITEA)) == NULL)
@@ -439,7 +439,7 @@ void get_fn(char *dest, char *src, char *ext)
 	*dp = '\0';
 	if ((strrchr(dest,'.') == NULL) &&
 	    (strlen(dest) <= (LENFN - strlen(ext))))
-		strcat(dest, ext);
+		strlcat(dest, ext, sizeof(dest));
 }
 
 /*
