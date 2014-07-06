@@ -20,8 +20,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "z80a.h"
-#include "z80aglb.h"
+#include "z80asm.h"
+#include "glb.h"
 
 #ifndef isxdigit
 #define isxdigit(c) (isdigit(c) || (c>='a' && c<='f') || (c>='A' && c<='F'))

@@ -18,8 +18,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "z80a.h"
-#include "z80aglb.h"
+#include "z80asm.h"
+#include "glb.h"
 
 int hash(char *);
 int numcmp(int, int);

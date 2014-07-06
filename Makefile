@@ -3,8 +3,7 @@ BINDIR?=	/usr/local/bin
 PROG=		z80asm
 NOMAN=
 
-SRCS=		z80aglb.c z80amain.c z80anum.c z80aopc.c \
-		z80aout.c z80apfun.c z80arfun.c z80atab.c
+SRCS=		z80asm.c glb.c num.c opc.c out.c pfun.c rfun.c tab.c
 
 CFLAGS+=	-g
 CFLAGS+=	-Werror -Wextra -std=c99 -Wcast-qual -Wformat

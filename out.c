@@ -17,8 +17,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "z80a.h"
-#include "z80aglb.h"
+#include "z80asm.h"
+#include "glb.h"
 
 void flush_hex(void);
 int chksum(void);

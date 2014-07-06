@@ -17,8 +17,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "z80a.h"
-#include "z80aglb.h"
+#include "z80asm.h"
+#include "glb.h"
 
 char *get_second(char *);
 int lda(void), ldb(void), ldc(void), ldd(void), lde(void);
