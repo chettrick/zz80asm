@@ -174,7 +174,7 @@ char *strsave(char *s)
 	register char *p;
 
 	if ((p = malloc((unsigned) strlen(s)+1)) != NULL)
-		strcpy(p, s);
+		strlcpy(p, s, sizeof(p));
 	return(p);
 }
 

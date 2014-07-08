@@ -3278,7 +3278,6 @@ int calc_val(char *s)
 		return(0);
 	}
 	i = p - s;
-	strncpy(tmp, s, i);
-	*(tmp + i) = '\0';
+	strlcpy(tmp, s, i + 1);
 	return(eval(tmp));
 }
