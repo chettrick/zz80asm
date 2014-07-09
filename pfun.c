@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "z80asm.h"
+#include "zz80asm.h"
 #include "glb.h"
 
 extern void fatal(int, char *);
