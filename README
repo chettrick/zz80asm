@@ -1,6 +1,7 @@
 Usage:
 
-zz80asm -ofile -f[b|m|h] -l[file] -s[n|a] -x -v -dsymbol ... file ...
+zz80asm [-d symbol ...] [-f b|m|h] [-l [listfile]] [-o outfile]
+	[-s [a|n]] [-v] [-x] filename ...
 
 A maximum of 512 source files is allowed. If the filename of a source
 doesn't have an extension the default extension ".asm" will be
