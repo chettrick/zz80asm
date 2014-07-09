@@ -16,7 +16,7 @@
  */
 
 #include <stdio.h>
-#include "zz80asm.h"
+#include "z80asm.h"
 
 extern int op_1b(), op_2b(), op_pupo(), op_ex(), op_ld();
 extern int op_call(), op_ret(), op_jp(), op_jr(), op_djnz(), op_rst();

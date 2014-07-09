@@ -17,7 +17,7 @@
  */
 
 #include <stdio.h>
-#include "zz80asm.h"
+#include "z80asm.h"
 
 char *infiles[MAXFN],		/* source filenames */
      objfn[LENFN + 1],		/* object filename */

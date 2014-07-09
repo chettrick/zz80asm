@@ -21,7 +21,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include "zz80asm.h"
+#include "z80asm.h"
 #include "glb.h"
 
 void init(void), options(int, char *[]);
@@ -50,7 +50,7 @@ extern void a_sort_sym(int);
 
 static char *errmsg[] = {		/* error messages for fatal() */
 	"out of memory: %s",		/* 0 */
-	"usage: zz80asm -f[b|m|h] -s[n|a] {-x} -v -ofile -l[file] -dsymbol ... file ...",
+	"usage: z80asm -f[b|m|h] -s[n|a] {-x} -v -ofile -l[file] -dsymbol ... file ...",
 	"Assembly halted",		/* 2 */
 	"can't open file %s",		/* 3 */
 	"internal error: %s"		/* 4 */
