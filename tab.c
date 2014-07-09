@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "z80asm.h"
+#include "zz80asm.h"
 #include "glb.h"
 
 int hash(char *);

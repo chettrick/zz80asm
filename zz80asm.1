@@ -1,0 +1,63 @@
+.\" Copyright (c) 2014 Chris Hettrick <chris@structfoo.com>
+.\"
+.\" Permission to use, copy, modify, and distribute this software for any
+.\" purpose with or without fee is hereby granted, provided that the above
+.\" copyright notice and this permission notice appear in all copies.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+.\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+.\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+.\" ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+.\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+.\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+.\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+.\"
+.Dd $Mdocdate: July 8 2014 $
+.Dt ZZ80ASM 1
+.Os
+.Sh NAME
+.Nm zz80asm
+.Nd z80 cross assembler
+.Sh SYNOPSIS
+.Nm coeff
+.Op Ar directory
+.Sh DESCRIPTION
+The
+.Nm
+utility differentially compares sensor coefficients between
+calibration certficates and instrument log captures.
+.Pp
+The mounted ISO9660 or FAT filesystem, or optional
+.Ar directory ,
+is recursively searched for sensor coefficients,
+and all values found are compared.
+Only one ISO9660 or FAT filesystem may be mounted at a time.
+.Sh FILES
+.Bl -tag -width "/usr/local/share/coeff/coeff.lstXXX" -compact
+.It Pa /usr/local/share/coeff/coeff.lst
+Sorted list of record value pairs from NetSuite.
+.El
+.Sh EXIT STATUS
+.Ex -std coeff
+.Sh SEE ALSO
+.Xr sort 1 ,
+.Xr mount 8
+.Sh AUTHORS
+.An -nosplit
+.Nm
+was written by
+.An Chris Hettrick Aq chris@structfoo.com .
+.Sh CAVEATS
+Tested only on Xchange series sensors.
+.Pp
+The file
+.Pa /usr/local/share/coeff/coeff.lst
+must be sorted with
+.Xr sort 1
+before executing
+.Nm .
+.Pp
+The current matching algorithm compares absolute
+differences between capture and calibration files
+and not contextual differences.
+This might not matter, depending on who you are.
