@@ -1,7 +1,7 @@
 BINDIR?=	/usr/local/bin
+MANDIR?=	/usr/local/man/man
 
 PROG=		zz80asm
-NOMAN=
 
 SRCS=		zz80asm.c glb.c num.c opc.c out.c pfun.c rfun.c tab.c
 

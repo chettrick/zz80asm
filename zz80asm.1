@@ -1,0 +1,144 @@
+.\" Copyright (c) 2014 Chris Hettrick <chris@structfoo.com>
+.\"
+.\" Permission is hereby granted, free of charge, to any person obtaining a
+.\" copy of this software and associated documentation files (the "Software"),
+.\" to deal in the Software without restriction, including without limitation
+.\" the rights to use, copy, modify, merge, publish, distribute, sublicense,
+.\" and/or sell copies of the Software, and to permit persons to whom the
+.\" Software is furnished to do so, subject to the following conditions:
+.\"
+.\" The above copyright notice and this permission notice shall be included
+.\" in all copies or substantial portions of the Software.
+.\"
+.\" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+.\" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+.\" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+.\" THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+.\" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+.\" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+.\" DEALINGS IN THE SOFTWARE.
+.\"
+.Dd $Mdocdate: July 9 2014 $
+.Dt ZZ80ASM 1
+.Os
+.Sh NAME
+.Nm zz80asm
+.Nd z80 cross assembler
+.Sh SYNOPSIS
+.Nm zz80asm
+.Op Fl d Ar symbol ...
+.Op Fl f Ar b|m|h
+.Op Fl l Op Ar listfile
+.Op Fl o Ar outfile
+.Op Fl s Op Ar a|n
+.Op Fl v
+.Op Fl x
+.Ar filename ...
+.Sh DESCRIPTION
+The
+.Nm
+utility assembles the files
+.Ar filename ...
+and writes to the output file
+.Ar outfile ,
+and optionally the listing file
+.Ar listfile.
+.Pp
+The options are as follows:
+.Bl -tag -width Ds
+.It Fl d Ar symbol ...
+Pre-define one or more
+.Ar symbols
+with a value of zero.
+.It Fl f Ar b|m|h
+Format
+.Ar outfile
+as either binary, binary with Mostek header, or Intel Hex, respectively.
+.It Fl l Op Ar listfile
+Generate listing file as
+.Ar listfile ,
+or as
+.Ar filename.lst
+by default.
+.It Fl o Ar outfile
+Set output filename to
+.Ar outfile
+instead of the default
+.Ar filename.bin
+or
+.Ar filename.hex .
+.It Fl s Op Ar a|n
+Generate unsorted symbol table.
+.Ar a
+and
+.Ar n
+sort the symbol table by address or name, respectively.
+.It Fl v
+Produce more verbose output.
+.It Fl x
+Do not output data into
+.Ar outfile
+for DEFS in pass two of the assembler.
+.El
+.Sh PSEUDO OPERATIONS
+.Ss Symbol definition and memory allocation:
+.Bl -tag -width autoselect -offset indent
+.It ORG Ao expression Ac
+Set program address.
+.It Ao symbol Ac EQU Ao expression Ac
+Define constant symbol.
+.It Ao symbol Ac DEFL Ao expression Ac
+Define variable symbol.
+.It Ao symbol Ac DEFB Ao expression, 'char', ... Ac
+Write 8 bit bytes in memory.
+.It Ao symbol Ac DEFW Ao expression, expression ... Ac
+Write 16 bit words in memory.
+.It Ao symbol Ac DEFM Ao 'string' Ac
+Write character string in memory.
+.It Ao symbol Ac DEFS Ao expression Ac
+Reserve space in memory.
+.El
+.Ss Conditional assembly:
+.Bl -tag -width autoselect -offset indent
+.It IFDEF Ao symbol Ac
+Assemble if symbol defined.
+.It IFNDEF Ao symbol Ac
+Assemble if symbol not defined.
+.It IFEQ Ao expression 1, expression 2 Ac
+Assemble if equal.
+.It IFNEQ Ao expression 1, expression 2 Ac
+Assemble if not equal.
+.It ELSE
+Else clause for all conditionals.
+.It ENDIF
+End of conditional assembly.
+.El
+.Ss Manipulation of list file:
+.Bl -tag -width autoselect -offset indent
+.It TITLE Ao 'string' Ac
+Title for page header.
+.It PAGE Ao expression Ac
+Number of lines per page.
+.It EJECT
+Skip to new page.
+.It LIST
+Turn listing on.
+.It NOLIST
+Turn listing off.
+.El
+.Ss Miscellaneous:
+.Bl -tag -width autoselect -offset indent
+.It INCLUDE Ao filename Ac
+Include another source file.
+.It PRINT Ao 'string' Ac
+Print string to stdout in pass one of the assembler.
+.El
+.Sh EXIT STATUS
+.Ex -std zz80asm
+.Sh AUTHORS
+.An -nosplit
+.Nm
+was written by
+.An Udo Munk
+and updated by
+.An Chris Hettrick Aq chris@structfoo.com .
