@@ -24,8 +24,9 @@ extern char	*infiles[],
 		label[],
 		opcode[],
 		operand[],
-		ops[],
 		title[];
+
+extern int	ops[];
 
 extern int	list_flag,
 		sym_flag,

@@ -28,8 +28,9 @@ char *infiles[MAXFN],		/* source filenames */
      label[SYMSIZE+1],		/* buffer for label */
      opcode[MAXLINE],		/* buffer for opcode */
      operand[MAXLINE],		/* buffer for operand */
-     ops[OPCARRAY],		/* buffer for generated object code */
      title[MAXLINE];		/* buffer for title of source */
+
+int  ops[OPCARRAY];		/* buffer for generated object code */
 
 int  list_flag,			/* flag for option -l */
      sym_flag,			/* flag for option -s */
