@@ -42,9 +42,9 @@ int op_ds(void);
 int op_db(void);
 int op_dm(void);
 int op_dw(void);
-int op_misc(int, int);
-int op_cond(int, int);
-int op_glob(int, int);
+int op_misc(int);
+int op_cond(int);
+int op_glob(int);
 
 /*
  *	ORG
@@ -245,7 +245,7 @@ int op_dw(void)
 /*
  *	EJECT, LIST, NOLIST, PAGE, PRINT, TITLE, INCLUDE
  */
-int op_misc(int op_code, int dummy)
+int op_misc(int op_code)
 {
 	register char *p, *d;
 	static char fn[LENFN];
@@ -353,7 +353,7 @@ int op_misc(int op_code, int dummy)
 /*
  *	IFDEF, IFNDEF, IFEQ, IFNEQ, ELSE, ENDIF
  */
-int op_cond(int op_code, int dummy)
+int op_cond(int op_code)
 {
 	register char *p, *p1, *p2;
 	static int condnest[IFNEST];
@@ -443,7 +443,7 @@ int op_cond(int op_code, int dummy)
 /*
  *	EXTRN and PUBLIC
  */
-int op_glob(int op_code, int dummy)
+int op_glob(int op_code)
 {
 	if (!gencode)
 		return(0);

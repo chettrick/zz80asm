@@ -36,10 +36,10 @@ extern void asmerr(int);
 extern int get_reg(char *);
 extern void put_label(void);
 
-int op_1b(int, int);
+int op_1b(int);
 int op_2b(int, int);
 int op_im(void);
-int op_pupo(int, int);
+int op_pupo(int);
 int op_ex(void);
 int op_call(void);
 int op_rst(void);
@@ -74,7 +74,7 @@ int op_bit(void);
 /*
  *	process 1byte opcodes without arguments
  */
-int op_1b(int b1, int dummy)
+int op_1b(int b1)
 {
 	if (pass == 1) {		/* Pass 1 */
 		if (*label)
@@ -131,7 +131,7 @@ int op_im(void)
 /*
  *	PUSH and POP
  */
-int op_pupo(int op_code, int dummy)
+int op_pupo(int op_code)
 {
 	register int len;
 
