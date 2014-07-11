@@ -18,18 +18,18 @@
 #include <stdio.h>
 #include "zz80asm.h"
 
-extern int op_1b(), op_2b(), op_pupo(), op_ex(), op_ld();
-extern int op_call(), op_ret(), op_jp(), op_jr(), op_djnz(), op_rst();
-extern int op_add(), op_adc(), op_sub(), op_sbc(), op_cp();
-extern int op_inc(), op_dec(), op_or(), op_xor(), op_and();
-extern int op_rl(), op_rr(), op_sla(), op_sra(), op_srl(), op_rlc(), op_rrc();
-extern int op_out(), op_in(), op_im();
-extern int op_set(), op_res(), op_bit();
-extern int op_org(), op_dl(), op_equ();
-extern int op_ds(), op_db(), op_dw(), op_dm();
-extern int op_misc();
-extern int op_cond();
-extern int op_glob();
+extern int op_1b(int, int), op_2b(int, int), op_pupo(int, int);
+extern int op_ex(void), op_ld(void), op_call(void), op_ret(void);
+extern int op_jp(void), op_jr(void), op_djnz(void), op_rst(void);
+extern int op_add(void), op_adc(void), op_sub(void), op_sbc(void), op_cp(void);
+extern int op_inc(void), op_dec(void), op_or(void), op_xor(void), op_and(void);
+extern int op_rl(void), op_rr(void), op_sla(void), op_sra(void), op_srl(void);
+extern int op_rlc(void), op_rrc(void);
+extern int op_out(void), op_in(void), op_im(void);
+extern int op_set(void), op_res(void), op_bit(void);
+extern int op_org(void), op_dl(void), op_equ(void);
+extern int op_ds(void), op_db(void), op_dw(void), op_dm(void);
+extern int op_misc(void), op_cond(void), op_glob(void);
 
 /*
  *	opcode table:
