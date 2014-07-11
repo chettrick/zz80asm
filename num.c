@@ -47,18 +47,19 @@
 #define OPECOM		15	/* logical complement */
 #define OPESYM		99	/* symbol */
 
-int strval(char *);
-int isari(int);
-int get_type(char *);
-int axtoi(char *);
-int abtoi(char *);
-int aotoi(char *);
+extern struct sym *get_sym(char *);
+extern void asmerr(int);
+
 int eval(char *);
 int chk_v1(int);
 int chk_v2(int);
 
-extern struct sym *get_sym(char *);
-extern void asmerr(int);
+static int strval(char *);
+static int isari(int);
+static int get_type(char *);
+static int axtoi(char *);
+static int abtoi(char *);
+static int aotoi(char *);
 
 /*
  *	recursive expression parser
@@ -183,7 +184,7 @@ hyp_error:
  *
  *	Output: operand type
  */
-int get_type(char *s)
+static int get_type(char *s)
 {
 	if (isdigit((int)*s)) {		/* numerical operand */
 		if (isdigit((int)*(s + strlen(s) - 1)))	/* decimal number */
@@ -223,7 +224,7 @@ int get_type(char *s)
  *	check a character for arithmetical operators
  *	+, -, *, /, %, <, >, |, &, ~ and ^
  */
-int isari(int c)
+static int isari(int c)
 {
 	return((c) == '+' || (c) == '-' || (c) == '*' ||
 	       (c) == '/' || (c) == '%' || (c) == '<' ||
@@ -235,7 +236,7 @@ int isari(int c)
  *	conversion of string with hexadecimal number to integer
  *	format: nnnnH or 0nnnnH if 1st digit > 9
  */
-int axtoi(char *str)
+static int axtoi(char *str)
 {
 	register int num;
 
@@ -252,7 +253,7 @@ int axtoi(char *str)
  *	conversion of string with octal number to integer
  *	format: nnnnO
  */
-int aotoi(char *str)
+static int aotoi(char *str)
 {
 	register int num;
 
@@ -283,7 +284,7 @@ int abtoi(char *str)
 /*
  *	convert ASCII string to integer
  */
-int strval(char *str)
+static int strval(char *str)
 {
 	register int num;
 
