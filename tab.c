@@ -27,6 +27,16 @@ int numcmp(int, int);
 extern void fatal(int, char *);
 extern void asmerr(int);
 
+struct opc *search_op(char *);
+int get_reg(char *);
+struct sym *get_sym(char *);
+int put_sym(char *, int);
+void put_label(void);
+char *strsave(char *);
+int copy_sym(void);
+void n_sort_sym(int);
+void a_sort_sym(int);
+
 /*
  *	binary search in sorted table opctab
  *

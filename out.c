@@ -23,6 +23,16 @@
 void flush_hex(void);
 int chksum(void);
 void btoh(unsigned char, char **);
+void asmerr(int);
+void lst_header(void);
+void lst_attl(void);
+void lst_line(int, int);
+void lst_sym(void);
+void lst_sort_sym(int);
+void obj_header(void);
+void obj_end(void);
+void obj_writeb(int);
+void obj_fill(int);
 
 extern void fatal(int, char *);
 

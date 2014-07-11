@@ -53,6 +53,9 @@ int get_type(char *);
 int axtoi(char *);
 int abtoi(char *);
 int aotoi(char *);
+int eval(char *);
+int chk_v1(int);
+int chk_v2(int);
 
 extern struct sym *get_sym(char *);
 extern void asmerr(int);

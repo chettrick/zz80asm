@@ -35,6 +35,17 @@ extern struct sym *get_sym(char *);
 extern int put_sym(char *, int);
 extern void put_label(void);
 
+int op_org(void);
+int op_equ(void);
+int op_dl(void);
+int op_ds(void);
+int op_db(void);
+int op_dm(void);
+int op_dw(void);
+int op_misc(int, int);
+int op_cond(int, int);
+int op_glob(int, int);
+
 /*
  *	ORG
  */

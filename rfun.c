@@ -36,6 +36,41 @@ extern void asmerr(int);
 extern int get_reg(char *);
 extern void put_label(void);
 
+int op_1b(int, int);
+int op_2b(int, int);
+int op_im(void);
+int op_pupo(int, int);
+int op_ex(void);
+int op_call(void);
+int op_rst(void);
+int op_ret(void);
+int op_jp(void);
+int op_jr(void);
+int op_djnz(void);
+int op_ld(void);
+int op_add(void);
+int op_adc(void);
+int op_sub(void);
+int op_sbc(void);
+int op_inc(void);
+int op_dec(void);
+int op_or(void);
+int op_xor(void);
+int op_and(void);
+int op_cp(void);
+int op_rl(void);
+int op_rr(void);
+int op_sla(void);
+int op_sra(void);
+int op_srl(void);
+int op_rlc(void);
+int op_rrc(void);
+int op_out(void);
+int op_in(void);
+int op_set(void);
+int op_res(void);
+int op_bit(void);
+
 /*
  *	process 1byte opcodes without arguments
  */
