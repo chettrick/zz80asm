@@ -120,7 +120,6 @@ struct sym *get_sym(char *sym_name)
  */
 int put_sym(char *sym_name, int sym_val)
 {
-	struct sym *get_sym();
 	register int hashval;
 	register struct sym *np;
 
@@ -145,8 +144,6 @@ int put_sym(char *sym_name, int sym_val)
  */
 void put_label(void)
 {
-	struct sym *get_sym(char *);
-
 	if (get_sym(label) == NULL) {
 		if (put_sym(label, pc))
 			fatal(F_OUTMEM, "symbols");
