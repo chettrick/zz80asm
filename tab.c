@@ -125,8 +125,6 @@ int put_sym(char *sym_name, int sym_val)
 	register int hashval;
 	register struct sym *np;
 
-	char *strsave(char *);
-
 	if (!gencode)
 		return(0);
 	if ((np = get_sym(sym_name)) == NULL) {
