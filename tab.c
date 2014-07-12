@@ -181,7 +181,7 @@ static char *strsave(char *s)
 {
 	register char *p;
 
-	if ((p = malloc((unsigned) strlen(s)+1)) != NULL)
+	if ((p = malloc((unsigned int)strlen(s)+1)) != NULL)
 		strlcpy(p, s, sizeof(p));
 	return(p);
 }
@@ -260,9 +260,9 @@ void a_sort_sym(int len)
  */
 static int numcmp(int n1, int n2)
 {
-	if ((unsigned) (n1 & 0xffff) < (unsigned) (n2 & 0xffff))
+	if ((unsigned int)(n1 & 0xffff) < (unsigned int)(n2 & 0xffff))
 		return(-1);
-	else if ((unsigned) (n1 & 0xffff) > (unsigned) (n2 & 0xffff))
+	else if ((unsigned int)(n1 & 0xffff) > (unsigned int)(n2 & 0xffff))
 		return(1);
 	else
 		return(0);

@@ -78,7 +78,7 @@ struct sym {
  *	structure nested INCLUDE's
  */
 struct inc {
-	unsigned inc_line;	/* line counter for listing */
+	unsigned int inc_line;	/* line counter for listing */
 	char *inc_fn;		/* filename */
 	FILE *inc_fp;		/* file pointer */
 };
@@ -190,7 +190,7 @@ FILE *srcfp,			/* file pointer for current source */
      *lstfp,			/* file pointer for listing */
      *errfp;			/* file pointer for error output */
 
-unsigned
+unsigned int
       c_line,			/* current line no. in current source */
       s_line,			/* line no. counter for listing */
       p_line,			/* no. printed lines on page */
