@@ -19,7 +19,6 @@
 #include <string.h>
 
 #include "zz80asm.h"
-#include "glb.h"
 
 extern int eval(char *);
 extern int calc_val(char *);

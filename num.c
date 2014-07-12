@@ -22,7 +22,6 @@
 #include <string.h>
 
 #include "zz80asm.h"
-#include "glb.h"
 
 #ifndef isxdigit
 #define isxdigit(c) (isdigit(c) || (c>='a' && c<='f') || (c>='A' && c<='F'))

@@ -23,7 +23,6 @@
 #include <unistd.h>
 
 #include "zz80asm.h"
-#include "glb.h"
 
 extern void asmerr(int);
 extern void lst_line(int, int);
@@ -68,6 +67,11 @@ static char *errmsg[] = {		/* error messages for fatal() */
 int main(int argc, char *argv[])
 {
 	int len;
+
+	/* program defaults */
+	gencode = 1;
+	out_form = OUTDEF;
+	ppl = PLENGTH;
 
 	init();
 	options(argc, argv);

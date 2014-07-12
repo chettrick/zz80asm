@@ -3,7 +3,7 @@ MANDIR?=	/usr/local/man/man
 
 PROG=		zz80asm
 
-SRCS=		zz80asm.c glb.c num.c opc.c out.c pfun.c rfun.c tab.c
+SRCS=		zz80asm.c num.c opc.c out.c pfun.c rfun.c tab.c
 
 CFLAGS+=	-g
 CFLAGS+=	-Werror -Wextra -std=c99 -Wcast-qual -Wformat

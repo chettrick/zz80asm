@@ -146,3 +146,67 @@ struct inc {
 #define F_HALT		2	/* assembly halted */
 #define F_FOPEN		3	/* can't open file */
 #define F_INTERN	4	/* internal error */
+
+/*
+ *	global variables other than CPU specific tables
+ */
+char *infiles[MAXFN],		/* source filenames */
+     objfn[LENFN + 1],		/* object filename */
+     lstfn[LENFN + 1],		/* listing filename */
+     *srcfn,			/* filename of current processed source file */
+     line[MAXLINE],		/* buffer for one line source */
+     tmp[MAXLINE],		/* temporary buffer */
+     label[SYMSIZE+1],		/* buffer for label */
+     opcode[MAXLINE],		/* buffer for opcode */
+     operand[MAXLINE],		/* buffer for operand */
+     title[MAXLINE];		/* buffer for title of source */
+
+int  ops[OPCARRAY];		/* buffer for generated object code */
+
+int  list_flag,			/* flag for option -l */
+     sym_flag,			/* flag for option -s */
+     ver_flag,			/* flag for option -v */
+     dump_flag,			/* flag for option -x */
+     pc,			/* program counter */
+     pass,			/* processed pass */
+     iflevel,			/* IF nesting level */
+     gencode,			/* flag for conditional object code */
+     errors,			/* error counter */
+     errnum,			/* error number in pass 2 */
+     sd_flag,			/* list flag for PSEUDO opcodes */
+				/* = 0: address from <val>, data from <ops> */
+				/* = 1: address from <sd_val>, data from <ops>*/
+				/* = 2: no address, data from <ops> */
+				/* = 3: address from <sd_val>, no data */
+				/* = 4: suppress whole line */
+     sd_val,			/* output value for PSEUDO opcodes */
+     prg_adr,			/* start address of program */
+     prg_flag,			/* flag for prg_adr valid */
+     out_form,			/* format of object file */
+     symsize;			/* size of symarray */
+
+FILE *srcfp,			/* file pointer for current source */
+     *objfp,			/* file pointer for object code */
+     *lstfp,			/* file pointer for listing */
+     *errfp;			/* file pointer for error output */
+
+unsigned
+      c_line,			/* current line no. in current source */
+      s_line,			/* line no. counter for listing */
+      p_line,			/* no. printed lines on page */
+      ppl,			/* page length */
+      page;			/* no. of pages for listing */
+
+struct sym
+     *symtab[HASHSIZE],		/* symbol table */
+     **symarray;		/* sorted symbol table */
+
+/*
+ *	global variable declarations
+ */
+extern int	no_opcodes,
+		no_operands;
+
+extern struct opc opctab[];
+
+extern struct ope opetab[];

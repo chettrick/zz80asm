@@ -20,7 +20,6 @@
 #include <string.h>
 
 #include "zz80asm.h"
-#include "glb.h"
 
 extern void fatal(int, char *);
 extern void asmerr(int);
