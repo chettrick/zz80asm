@@ -11,6 +11,9 @@
  *	04-OCT-2008 fixed comment bug, ';' string argument now working
  */
 
+#ifndef _ZZ80ASM_H_
+#define _ZZ80ASM_H_
+
 /*
  *	OS dependant definitions
  */
@@ -210,3 +213,5 @@ extern int	no_opcodes,
 extern struct opc opctab[];
 
 extern struct ope opetab[];
+
+#endif /* _ZZ80ASM_H_ */
