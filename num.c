@@ -16,10 +16,11 @@
  *	module with numerical computation and conversion
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "zz80asm.h"
 #include "glb.h"
 

@@ -15,14 +15,12 @@
  *	module with table operations on opcode and symbol tables
  */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
 #include "zz80asm.h"
 #include "glb.h"
-
-int hash(char *);
-int numcmp(int, int);
 
 extern void fatal(int, char *);
 extern void asmerr(int);
@@ -32,10 +30,13 @@ int get_reg(char *);
 struct sym *get_sym(char *);
 int put_sym(char *, int);
 void put_label(void);
-char *strsave(char *);
 int copy_sym(void);
 void n_sort_sym(int);
 void a_sort_sym(int);
+
+static int hash(char *);
+static int numcmp(int, int);
+static char *strsave(char *);
 
 /*
  *	binary search in sorted table opctab
@@ -163,7 +164,7 @@ void put_label(void)
  *
  *	Output: hash value
  */
-int hash(char *name)
+static int hash(char *name)
 {
 	register int hashval;
 
@@ -179,7 +180,7 @@ int hash(char *name)
  *
  *	Output: pointer to allocated memory with string
  */
-char *strsave(char *s)
+static char *strsave(char *s)
 {
 	register char *p;
 
@@ -260,7 +261,7 @@ void a_sort_sym(int len)
 /*
  *	compares two 16bit values, result like strcmp()
  */
-int numcmp(int n1, int n2)
+static int numcmp(int n1, int n2)
 {
 	if ((unsigned) (n1 & 0xffff) < (unsigned) (n2 & 0xffff))
 		return(-1);

@@ -16,23 +16,14 @@
  *	main module, handles the options and runs 2 passes over the sources
  */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
 #include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
 #include "zz80asm.h"
 #include "glb.h"
-
-void init(void), options(int, char *[]);
-void usage(void), fatal(int, char *);
-void pass1(void), p1_file(char *);
-void pass2(void), p2_file(char *);
-int p1_line(void), p2_line(void);
-void open_o_files(char *), get_fn(char *, char *, char *);
-char *get_label(char *, char *);
-char *get_opcode(char *, char *);
-char *get_arg(char *, char *);
 
 extern void asmerr(int);
 extern void lst_line(int, int);
@@ -47,6 +38,23 @@ extern void put_label(void);
 extern int copy_sym(void);
 extern void n_sort_sym(int);
 extern void a_sort_sym(int);
+
+void fatal(int, char *);
+void p1_file(char *);
+void p2_file(char *);
+
+static void init(void);
+static void options(int, char *[]);
+static void usage(void);
+static void pass1(void);
+static void pass2(void);
+static int p1_line(void);
+static int p2_line(void);
+static void open_o_files(char *);
+static void get_fn(char *, char *, char *);
+static char *get_label(char *, char *);
+static char *get_opcode(char *, char *);
+static char *get_arg(char *, char *);
 
 static char *errmsg[] = {		/* error messages for fatal() */
 	"out of memory: %s",		/* 0 */
@@ -94,7 +102,7 @@ int main(int argc, char *argv[])
 /*
  *	initialization
  */
-void init(void)
+static void init(void)
 {
 	errfp = stdout;
 }
@@ -102,7 +110,7 @@ void init(void)
 /*
  *	process options
  */
-void options(int argc, char *argv[])
+static void options(int argc, char *argv[])
 {
 	register char *s, *t;
 	register int i;
@@ -201,7 +209,7 @@ void options(int argc, char *argv[])
 /*
  *	error in options, print usage
  */
-void usage(void)
+static void usage(void)
 {
 	fatal(F_USAGE, NULL);
 }

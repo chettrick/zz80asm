@@ -16,6 +16,7 @@
  */
 
 #include <stdio.h>
+
 #include "zz80asm.h"
 
 extern int op_1b(int), op_2b(int, int), op_pupo(int);
@@ -27,8 +28,9 @@ extern int op_rl(void), op_rr(void), op_sla(void), op_sra(void), op_srl(void);
 extern int op_rlc(void), op_rrc(void);
 extern int op_out(void), op_in(void), op_im(void);
 extern int op_set(void), op_res(void), op_bit(void);
-extern int op_org(void), op_dl(void), op_equ(void);
-extern int op_ds(void), op_db(void), op_dw(void), op_dm(void);
+
+extern int op_org(void), op_equ(void), op_dl(void);
+extern int op_ds(void), op_db(void), op_dm(void), op_dw(void);
 extern int op_misc(int), op_cond(int), op_glob(int);
 
 /*

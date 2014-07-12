@@ -17,16 +17,9 @@
 
 #include <stdio.h>
 #include <string.h>
+
 #include "zz80asm.h"
 #include "glb.h"
-
-char *get_second(char *);
-int lda(void), ldb(void), ldc(void), ldd(void), lde(void);
-int ldh(void), ldl(void);
-int ldbc(void), ldde(void), ldhl(void), ldix(void), ldiy(void);
-int ldsp(void), ldihl(void), ldiix(void), ldiiy(void), ldinn(void);
-int adda(void), addhl(void), addix(void), addiy(void);
-int adca(void), adchl(void), sbca(void), sbchl(void);
 
 extern int eval(char *);
 extern int calc_val(char *);
@@ -36,40 +29,23 @@ extern void asmerr(int);
 extern int get_reg(char *);
 extern void put_label(void);
 
-int op_1b(int);
-int op_2b(int, int);
-int op_im(void);
-int op_pupo(int);
-int op_ex(void);
-int op_call(void);
-int op_rst(void);
-int op_ret(void);
-int op_jp(void);
-int op_jr(void);
-int op_djnz(void);
-int op_ld(void);
-int op_add(void);
-int op_adc(void);
-int op_sub(void);
-int op_sbc(void);
-int op_inc(void);
-int op_dec(void);
-int op_or(void);
-int op_xor(void);
-int op_and(void);
-int op_cp(void);
-int op_rl(void);
-int op_rr(void);
-int op_sla(void);
-int op_sra(void);
-int op_srl(void);
-int op_rlc(void);
-int op_rrc(void);
-int op_out(void);
-int op_in(void);
-int op_set(void);
-int op_res(void);
-int op_bit(void);
+int op_1b(int), op_2b(int, int), op_pupo(int);
+int op_ex(void), op_ld(void), op_call(void), op_ret(void);
+int op_jp(void), op_jr(void), op_djnz(void), op_rst(void);
+int op_add(void), op_adc(void), op_sub(void), op_sbc(void), op_cp(void);
+int op_inc(void), op_dec(void), op_or(void), op_xor(void), op_and(void);
+int op_rl(void), op_rr(void), op_sla(void), op_sra(void), op_srl(void);
+int op_rlc(void), op_rrc(void);
+int op_out(void), op_in(void), op_im(void);
+int op_set(void), op_res(void), op_bit(void);
+
+static char *get_second(char *);
+static int lda(void), ldb(void), ldc(void), ldd(void), lde(void);
+static int ldh(void), ldl(void);
+static int ldbc(void), ldde(void), ldhl(void), ldix(void), ldiy(void);
+static int ldsp(void), ldihl(void), ldiix(void), ldiiy(void), ldinn(void);
+static int adda(void), addhl(void), addix(void), addiy(void);
+static int adca(void), adchl(void), sbca(void), sbchl(void);
 
 /*
  *	process 1byte opcodes without arguments
@@ -717,7 +693,7 @@ int op_ld(void)
 /*
  *	LD A,?
  */
-int lda(void)
+static int lda(void)
 {
 	register int op;
 	register int i, len;
@@ -805,7 +781,7 @@ int lda(void)
 /*
  *	LD B,?
  */
-int ldb(void)
+static int ldb(void)
 {
 	register int op;
 	register int len;
@@ -865,7 +841,7 @@ int ldb(void)
 /*
  *	LD C,?
  */
-int ldc(void)
+static int ldc(void)
 {
 	register int op;
 	register int len;
@@ -925,7 +901,7 @@ int ldc(void)
 /*
  *	LD D,?
  */
-int ldd(void)
+static int ldd(void)
 {
 	register int op;
 	register int len;
@@ -985,7 +961,7 @@ int ldd(void)
 /*
  *	LD E,?
  */
-int lde(void)
+static int lde(void)
 {
 	register int op;
 	register int len;
@@ -1045,7 +1021,7 @@ int lde(void)
 /*
  *	LD H,?
  */
-int ldh(void)
+static int ldh(void)
 {
 	register int op;
 	register int len;
@@ -1105,7 +1081,7 @@ int ldh(void)
 /*
  *	LD L,?
  */
-int ldl(void)
+static int ldl(void)
 {
 	register int op;
 	register int len;
@@ -1165,7 +1141,7 @@ int ldl(void)
 /*
  *	LD BC,?
  */
-int ldbc(void)
+static int ldbc(void)
 {
 	register int i, len;
 	register char *p;
@@ -1208,7 +1184,7 @@ int ldbc(void)
 /*
  *	LD DE,?
  */
-int ldde(void)
+static int ldde(void)
 {
 	register int i, len;
 	register char *p;
@@ -1251,7 +1227,7 @@ int ldde(void)
 /*
  *	LD HL,?
  */
-int ldhl(void)
+static int ldhl(void)
 {
 	register int i, len;
 	register char *p;
@@ -1293,7 +1269,7 @@ int ldhl(void)
 /*
  *	LD IX,?
  */
-int ldix(void)
+static int ldix(void)
 {
 	register int i, len;
 	register char *p;
@@ -1337,7 +1313,7 @@ int ldix(void)
 /*
  *	LD IY,?
  */
-int ldiy(void)
+static int ldiy(void)
 {
 	register int i, len;
 	register char *p;
@@ -1381,7 +1357,7 @@ int ldiy(void)
 /*
  *	LD SP,?
  */
-int ldsp(void)
+static int ldsp(void)
 {
 	register int i, len;
 	register char *p;
@@ -1438,7 +1414,7 @@ int ldsp(void)
 /*
  *	LD (HL),?
  */
-int ldihl(void)
+static int ldihl(void)
 {
 	register int op;
 	register int len;
@@ -1479,7 +1455,7 @@ int ldihl(void)
 /*
  *	LD (IX+d),?
  */
-int ldiix(void)
+static int ldiix(void)
 {
 	register int op;
 	register int len;
@@ -1526,7 +1502,7 @@ int ldiix(void)
 /*
  *	LD (IY+d),?
  */
-int ldiiy(void)
+static int ldiiy(void)
 {
 	register int op;
 	register int len;
@@ -1573,7 +1549,7 @@ int ldiiy(void)
 /*
  *	LD (nn),?
  */
-int ldinn(void)
+static int ldinn(void)
 {
 	register int i, len;
 	register char *p;
@@ -1706,7 +1682,7 @@ int op_add(void)
 /*
  *	ADD A,?
  */
-int adda(void)
+static int adda(void)
 {
 	register int op;
 	register int len;
@@ -1764,7 +1740,7 @@ int adda(void)
 /*
  *	ADD HL,?
  */
-int addhl(void)
+static int addhl(void)
 {
 	switch (get_reg(get_second(operand))) {
 	case REGBC:			/* ADD HL,BC */
@@ -1795,7 +1771,7 @@ int addhl(void)
 /*
  *	ADD IX,?
  */
-int addix(void)
+static int addix(void)
 {
 	switch (get_reg(get_second(operand))) {
 	case REGBC:			/* ADD IX,BC */
@@ -1830,7 +1806,7 @@ int addix(void)
 /*
  *	ADD IY,?
  */
-int addiy(void)
+static int addiy(void)
 {
 	switch (get_reg(get_second(operand))) {
 	case REGBC:			/* ADD IY,BC */
@@ -1901,7 +1877,7 @@ int op_adc(void)
 /*
  *	ADC A,?
  */
-int adca(void)
+static int adca(void)
 {
 	register int op;
 	register int len;
@@ -1959,7 +1935,7 @@ int adca(void)
 /*
  *	ADC HL,?
  */
-int adchl(void)
+static int adchl(void)
 {
 	switch (get_reg(get_second(operand))) {
 	case REGBC:			/* ADC HL,BC */
@@ -2088,7 +2064,7 @@ int op_sbc(void)
 /*
  *	SBC A,?
  */
-int sbca(void)
+static int sbca(void)
 {
 	register int op;
 	register int len;
@@ -2146,7 +2122,7 @@ int sbca(void)
 /*
  *	SBC HL,?
  */
-int sbchl(void)
+static int sbchl(void)
 {
 	switch (get_reg(get_second(operand))) {
 	case REGBC:			/* SBC HL,BC */
@@ -3288,7 +3264,7 @@ int op_bit(void)
  *	opcodes:	opcode destination,source
  *	if source is missing returns NULL
  */
-char *get_second(char *s)
+static char *get_second(char *s)
 {
 	register char *p;
 

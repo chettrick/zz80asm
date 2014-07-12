@@ -17,12 +17,12 @@
 
 #include <stdio.h>
 #include <string.h>
+
 #include "zz80asm.h"
 #include "glb.h"
 
-void flush_hex(void);
-int chksum(void);
-void btoh(unsigned char, char **);
+extern void fatal(int, char *);
+
 void asmerr(int);
 void lst_header(void);
 void lst_attl(void);
@@ -34,7 +34,9 @@ void obj_end(void);
 void obj_writeb(int);
 void obj_fill(int);
 
-extern void fatal(int, char *);
+static void flush_hex(void);
+static int chksum(void);
+static void btoh(unsigned char, char **);
 
 static char *errmsg[] = {		/* error messages for asmerr() */
 	"illegal opcode",		/* 0 */
@@ -317,7 +319,7 @@ void obj_fill(int count)
 /*
  *	create a hex record in ASCII and write into object file
  */
-void flush_hex(void)
+static void flush_hex(void)
 {
 	char *p;
 	register int i;
@@ -345,7 +347,7 @@ void flush_hex(void)
  *	convert unsigned char into ASCII hex and copy to string at p
  *	increase p by 2
  */
-void btoh(unsigned char byte, char **p)
+static void btoh(unsigned char byte, char **p)
 {
 	register unsigned char c;
 
@@ -358,7 +360,7 @@ void btoh(unsigned char byte, char **p)
 /*
  *	compute checksum for Intel hex record
  */
-int chksum(void)
+static int chksum(void)
 {
 	register int i, j, sum;
 

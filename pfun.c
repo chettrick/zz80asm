@@ -16,9 +16,10 @@
  *	processing of all PSEUDO ops
  */
 
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
+
 #include "zz80asm.h"
 #include "glb.h"
 
