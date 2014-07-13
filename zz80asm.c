@@ -38,13 +38,13 @@ extern size_t copy_sym(void);
 extern void n_sort_sym(size_t);
 extern void a_sort_sym(size_t);
 
-void fatal(int, char *);
+void fatal(int, char *) __attribute__((noreturn));
 void p1_file(char *);
 void p2_file(char *);
 
 static void init(void);
 static void options(int, char *[]);
-static void usage(void);
+static void usage(void) __attribute__((noreturn));
 static void pass1(void);
 static void pass2(void);
 static int p1_line(void);
