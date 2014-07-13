@@ -3281,13 +3281,11 @@ static char *get_second(char *s)
 int calc_val(char *s)
 {
 	register char *p;
-	register int i;
 
 	if ((p = strrchr(s, ')')) == NULL) {
 		asmerr(E_MISPAR);
 		return(0);
 	}
-	i = p - s;
-	strlcpy(tmp, s, i + 1);
-	return(eval(tmp));
+	strlcpy(tmp, s, p - s + 1);
+	return (eval(tmp));
 }
