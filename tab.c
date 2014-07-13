@@ -29,9 +29,9 @@ int get_reg(char *);
 struct sym *get_sym(char *);
 int put_sym(char *, int);
 void put_label(void);
-int copy_sym(void);
-void n_sort_sym(int);
-void a_sort_sym(int);
+size_t copy_sym(void);
+void n_sort_sym(size_t);
+void a_sort_sym(size_t);
 
 static int hash(char *);
 static int numcmp(int, int);
@@ -187,9 +187,9 @@ static char *strsave(char *s)
  *	copy whole symbol hash table into allocated pointer array
  *	used for sorting the symbol table later
  */
-int copy_sym(void)
+size_t copy_sym(void)
 {
-	register int i, j;
+	size_t i, j;
 	register struct sym *np;
 
 	symarray = (struct sym **) malloc(SYMINC * sizeof(struct sym *));
@@ -215,14 +215,14 @@ int copy_sym(void)
 /*
  *	sort symbol table by name
  */
-void n_sort_sym(int len)
+void n_sort_sym(size_t len)
 {
-	register int gap, i, j;
+	size_t gap, i, j;
 	register struct sym *temp;
 
 	for (gap = len/2; gap > 0; gap /= 2)
 		for (i = gap; i < len; i++)
-			for (j = i-gap; j >= 0; j -= gap) {
+			for (j = i-gap; j; j -= gap) {
 				if (strcmp(symarray[j]->sym_name,
 				    symarray[j+gap]->sym_name) <= 0)
 					break;
@@ -235,14 +235,14 @@ void n_sort_sym(int len)
 /*
  *	sort symbol table by address
  */
-void a_sort_sym(int len)
+void a_sort_sym(size_t len)
 {
-	register int gap, i, j;
+	size_t gap, i, j;
 	register struct sym *temp;
 
 	for (gap = len/2; gap > 0; gap /= 2)
 		for (i = gap; i < len; i++)
-			for (j = i-gap; j >= 0; j -= gap) {
+			for (j = i-gap; j; j -= gap) {
 				if (numcmp(symarray[j]->sym_val,
 				    symarray[j+gap]->sym_val) <= 0)
 					break;

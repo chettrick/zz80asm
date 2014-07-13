@@ -189,8 +189,8 @@ int  list_flag,			/* flag for option -l */
      sd_val,			/* output value for PSEUDO opcodes */
      prg_adr,			/* start address of program */
      prg_flag,			/* flag for prg_adr valid */
-     out_form,			/* format of object file */
-     symsize;			/* size of symarray */
+     out_form;			/* format of object file */
+size_t symsize;			/* size of symarray */
 
 FILE *srcfp,			/* file pointer for current source */
      *objfp,			/* file pointer for object code */
@@ -200,9 +200,11 @@ FILE *srcfp,			/* file pointer for current source */
 unsigned int
       c_line,			/* current line no. in current source */
       s_line,			/* line no. counter for listing */
-      p_line,			/* no. printed lines on page */
-      ppl,			/* page length */
       page;			/* no. of pages for listing */
+
+size_t
+      p_line,			/* no. printed lines on page */
+      ppl;			/* page length */
 
 struct sym
      *symtab[HASHSIZE],		/* symbol table */

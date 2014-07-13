@@ -27,10 +27,10 @@ void lst_header(void);
 void lst_attl(void);
 void lst_line(int, int);
 void lst_sym(void);
-void lst_sort_sym(int);
+void lst_sort_sym(size_t);
 void obj_header(void);
 void obj_end(void);
-void obj_writeb(int);
+void obj_writeb(size_t);
 void obj_fill(int);
 
 static void flush_hex(void);
@@ -209,9 +209,9 @@ void lst_sym(void)
 /*
  *	print sorted symbol table into listfile
  */
-void lst_sort_sym(int len)
+void lst_sort_sym(size_t len)
 {
-	register int i, j;
+	size_t i, j;
 
 	p_line = i = j = 0;
 	strlcpy(title, "Symboltable", sizeof(title));
@@ -247,7 +247,7 @@ void obj_header(void)
 		putc(prg_adr >> 8, objfp);
 		break;
 	case OUTHEX:
-		hex_adr = prg_adr;
+		hex_adr = (unsigned short)prg_adr;
 		break;
 	}
 }
@@ -272,7 +272,7 @@ void obj_end(void)
 /*
  *	write opcodes in ops[] into object file
  */
-void obj_writeb(int opanz)
+void obj_writeb(size_t opanz)
 {
 	register int i;
 
@@ -287,7 +287,7 @@ void obj_writeb(int opanz)
 		for (i = 0; opanz; opanz--) {
 			if (hex_cnt >= MAXHEX)
 				flush_hex();
-			hex_buf[hex_cnt++] = ops[i++];
+			hex_buf[hex_cnt++] = (unsigned char)ops[i++];
 		}
 		break;
 	}

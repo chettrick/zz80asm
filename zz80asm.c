@@ -27,16 +27,16 @@
 extern void asmerr(int);
 extern void lst_line(int, int);
 extern void lst_sym(void);
-extern void lst_sort_sym(int);
+extern void lst_sort_sym(size_t);
 extern void obj_header(void);
 extern void obj_end(void);
 extern void obj_writeb(int);
 extern struct opc *search_op(char *);
 extern int put_sym(char *, int);
 extern void put_label(void);
-extern int copy_sym(void);
-extern void n_sort_sym(int);
-extern void a_sort_sym(int);
+extern size_t copy_sym(void);
+extern void n_sort_sym(size_t);
+extern void a_sort_sym(size_t);
 
 void fatal(int, char *);
 void p1_file(char *);
@@ -66,7 +66,7 @@ static char *errmsg[] = {		/* error messages for fatal() */
 
 int main(int argc, char *argv[])
 {
-	int len;
+	size_t len;
 
 	/* program defaults */
 	gencode = 1;
@@ -182,8 +182,8 @@ static void options(int argc, char *argv[])
 				}
 				t = tmp;
 				while (*s)
-					*t++ = islower((int)*s) ?
-						toupper((int)*s++) : *s++;
+					*t++ = islower(*s) ?
+						(char)toupper(*s++) : *s++;
 				s--;
 				*t = '\0';
 				if (put_sym(tmp, 0))
@@ -465,9 +465,9 @@ char *get_label(char *s, char *l)
 	i = 0;
 	if (*l == LINCOM)
 		goto comment;
-	while (!isspace((int)*l) && *l != COMMENT && *l != LABSEP
-	       && i < SYMSIZE) {
-		*s++ = islower((int)*l) ? toupper((int)*l++) : *l++;
+	while (!isspace(*l) && *l != COMMENT && *l != LABSEP &&
+	    i < SYMSIZE) {
+		*s++ = islower(*l) ? (char)toupper(*l++) : *l++;
 		i++;
 	}
 comment:
@@ -483,14 +483,14 @@ char *get_opcode(char *s, char *l)
 {
 	if (*l == LINCOM)
 		goto comment;
-	while (!isspace((int)*l) && *l != COMMENT && *l != LABSEP)
+	while (!isspace(*l) && *l != COMMENT && *l != LABSEP)
 		l++;
 	if (*l == LABSEP)
 		l++;
 	while (*l == ' ' || *l == '\t')
 		l++;
-	while (!isspace((int)*l) && *l != COMMENT)
-		*s++ = islower((int)*l) ? toupper((int)*l++) : *l++;
+	while (!isspace(*l) && *l != COMMENT)
+		*s++ = islower(*l) ? (char)toupper(*l++) : *l++;
 comment:
 	*s = '\0';
 	return(l);
@@ -508,12 +508,12 @@ char *get_arg(char *s, char *l)
 	while (*l == ' ' || *l == '\t')
 		l++;
 	while (*l != '\n' && *l != COMMENT) {
-		if (isspace((int)*l)) {
+		if (isspace(*l)) {
 			l++;
 			continue;
 		}
 		if (*l != STRSEP) {
-			*s++ = islower((int)*l) ? toupper((int)*l) : *l;
+			*s++ = islower(*l) ? (char)toupper(*l) : *l;
 			l++;
 			continue;
 		}

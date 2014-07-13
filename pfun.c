@@ -270,7 +270,7 @@ int op_misc(int op_code)
 		break;
 	case 4:				/* PAGE */
 		if (pass == 2)
-			ppl = eval(operand);
+			ppl = (size_t)eval(operand);
 		break;
 	case 5:				/* PRINT */
 		if (pass == 1) {
