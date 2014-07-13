@@ -67,7 +67,7 @@ static char hex_out[MAXHEX*2+11];	/* ASCII buffer for one hex record */
 void asmerr(int i)
 {
 	if (pass == 1) {
-		fprintf(errfp, "Error in file: %s  Line: %d\n", srcfn, c_line);
+		fprintf(errfp, "Error in file: %s Line: %d\n", srcfn, c_line);
 		fprintf(errfp, "%s\n", errmsg[i]);
 	} else
 		errnum = i;

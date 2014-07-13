@@ -223,8 +223,7 @@ static void usage(void)
  */
 void fatal(int i, char *arg)
 {
-	printf(errmsg[i], arg);
-	putchar('\n');
+	printf("%s %s\n", errmsg[i], arg);
 	exit(1);
 }
 
