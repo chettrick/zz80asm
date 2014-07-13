@@ -185,7 +185,7 @@ void lst_sym(void)
 	register struct sym *np;
 
 	p_line = j = 0;
-	strcpy(title,"Symboltable");
+	strlcpy(title, "Symboltable", sizeof(title));
 	for (i = 0; i < HASHSIZE; i++) {
 		if (symtab[i] != NULL) {
 			for (np = symtab[i]; np != NULL; np = np->sym_next) {
@@ -215,7 +215,7 @@ void lst_sort_sym(int len)
 	register int i, j;
 
 	p_line = i = j = 0;
-	strcpy(title, "Symboltable");
+	strlcpy(title, "Symboltable", sizeof(title));
 	while (i < len) {
 		if (p_line == 0) {
 			lst_header();

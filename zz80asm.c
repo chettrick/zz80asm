@@ -404,7 +404,7 @@ void open_o_files(char *source)
 	register char *p;
 
 	if (*objfn == '\0')
-		strcpy(objfn, source);
+		strlcpy(objfn, source, sizeof(objfn));
 	if ((p = strrchr(objfn, '.')) != NULL) {
 		if (out_form == OUTHEX)
 			strlcpy(p, OBJEXTHEX, sizeof(p));
@@ -412,9 +412,9 @@ void open_o_files(char *source)
 			strlcpy(p, OBJEXTBIN, sizeof(p));
 	} else {
 		if (out_form == OUTHEX)
-			strcat(objfn, OBJEXTHEX);
+			strlcat(objfn, OBJEXTHEX, sizeof(objfn));
 		else
-			strcat(objfn, OBJEXTBIN);
+			strlcat(objfn, OBJEXTBIN, sizeof(objfn));
 	}
 
 	if (out_form == OUTHEX)
@@ -425,11 +425,11 @@ void open_o_files(char *source)
 		fatal(F_FOPEN, objfn);
 	if (list_flag) {
 		if (*lstfn == '\0')
-			strcpy(lstfn, source);
+			strlcpy(lstfn, source, sizeof(lstfn));
 		if ((p = strrchr(lstfn, '.')) != NULL)
 			strlcpy(p, LSTEXT, sizeof(p));
 		else
-			strcat(lstfn, LSTEXT);
+			strlcat(lstfn, LSTEXT, sizeof(lstfn));
 		if ((lstfp = fopen(lstfn, WRITEA)) == NULL)
 			fatal(F_FOPEN, lstfn);
 		errfp = lstfp;
