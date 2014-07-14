@@ -76,18 +76,18 @@ extern struct ope opetab[];
  *	structure symbol table entries
  */
 struct sym {
+	struct sym *sym_next;	/* next entry */
 	char *sym_name;		/* symbol name */
 	int  sym_val;		/* symbol value */
-	struct sym *sym_next;	/* next entry */
 };
 
 /*
  *	structure nested INCLUDE's
  */
 struct inc {
-	unsigned int inc_line;	/* line counter for listing */
 	char *inc_fn;		/* filename */
 	FILE *inc_fp;		/* file pointer */
+	unsigned int inc_line;	/* line counter for listing */
 };
 
 /*
