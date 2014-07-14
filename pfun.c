@@ -42,7 +42,7 @@ int op_glob(int);
  */
 int op_org(void)
 {
-	register int i;
+	int i;
 
 	if (!gencode)
 		return(0);
@@ -105,7 +105,7 @@ int op_dl(void)
  */
 int op_ds(void)
 {
-	register int val;
+	int val;
 
 	if (!gencode)
 		return(0);
@@ -126,9 +126,9 @@ int op_ds(void)
  */
 int op_db(void)
 {
-	register int i;
-	register char *p;
-	register char *s;
+	int i;
+	char *p;
+	char *s;
 
 	if (!gencode)
 		return(0);
@@ -171,8 +171,8 @@ hyp_error:
  */
 int op_dm(void)
 {
-	register int i;
-	register char *p;
+	int i;
+	char *p;
 
 	if (!gencode)
 		return(0);
@@ -203,9 +203,9 @@ int op_dm(void)
  */
 int op_dw(void)
 {
-	register int i, len, temp;
-	register char *p;
-	register char *s;
+	int i, len, temp;
+	char *p;
+	char *s;
 
 	if (!gencode)
 		return(0);
@@ -238,7 +238,7 @@ int op_dw(void)
  */
 int op_misc(int op_code)
 {
-	register char *p, *d;
+	char *p, *d;
 	static char fn[LENFN];
 	static int incnest;
 	static struct inc incl[INCNEST];
@@ -346,7 +346,7 @@ int op_misc(int op_code)
  */
 int op_cond(int op_code)
 {
-	register char *p, *p1, *p2;
+	char *p, *p1, *p2;
 	static int condnest[IFNEST];
 
 	switch(op_code) {

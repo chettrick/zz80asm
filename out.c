@@ -92,7 +92,7 @@ void lst_attl(void)
  */
 void lst_line(int val, int opanz)
 {
-	register int i;
+	int i;
 
 	if (!list_flag || sd_flag == 4) {
 		sd_flag = 0;
@@ -172,8 +172,8 @@ void lst_line(int val, int opanz)
  */
 void lst_sym(void)
 {
-	register int i, j;
-	register struct sym *np;
+	int i, j;
+	struct sym *np;
 
 	p_line = j = 0;
 	strlcpy(title, "Symboltable", sizeof(title));
@@ -266,7 +266,7 @@ void obj_end(void)
  */
 void obj_writeb(size_t opanz)
 {
-	register int i;
+	int i;
 
 	switch (out_form) {
 	case OUTBIN:
@@ -312,7 +312,7 @@ void obj_fill(int count)
 static void flush_hex(void)
 {
 	char *p;
-	register int i;
+	int i;
 
 	if (!hex_cnt)
 		return;
@@ -339,7 +339,7 @@ static void flush_hex(void)
  */
 static void btoh(unsigned char byte, char **p)
 {
-	register unsigned char c;
+	unsigned char c;
 
 	c = byte >> 4;
 	*(*p)++ = (c < 10) ? (char)(c + '0') : (char)(c - 10 + 'A');
@@ -352,7 +352,7 @@ static void btoh(unsigned char byte, char **p)
  */
 static int chksum(void)
 {
-	register int i, j, sum;
+	int i, j, sum;
 
 	sum = hex_cnt;
 	sum += hex_adr >> 8;

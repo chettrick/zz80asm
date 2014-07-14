@@ -107,8 +107,8 @@ static void init(void)
  */
 static void options(int argc, char *argv[])
 {
-	register char *s, *t;
-	register int i;
+	char *s, *t;
+	int i;
 
 	while (--argc > 0 && (*++argv)[0] == '-')
 		for (s = argv[0]+1; *s != '\0'; s++)
@@ -224,7 +224,7 @@ void fatal(int i, char *arg)
  */
 void pass1(void)
 {
-	register int fi;
+	int fi;
 
 	pass = 1;
 	pc = 0;
@@ -274,9 +274,9 @@ void p1_file(char *fn)
  */
 int p1_line(void)
 {
-	register char *p;
-	register int i;
-	register struct opc *op;
+	char *p;
+	int i;
+	struct opc *op;
 
 	if ((p = fgets(line, MAXLINE, srcfp)) == NULL)
 		return(0);
@@ -305,7 +305,7 @@ int p1_line(void)
  */
 void pass2(void)
 {
-	register int fi;
+	int fi;
 
 	pass = 2;
 	pc = 0;
@@ -350,9 +350,9 @@ void p2_file(char *fn)
  */
 int p2_line(void)
 {
-	register char *p;
-	register int op_count;
-	register struct opc *op;
+	char *p;
+	int op_count;
+	struct opc *op;
 
 	if ((p = fgets(line, MAXLINE, srcfp)) == NULL)
 		return(0);
@@ -391,7 +391,7 @@ int p2_line(void)
  */
 void open_o_files(char *source)
 {
-	register char *p;
+	char *p;
 
 	if (*objfn == '\0')
 		strlcpy(objfn, source, sizeof(objfn));
@@ -431,8 +431,8 @@ void open_o_files(char *source)
  */
 void get_fn(char *dest, char *src, char *ext)
 {
-	register int i;
-	register char *sp, *dp;
+	int i;
+	char *sp, *dp;
 
 	i = 0;
 	sp = src;
@@ -451,7 +451,7 @@ void get_fn(char *dest, char *src, char *ext)
  */
 char *get_label(char *s, char *l)
 {
-	register int i;
+	int i;
 
 	i = 0;
 	if (*l == LINCOM)

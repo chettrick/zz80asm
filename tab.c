@@ -38,8 +38,8 @@ static char *strsave(char *);
  */
 struct opc *search_op(char *op_name)
 {
-	register int cond;
-	register struct opc *low, *high, *mid;
+	int cond;
+	struct opc *low, *high, *mid;
 
 	low = &opctab[0];
 	high = &opctab[no_opcodes - 1];
@@ -65,8 +65,8 @@ struct opc *search_op(char *op_name)
  */
 int get_reg(char *s)
 {
-	register int cond;
-	register struct ope *low, *high, *mid;
+	int cond;
+	struct ope *low, *high, *mid;
 
 	if (s == NULL || *s == '\0')
 		return(NOOPERA);
@@ -93,7 +93,7 @@ int get_reg(char *s)
  */
 struct sym *get_sym(char *sym_name)
 {
-	register struct sym *np;
+	struct sym *np;
 
 	for (np = symtab[hash(sym_name)]; np != NULL; np = np->sym_next)
 		if (strcmp(sym_name, np->sym_name) == 0)
@@ -112,8 +112,8 @@ struct sym *get_sym(char *sym_name)
  */
 int put_sym(char *sym_name, int sym_val)
 {
-	register int hashval;
-	register struct sym *np;
+	int hashval;
+	struct sym *np;
 
 	if (!gencode)
 		return(0);
@@ -152,7 +152,7 @@ void put_label(void)
  */
 static int hash(char *name)
 {
-	register int hashval;
+	int hashval;
 
 	for (hashval = 0; *name;)
 		hashval += *name++;
@@ -168,7 +168,7 @@ static int hash(char *name)
  */
 static char *strsave(char *s)
 {
-	register char *p;
+	char *p;
 
 	if ((p = malloc((unsigned int)strlen(s)+1)) != NULL)
 		strlcpy(p, s, sizeof(p));
@@ -182,7 +182,7 @@ static char *strsave(char *s)
 size_t copy_sym(void)
 {
 	size_t i, j;
-	register struct sym *np;
+	struct sym *np;
 
 	symarray = (struct sym **) malloc(SYMINC * sizeof(struct sym *));
 	if (symarray == NULL)
@@ -210,7 +210,7 @@ size_t copy_sym(void)
 void n_sort_sym(size_t len)
 {
 	size_t gap, i, j;
-	register struct sym *temp;
+	struct sym *temp;
 
 	for (gap = len/2; gap > 0; gap /= 2)
 		for (i = gap; i < len; i++)
@@ -230,7 +230,7 @@ void n_sort_sym(size_t len)
 void a_sort_sym(size_t len)
 {
 	size_t gap, i, j;
-	register struct sym *temp;
+	struct sym *temp;
 
 	for (gap = len/2; gap > 0; gap /= 2)
 		for (i = gap; i < len; i++)

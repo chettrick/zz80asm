@@ -61,8 +61,8 @@ static int aotoi(char *);
  */
 int eval(char *s)
 {
-	register char *p;
-	register int val;
+	char *p;
+	int val;
 	char word[MAXLINE];
 	struct sym *sp;
 
@@ -229,7 +229,7 @@ static int isari(int c)
  */
 static int axtoi(char *str)
 {
-	register int num;
+	int num;
 
 	num = 0;
 	while (isxdigit((int)*str)) {
@@ -246,7 +246,7 @@ static int axtoi(char *str)
  */
 static int aotoi(char *str)
 {
-	register int num;
+	int num;
 
 	num = 0;
 	while ('0' <= *str && *str <= '7') {
@@ -262,7 +262,7 @@ static int aotoi(char *str)
  */
 int abtoi(char *str)
 {
-	register int num;
+	int num;
 
 	num = 0;
 	while ('0' <= *str && *str <= '1') {
@@ -277,7 +277,7 @@ int abtoi(char *str)
  */
 static int strval(char *str)
 {
-	register int num;
+	int num;
 
 	num = 0;
 	while (*str) {

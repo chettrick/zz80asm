@@ -100,7 +100,7 @@ int op_im(void)
  */
 int op_pupo(int op_code)
 {
-	register int len;
+	int len;
 
 	if (pass == 1)
 		if (*label)
@@ -184,7 +184,7 @@ int op_pupo(int op_code)
  */
 int op_ex(void)
 {
-	register int len;
+	int len;
 
 	if (pass == 1)
 		if (*label)
@@ -219,8 +219,8 @@ int op_ex(void)
  */
 int op_call(void)
 {
-	register char *p1, *p2;
-	register int i;
+	char *p1, *p2;
+	int i;
 
 	if (pass == 1) {	/* PASS 1 */
 		if (*label)
@@ -307,7 +307,7 @@ int op_call(void)
  */
 int op_rst(void)
 {
-	register int op;
+	int op;
 
 	if (pass == 1) {	/* PASS 1 */
 		if (*label)
@@ -373,8 +373,8 @@ int op_ret(void)
  */
 int op_jp(void)
 {
-	register char *p1, *p2;
-	register int i, len;
+	char *p1, *p2;
+	int i, len;
 
 	if (pass == 1)
 		if (*label)
@@ -498,7 +498,7 @@ int op_jp(void)
  */
 int op_jr(void)
 {
-	register char *p1, *p2;
+	char *p1, *p2;
 
 	if (pass == 1) {	/* PASS 1 */
 		if (*label)
@@ -564,8 +564,8 @@ int op_djnz(void)
  */
 int op_ld(void)
 {
-	register int len;
-	register char *p1, *p2;
+	int len;
+	char *p1, *p2;
 
 	if (pass == 1)
 		if (*label)
@@ -686,9 +686,9 @@ int op_ld(void)
  */
 static int lda(void)
 {
-	register int op;
-	register int i, len;
-	register char *p;
+	int op;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -774,9 +774,9 @@ static int lda(void)
  */
 static int ldb(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -834,9 +834,9 @@ static int ldb(void)
  */
 static int ldc(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -894,9 +894,9 @@ static int ldc(void)
  */
 static int ldd(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -954,9 +954,9 @@ static int ldd(void)
  */
 static int lde(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1014,9 +1014,9 @@ static int lde(void)
  */
 static int ldh(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1074,9 +1074,9 @@ static int ldh(void)
  */
 static int ldl(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1134,8 +1134,8 @@ static int ldl(void)
  */
 static int ldbc(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1177,8 +1177,8 @@ static int ldbc(void)
  */
 static int ldde(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1220,8 +1220,8 @@ static int ldde(void)
  */
 static int ldhl(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1262,8 +1262,8 @@ static int ldhl(void)
  */
 static int ldix(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1306,8 +1306,8 @@ static int ldix(void)
  */
 static int ldiy(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1350,8 +1350,8 @@ static int ldiy(void)
  */
 static int ldsp(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1407,9 +1407,9 @@ static int ldsp(void)
  */
 static int ldihl(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1448,9 +1448,9 @@ static int ldihl(void)
  */
 static int ldiix(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1495,9 +1495,9 @@ static int ldiix(void)
  */
 static int ldiiy(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1542,8 +1542,8 @@ static int ldiiy(void)
  */
 static int ldinn(void)
 {
-	register int i, len;
-	register char *p;
+	int i, len;
+	char *p;
 
 	p = get_second(operand);
 	switch (get_reg(p)) {
@@ -1633,8 +1633,8 @@ static int ldinn(void)
  */
 int op_add(void)
 {
-	register int len;
-	register char *p1, *p2;
+	int len;
+	char *p1, *p2;
 
 	if (pass == 1)
 		if (*label)
@@ -1675,9 +1675,9 @@ int op_add(void)
  */
 static int adda(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1834,8 +1834,8 @@ static int addiy(void)
  */
 int op_adc(void)
 {
-	register int len;
-	register char *p1, *p2;
+	int len;
+	char *p1, *p2;
 
 	if (pass == 1)
 		if (*label)
@@ -1870,9 +1870,9 @@ int op_adc(void)
  */
 static int adca(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -1963,7 +1963,7 @@ static int adchl(void)
  */
 int op_sub(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2021,8 +2021,8 @@ int op_sub(void)
  */
 int op_sbc(void)
 {
-	register int len;
-	register char *p1, *p2;
+	int len;
+	char *p1, *p2;
 
 	if (pass == 1)
 		if (*label)
@@ -2057,9 +2057,9 @@ int op_sbc(void)
  */
 static int sbca(void)
 {
-	register int op;
-	register int len;
-	register char *p;
+	int op;
+	int len;
+	char *p;
 
 	p = get_second(operand);
 	switch (op = get_reg(p)) {
@@ -2150,7 +2150,7 @@ static int sbchl(void)
  */
 int op_inc(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2232,7 +2232,7 @@ int op_inc(void)
  */
 int op_dec(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2314,7 +2314,7 @@ int op_dec(void)
  */
 int op_or(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2372,7 +2372,7 @@ int op_or(void)
  */
 int op_xor(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2430,7 +2430,7 @@ int op_xor(void)
  */
 int op_and(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2488,7 +2488,7 @@ int op_and(void)
  */
 int op_cp(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2546,7 +2546,7 @@ int op_cp(void)
  */
 int op_rl(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2605,7 +2605,7 @@ int op_rl(void)
  */
 int op_rr(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2664,7 +2664,7 @@ int op_rr(void)
  */
 int op_sla(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2723,7 +2723,7 @@ int op_sla(void)
  */
 int op_sra(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2782,7 +2782,7 @@ int op_sra(void)
  */
 int op_srl(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2841,7 +2841,7 @@ int op_srl(void)
  */
 int op_rlc(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2900,7 +2900,7 @@ int op_rlc(void)
  */
 int op_rrc(void)
 {
-	register int len, op;
+	int len, op;
 
 	if (pass == 1)
 		if (*label)
@@ -2959,7 +2959,7 @@ int op_rrc(void)
  */
 int op_out(void)
 {
-	register int op;
+	int op;
 
 	if (pass == 1) {		/* PASS 1 */
 		if (*label)
@@ -3000,8 +3000,8 @@ int op_out(void)
  */
 int op_in(void)
 {
-	register char *p1, *p2;
-	register int op;
+	char *p1, *p2;
+	int op;
 
 	if (pass == 1) {		/* PASS 1 */
 		if (*label)
@@ -3045,10 +3045,10 @@ int op_in(void)
  */
 int op_set(void)
 {
-	register char *p1, *p2;
-	register int len;
-	register int i;
-	register int op;
+	char *p1, *p2;
+	int len;
+	int i;
+	int op;
 
 	len = 2;
 	i = 0;
@@ -3115,10 +3115,10 @@ int op_set(void)
  */
 int op_res(void)
 {
-	register char *p1, *p2;
-	register int len;
-	register int i;
-	register int op;
+	char *p1, *p2;
+	int len;
+	int i;
+	int op;
 
 	len = 2;
 	i = 0;
@@ -3185,10 +3185,10 @@ int op_res(void)
  */
 int op_bit(void)
 {
-	register char *p1, *p2;
-	register int len;
-	register int i;
-	register int op;
+	char *p1, *p2;
+	int len;
+	int i;
+	int op;
 
 	len = 2;
 	i = 0;
@@ -3257,7 +3257,7 @@ int op_bit(void)
  */
 static char *get_second(char *s)
 {
-	register char *p;
+	char *p;
 
 	if ((p = strchr(s, ',')) != NULL)
 		return(p + 1);
@@ -3272,7 +3272,7 @@ static char *get_second(char *s)
  */
 int calc_val(char *s)
 {
-	register char *p;
+	char *p;
 
 	if ((p = strrchr(s, ')')) == NULL) {
 		asmerr(E_MISPAR);
