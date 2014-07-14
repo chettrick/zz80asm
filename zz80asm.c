@@ -34,7 +34,6 @@ void p1_file(char *);
 void p2_file(char *);
 
 static void init(void);
-static void options(int, char *[]);
 static void usage(void) __attribute__((noreturn));
 static void pass1(void);
 static void pass2(void);
@@ -65,7 +64,95 @@ int main(int argc, char *argv[])
 	ppl = PLENGTH;
 
 	init();
-	options(argc, argv);
+
+	char *s, *t;
+	int i;
+
+	while (--argc > 0 && (*++argv)[0] == '-') {
+		for (s = argv[0]+1; *s != '\0'; s++) {
+			switch (*s) {
+			case 'd':
+				if (*++s == '\0') {
+					puts("name missing in option -d");
+					usage();
+				}
+				t = tmp;
+				while (*s)
+					*t++ = islower(*s) ?
+						(char)toupper(*s++) : *s++;
+				s--;
+				*t = '\0';
+				if (put_sym(tmp, 0))
+					fatal(F_OUTMEM, "symbols");
+				break;
+			case 'f':
+				if ((*(s + 1) == 'b') || (*(s + 1) == 'B'))
+					out_form = OUTBIN;
+				else if ((*(s + 1) == 'm') || (*(s + 1) == 'M'))
+					out_form = OUTMOS;
+				else if ((*(s + 1) == 'h') || (*(s + 1) == 'H'))
+					out_form = OUTHEX;
+				else {
+					printf("unknown option -%s\n", s);
+					usage();
+				}
+				s += (strlen(s) - 1);
+				break;
+			case 'l':
+				if (*(s + 1) != '\0') {
+					get_fn(lstfn, ++s, LSTEXT);
+					s += (strlen(s) - 1);
+				}
+				list_flag = 1;
+				break;
+			case 'o':
+				if (*++s == '\0') {
+					puts("name missing in option -o");
+					usage();
+				}
+				if (out_form == OUTHEX)
+					get_fn(objfn, s, OBJEXTHEX);
+				else
+					get_fn(objfn, s, OBJEXTBIN);
+				s += (strlen(s) - 1);
+				break;
+			case 's':
+				if (*(s + 1) == '\0')
+					sym_flag = 1;
+				else if ((*(s + 1) == 'n') || (*(s + 1) == 'N'))
+					sym_flag = 2;
+				else if ((*(s + 1) == 'a') || (*(s + 1) == 'A'))
+					sym_flag = 3;
+				else {
+					printf("unknown option -%s\n", s);
+					usage();
+				}
+				s += (strlen(s) - 1);
+				break;
+			case 'v':
+				ver_flag = 1;
+				break;
+			case 'x':
+				dump_flag = 1;
+				break;
+			default :
+				printf("unknown option %c\n", *s);
+				usage();
+			}
+		}
+	}
+	i = 0;
+	while ((argc--) && (i < MAXFN)) {
+		if ((infiles[i] = malloc(LENFN + 1)) == NULL)
+			fatal(F_OUTMEM, "filenames");
+		get_fn(infiles[i], *argv++, SRCEXT);
+		i++;
+	}
+	if (i == 0) {
+		printf("no input file\n");
+		usage();
+	}
+
 	printf("Z80 - Assembler Release %s, %s\n", REL, COPYR);
 	pass1();
 	pass2();
@@ -100,105 +187,6 @@ int main(int argc, char *argv[])
 static void init(void)
 {
 	errfp = stdout;
-}
-
-/*
- *	process options
- */
-static void options(int argc, char *argv[])
-{
-	char *s, *t;
-	int i;
-
-	while (--argc > 0 && (*++argv)[0] == '-')
-		for (s = argv[0]+1; *s != '\0'; s++)
-			switch (*s) {
-			case 'o':
-			case 'O':
-				if (*++s == '\0') {
-					puts("name missing in option -o");
-					usage();
-				}
-				if (out_form == OUTHEX)
-					get_fn(objfn, s, OBJEXTHEX);
-				else
-					get_fn(objfn, s, OBJEXTBIN);
-				s += (strlen(s) - 1);
-				break;
-			case 'l':
-			case 'L':
-				if (*(s + 1) != '\0') {
-					get_fn(lstfn, ++s, LSTEXT);
-					s += (strlen(s) - 1);
-				}
-				list_flag = 1;
-				break;
-			case 's':
-			case 'S':
-				if (*(s + 1) == '\0')
-					sym_flag = 1;
-				else if ((*(s + 1) == 'n') || (*(s + 1) == 'N'))
-					sym_flag = 2;
-				else if ((*(s + 1) == 'a') || (*(s + 1) == 'A'))
-					sym_flag = 3;
-				else {
-					printf("unknown option -%s\n", s);
-					usage();
-				}
-				s += (strlen(s) - 1);
-				break;
-			case 'x':
-			case 'X':
-				dump_flag = 1;
-				break;
-			case 'f':
-			case 'F':
-				if ((*(s + 1) == 'b') || (*(s + 1) == 'B'))
-					out_form = OUTBIN;
-				else if ((*(s + 1) == 'm') || (*(s + 1) == 'M'))
-					out_form = OUTMOS;
-				else if ((*(s + 1) == 'h') || (*(s + 1) == 'H'))
-					out_form = OUTHEX;
-				else {
-					printf("unknown option -%s\n", s);
-					usage();
-				}
-				s += (strlen(s) - 1);
-				break;
-			case 'd':
-			case 'D':
-				if (*++s == '\0') {
-					puts("name missing in option -d");
-					usage();
-				}
-				t = tmp;
-				while (*s)
-					*t++ = islower(*s) ?
-						(char)toupper(*s++) : *s++;
-				s--;
-				*t = '\0';
-				if (put_sym(tmp, 0))
-					fatal(F_OUTMEM, "symbols");
-				break;
-			case 'v':
-			case 'V':
-				ver_flag = 1;
-				break;
-			default :
-				printf("unknown option %c\n", *s);
-				usage();
-			}
-	i = 0;
-	while ((argc--) && (i < MAXFN)) {
-		if ((infiles[i] = malloc(LENFN + 1)) == NULL)
-			fatal(F_OUTMEM, "filenames");
-		get_fn(infiles[i], *argv++, SRCEXT);
-		i++;
-	}
-	if (i == 0) {
-		printf("no input file\n");
-		usage();
-	}
 }
 
 /*
