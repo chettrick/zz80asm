@@ -350,9 +350,9 @@ static void btoh(unsigned char byte, char **p)
 	register unsigned char c;
 
 	c = byte >> 4;
-	*(*p)++ = (c < 10) ? (c + '0') : (c - 10 + 'A');
+	*(*p)++ = (c < 10) ? (char)(c + '0') : (char)(c - 10 + 'A');
 	c = byte & 0xf;
-	*(*p)++ = (c < 10) ? (c + '0') : (c - 10 + 'A');
+	*(*p)++ = (c < 10) ? (char)(c + '0') : (char)(c - 10 + 'A');
 }
 
 /*
