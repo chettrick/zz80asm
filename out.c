@@ -53,6 +53,9 @@ static int hex_cnt;			/* current no bytes in hex buffer */
 static unsigned char hex_buf[MAXHEX];	/* buffer for one hex record */
 static char hex_out[MAXHEX*2+11];	/* ASCII buffer for one hex record */
 
+int errnum = 0;				/* error number in pass 2 */
+unsigned int page = 0;			/* no. of pages for listing */
+
 /*
  *	print error message to listfile and increase error counter
  */

@@ -183,6 +183,7 @@ static char *strsave(char *s)
 size_t copy_sym(void)
 {
 	size_t i, j;
+	size_t symsize;		/* size of symarray */
 	struct sym *np;
 
 	symarray = (struct sym **) malloc(SYMINC * sizeof(struct sym *));

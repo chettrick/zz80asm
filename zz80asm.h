@@ -149,21 +149,16 @@ struct inc {
 /*
  *	global variables other than CPU specific tables
  */
-char *infiles[MAXFN],		/* source filenames */
-     objfn[LENFN + 1],		/* object filename */
-     lstfn[LENFN + 1],		/* listing filename */
-     *srcfn,			/* filename of current processed source file */
+char *srcfn,			/* filename of current processed source file */
      line[MAXLINE],		/* buffer for one line source */
      tmp[MAXLINE],		/* temporary buffer */
      label[SYMSIZE+1],		/* buffer for label */
-     opcode[MAXLINE],		/* buffer for opcode */
      operand[MAXLINE],		/* buffer for operand */
      title[MAXLINE];		/* buffer for title of source */
 
 int  ops[OPCARRAY];		/* buffer for generated object code */
 
 int  list_flag,			/* flag for option -l */
-     sym_flag,			/* flag for option -s */
      ver_flag,			/* flag for option -v */
      dump_flag,			/* flag for option -x */
      pc,			/* program counter */
@@ -171,7 +166,6 @@ int  list_flag,			/* flag for option -l */
      iflevel,			/* IF nesting level */
      gencode,			/* flag for conditional object code */
      errors,			/* error counter */
-     errnum,			/* error number in pass 2 */
      sd_flag,			/* list flag for PSEUDO opcodes */
 				/* = 0: address from <val>, data from <ops> */
 				/* = 1: address from <sd_val>, data from <ops>*/
@@ -180,9 +174,7 @@ int  list_flag,			/* flag for option -l */
 				/* = 4: suppress whole line */
      sd_val,			/* output value for PSEUDO opcodes */
      prg_adr,			/* start address of program */
-     prg_flag,			/* flag for prg_adr valid */
      out_form;			/* format of object file */
-size_t symsize;			/* size of symarray */
 
 FILE *srcfp,			/* file pointer for current source */
      *objfp,			/* file pointer for object code */
@@ -191,8 +183,7 @@ FILE *srcfp,			/* file pointer for current source */
 
 unsigned int
       c_line,			/* current line no. in current source */
-      s_line,			/* line no. counter for listing */
-      page;			/* no. of pages for listing */
+      s_line;			/* line no. counter for listing */
 
 size_t
       p_line,			/* no. printed lines on page */

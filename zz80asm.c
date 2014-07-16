@@ -54,9 +54,18 @@ static char *errmsg[] = {		/* error messages for fatal() */
 	"internal error: %s"		/* 4 */
 };
 
+char *infiles[MAXFN];		/* source filenames */
+char  objfn[LENFN + 1];		/* object filename */
+char  lstfn[LENFN + 1];		/* listing filename */
+char  opcode[MAXLINE];		/* buffer for opcode */
+
 int main(int argc, char *argv[])
 {
+	char *s, *t;
+	int i;
 	size_t len;
+
+	int sym_flag = 0;		/* flag for option -s */
 
 	/* program defaults */
 	gencode = 1;
@@ -64,9 +73,6 @@ int main(int argc, char *argv[])
 	ppl = PLENGTH;
 
 	init();
-
-	char *s, *t;
-	int i;
 
 	while (--argc > 0 && (*++argv)[0] == '-') {
 		for (s = argv[0]+1; *s != '\0'; s++) {

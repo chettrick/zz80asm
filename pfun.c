@@ -37,6 +37,8 @@ int op_misc(int);
 int op_cond(int);
 int op_glob(int);
 
+int prg_flag = 0;			/* flag for prg_adr valid */
+
 /*
  *	ORG
  */
