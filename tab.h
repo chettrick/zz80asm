@@ -7,10 +7,6 @@
  *	opcode tables
  */
 
-#include <stdio.h>
-
-#include "zz80asm.h"
-
 extern int op_1b(int), op_2b(int, int), op_pupo(int);
 extern int op_ex(void), op_ld(void), op_call(void), op_ret(void);
 extern int op_jp(void), op_jr(void), op_djnz(void), op_rst(void);

@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "tab.h"
 #include "zz80asm.h"
+#include "tab.h"
 
 extern void fatal(int, char *);
 extern void asmerr(int);
