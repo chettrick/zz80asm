@@ -61,8 +61,8 @@ char  opcode[MAXLINE];		/* buffer for opcode */
 
 int main(int argc, char *argv[])
 {
-	char *s, *t;
-	int i;
+	char *t;
+	int i, ch;
 	size_t len;
 
 	int sym_flag = 0;		/* flag for option -s */
@@ -74,79 +74,81 @@ int main(int argc, char *argv[])
 
 	init();
 
-	while (--argc > 0 && (*++argv)[0] == '-') {
-		for (s = argv[0]+1; *s != '\0'; s++) {
-			switch (*s) {
-			case 'd':
-				if (*++s == '\0') {
-					puts("name missing in option -d");
-					usage();
-				}
-				t = tmp;
-				while (*s)
-					*t++ = islower(*s) ?
-						(char)toupper(*s++) : *s++;
-				s--;
-				*t = '\0';
-				if (put_sym(tmp, 0))
-					fatal(F_OUTMEM, "symbols");
-				break;
-			case 'f':
-				if ((*(s + 1) == 'b') || (*(s + 1) == 'B'))
-					out_form = OUTBIN;
-				else if ((*(s + 1) == 'm') || (*(s + 1) == 'M'))
-					out_form = OUTMOS;
-				else if ((*(s + 1) == 'h') || (*(s + 1) == 'H'))
-					out_form = OUTHEX;
-				else {
-					printf("unknown option -%s\n", s);
-					usage();
-				}
-				s += (strlen(s) - 1);
-				break;
-			case 'l':
-				if (*(s + 1) != '\0') {
-					get_fn(lstfn, ++s, LSTEXT);
-					s += (strlen(s) - 1);
-				}
-				list_flag = 1;
-				break;
-			case 'o':
-				if (*++s == '\0') {
-					puts("name missing in option -o");
-					usage();
-				}
-				if (out_form == OUTHEX)
-					get_fn(objfn, s, OBJEXTHEX);
-				else
-					get_fn(objfn, s, OBJEXTBIN);
-				s += (strlen(s) - 1);
-				break;
-			case 's':
-				if (*(s + 1) == '\0')
-					sym_flag = 1;
-				else if ((*(s + 1) == 'n') || (*(s + 1) == 'N'))
-					sym_flag = 2;
-				else if ((*(s + 1) == 'a') || (*(s + 1) == 'A'))
-					sym_flag = 3;
-				else {
-					printf("unknown option -%s\n", s);
-					usage();
-				}
-				s += (strlen(s) - 1);
-				break;
-			case 'v':
-				ver_flag = 1;
-				break;
-			case 'x':
-				dump_flag = 1;
-				break;
-			default :
-				printf("unknown option %c\n", *s);
+	while ((ch = getopt(argc, argv, "d:f:l:o:s:vx")) != -1) {
+		switch (ch) {
+		case 'd':
+			if (optarg == '\0') {
 				usage();
+				/* NOTREACHED */
 			}
+			t = tmp;
+			*t = islower(*optarg) ? (char)toupper(*optarg) :
+			    *optarg;
+			if (put_sym(tmp, 0) != 0)
+				fatal(F_OUTMEM, "symbols");
+			break;
+		case 'f':
+			switch (*optarg) {
+			case 'b':
+				out_form = OUTBIN;
+				break;
+			case 'm':
+				out_form = OUTMOS;
+				break;
+			case 'h':
+				out_form = OUTHEX;
+				break;
+			default:
+				usage();
+				/* NOTREACHED */
+			}
+			break;
+		case 'l':
+			if (optarg != '\0') {
+				get_fn(lstfn, optarg, LSTEXT);
+			}
+			list_flag = 1;
+			break;
+		case 'o':
+			if (optarg == '\0') {
+				usage();
+				/* NOTREACHED */
+			}
+			if (out_form == OUTHEX)
+				get_fn(objfn, optarg, OBJEXTHEX);
+			else
+				get_fn(objfn, optarg, OBJEXTBIN);
+			break;
+		case 's':
+			switch (*optarg) {
+			case '\0':
+				sym_flag = 1;
+				break;
+			case 'n':
+				sym_flag = 2;
+				break;
+			case 'a':
+				sym_flag = 3;
+				break;
+			default:
+				usage();
+				/* NOTREACHED */
+			}
+			break;
+		case 'v':
+			ver_flag = 1;
+			break;
+		case 'x':
+			dump_flag = 1;
+			break;
+		default :
+			usage();
+			/* NOTREACHED */
 		}
 	}
+	argc -= optind;
+	argv += optind;
+
 	i = 0;
 	while ((argc--) && (i < MAXFN)) {
 		if ((infiles[i] = malloc(LENFN + 1)) == NULL)
