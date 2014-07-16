@@ -3,6 +3,9 @@
  *	Copyright (C) 1987-2014 by Udo Munk
  */
 
+#ifndef _TAB_H_
+#define _TAB_H_
+
 /*
  *	opcode tables
  */
@@ -163,3 +166,5 @@ struct ope opetab[] = {
  *	compute no. of table entries
  */
 int no_operands = sizeof(opetab) / sizeof(struct ope);
+
+#endif /* _TAB_H_ */
