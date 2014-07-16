@@ -202,10 +202,4 @@ struct sym
      *symtab[HASHSIZE],		/* symbol table */
      **symarray;		/* sorted symbol table */
 
-/*
- *	global variable declarations
- */
-extern int	no_opcodes,
-		no_operands;
-
 #endif /* _ZZ80ASM_H_ */
