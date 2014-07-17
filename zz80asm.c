@@ -47,8 +47,8 @@ static char *get_arg(char *, char *);
 
 static char *errmsg[] = {		/* error messages for fatal() */
 	"out of memory: %s",		/* 0 */
-	"usage: zz80asm [-d symbol ...] [-f b|m|h] [-l [listfile]] "
-	    "[-o outfile] [-s [a|n]] [-v] [-x] filename ...",
+	"usage: zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] "
+	    "[-o outfile] [-s a|n|u] [-v] [-x] filename ...",
 	"Assembly halted",		/* 2 */
 	"can't open file %s",		/* 3 */
 	"internal error: %s"		/* 4 */
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
 	init();
 
-	while ((ch = getopt(argc, argv, "d:f:l:o:s:vx")) != -1) {
+	while ((ch = getopt(argc, argv, "d:f:l::o:s:vx")) != -1) {
 		switch (ch) {
 		case 'd':
 			if (optarg == '\0') {
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 			break;
 		case 's':
 			switch (*optarg) {
-			case '\0':
+			case 'u':
 				sym_flag = 1;
 				break;
 			case 'n':
