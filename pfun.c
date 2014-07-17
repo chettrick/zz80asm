@@ -298,13 +298,13 @@ int op_misc(int op_code)
 			*d++ = *p++;
 		*d = '\0';
 		if (pass == 1) {	/* PASS 1 */
-			if (!ver_flag)
+			if (ver_flag)
 				printf("   Include %s\n", fn);
 			p1_file(fn);
 		} else {		/* PASS 2 */
 			sd_flag = 2;
 			lst_line(0, 0);
-			if (!ver_flag)
+			if (ver_flag)
 				printf("   Include %s\n", fn);
 			p2_file(fn);
 		}

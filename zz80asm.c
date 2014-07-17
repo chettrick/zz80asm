@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
 	size_t len;
 
 	int sym_flag = 0;		/* flag for option -s */
+	ver_flag = 0;
 
 	/* program defaults */
 	gencode = 1;
@@ -225,11 +226,11 @@ void pass1(void)
 	pass = 1;
 	pc = 0;
 	fi = 0;
-	if (!ver_flag)
+	if (ver_flag)
 		puts("Pass 1");
 	open_o_files(infiles[fi]);
 	while (infiles[fi] != NULL) {
-		if (!ver_flag)
+		if (ver_flag)
 			printf("   Read    %s\n", infiles[fi]);
 		p1_file(infiles[fi]);
 		fi++;
@@ -306,11 +307,11 @@ void pass2(void)
 	pass = 2;
 	pc = 0;
 	fi = 0;
-	if (!ver_flag)
+	if (ver_flag)
 		puts("Pass 2");
 	obj_header();
 	while (infiles[fi] != NULL) {
-		if (!ver_flag)
+		if (ver_flag)
 			printf("   Read    %s\n", infiles[fi]);
 		p2_file(infiles[fi]);
 		fi++;
