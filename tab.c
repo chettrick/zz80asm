@@ -211,19 +211,21 @@ size_t copy_sym(void)
  */
 void n_sort_sym(size_t len)
 {
-	size_t gap, i, j;
+	int gap, i, j;
 	struct sym *temp;
 
-	for (gap = len/2; gap > 0; gap /= 2)
-		for (i = gap; i < len; i++)
-			for (j = i-gap; j; j -= gap) {
+	for (gap = (int)(len / 2); gap > 0; gap /= 2) {
+		for (i = gap; i < (int)len; i++) {
+			for (j = i - gap; j >= 0; j -= gap) {
 				if (strcmp(symarray[j]->sym_name,
-				    symarray[j+gap]->sym_name) <= 0)
+				    symarray[j + gap]->sym_name) <= 0)
 					break;
 				temp = symarray[j];
-				symarray[j] = symarray[j+gap];
-				symarray[j+gap] = temp;
+				symarray[j] = symarray[j + gap];
+				symarray[j + gap] = temp;
 			}
+		}
+	}
 }
 
 /*
@@ -231,19 +233,21 @@ void n_sort_sym(size_t len)
  */
 void a_sort_sym(size_t len)
 {
-	size_t gap, i, j;
+	int gap, i, j;
 	struct sym *temp;
 
-	for (gap = len/2; gap > 0; gap /= 2)
-		for (i = gap; i < len; i++)
-			for (j = i-gap; j; j -= gap) {
+	for (gap = (int)(len / 2); gap > 0; gap /= 2) {
+		for (i = gap; i < (int)len; i++) {
+			for (j = i - gap; j >= 0; j -= gap) {
 				if (numcmp(symarray[j]->sym_val,
-				    symarray[j+gap]->sym_val) <= 0)
+				    symarray[j + gap]->sym_val) <= 0)
 					break;
 				temp = symarray[j];
-				symarray[j] = symarray[j+gap];
-				symarray[j+gap] = temp;
+				symarray[j] = symarray[j + gap];
+				symarray[j + gap] = temp;
 			}
+		}
+	}
 }
 
 /*
