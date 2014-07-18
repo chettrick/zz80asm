@@ -66,13 +66,13 @@ int main(int argc, char *argv[])
 	size_t len;
 
 	int sym_flag = 0;		/* flag for option -s */
-	dump_flag = 0;
-	ver_flag = 0;
 
 	/* program defaults */
 	gencode = 1;
 	out_form = OUTDEF;
 	ppl = PLENGTH;
+	dump_flag = 1;
+	ver_flag = 0;
 
 	init();
 
@@ -141,7 +141,7 @@ int main(int argc, char *argv[])
 			ver_flag = 1;
 			break;
 		case 'x':
-			dump_flag = 1;
+			dump_flag = 0;		/* Default is on; turn off. */
 			break;
 		default :
 			usage();
