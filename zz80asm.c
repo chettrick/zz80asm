@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
 	size_t len;
 
 	int sym_flag = 0;		/* flag for option -s */
+	dump_flag = 0;
 	ver_flag = 0;
 
 	/* program defaults */

@@ -117,7 +117,7 @@ int op_ds(void)
 	sd_val = pc;
 	sd_flag = 3;
 	val = eval(operand);
-	if ((pass == 2) && !dump_flag)
+	if ((pass == 2) && dump_flag)
 		obj_fill(val);
 	pc += val;
 	return(0);
