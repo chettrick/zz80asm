@@ -254,7 +254,6 @@ void obj_end(void)
 {
 	switch (out_form) {
 	case OUTBIN:
-		break;
 	case OUTMOS:
 		break;
 	case OUTHEX:
@@ -273,8 +272,6 @@ void obj_writeb(size_t opanz)
 
 	switch (out_form) {
 	case OUTBIN:
-		fwrite(ops, 1, opanz, objfp);
-		break;
 	case OUTMOS:
 		fwrite(ops, 1, opanz, objfp);
 		break;
@@ -295,9 +292,6 @@ void obj_fill(int count)
 {
 	switch (out_form) {
 	case OUTBIN:
-		while (count--)
-			putc(0xff, objfp);
-		break;
 	case OUTMOS:
 		while (count--)
 			putc(0xff, objfp);
