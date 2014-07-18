@@ -11,4 +11,10 @@ CFLAGS+=	-Wmissing-declarations -pedantic-errors
 
 WARNINGS=	yes
 
+all: readme
+
+readme: ${PROG}.1
+	mandoc ${.CURDIR}/${PROG}.1 > ${.CURDIR}/README
+
+.PHONY: all readme
 .include <bsd.prog.mk>
