@@ -15,24 +15,6 @@
 
 #include "zz80asm.h"
 
-extern void asmerr(int);
-extern void lst_line(int, int);
-extern void lst_sym(void);
-extern void lst_sort_sym(size_t);
-extern void obj_header(void);
-extern void obj_end(void);
-extern void obj_writeb(int);
-extern struct opc *search_op(char *);
-extern int put_sym(char *, int);
-extern void put_label(void);
-extern size_t copy_sym(void);
-extern void n_sort_sym(size_t);
-extern void a_sort_sym(size_t);
-
-void fatal(int, char *) __attribute__((noreturn));
-void p1_file(char *);
-void p2_file(char *);
-
 static void init(void);
 static void usage(void) __attribute__((noreturn));
 static void pass1(void);

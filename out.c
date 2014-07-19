@@ -12,19 +12,6 @@
 
 #include "zz80asm.h"
 
-extern void fatal(int, char *);
-
-void asmerr(int);
-void lst_header(void);
-void lst_attl(void);
-void lst_line(int, int);
-void lst_sym(void);
-void lst_sort_sym(size_t);
-void obj_header(void);
-void obj_end(void);
-void obj_writeb(size_t);
-void obj_fill(int);
-
 static void flush_hex(void);
 static int chksum(void);
 static void btoh(unsigned char, char **);

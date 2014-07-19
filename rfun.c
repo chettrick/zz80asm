@@ -12,24 +12,7 @@
 
 #include "zz80asm.h"
 
-extern int eval(char *);
-extern int calc_val(char *);
-extern int chk_v1(int);
-extern int chk_v2(int);
-extern void asmerr(int);
-extern int get_reg(char *);
-extern void put_label(void);
-
-int op_1b(int), op_2b(int, int), op_pupo(int);
-int op_ex(void), op_ld(void), op_call(void), op_ret(void);
-int op_jp(void), op_jr(void), op_djnz(void), op_rst(void);
-int op_add(void), op_adc(void), op_sub(void), op_sbc(void), op_cp(void);
-int op_inc(void), op_dec(void), op_or(void), op_xor(void), op_and(void);
-int op_rl(void), op_rr(void), op_sla(void), op_sra(void), op_srl(void);
-int op_rlc(void), op_rrc(void);
-int op_out(void), op_in(void), op_im(void);
-int op_set(void), op_res(void), op_bit(void);
-
+static int calc_val(char *);
 static char *get_second(char *);
 static int lda(void), ldb(void), ldc(void), ldd(void), lde(void);
 static int ldh(void), ldl(void);

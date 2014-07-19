@@ -34,13 +34,6 @@
 #define OPECOM		15	/* logical complement */
 #define OPESYM		99	/* symbol */
 
-extern struct sym *get_sym(char *);
-extern void asmerr(int);
-
-int eval(char *);
-int chk_v1(int);
-int chk_v2(int);
-
 static int strval(char *);
 static int isari(int);
 static int get_type(char *);

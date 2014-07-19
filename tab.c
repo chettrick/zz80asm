@@ -14,18 +14,6 @@
 #include "zz80asm.h"
 #include "tab.h"
 
-extern void fatal(int, char *);
-extern void asmerr(int);
-
-struct opc *search_op(char *);
-int get_reg(char *);
-struct sym *get_sym(char *);
-int put_sym(char *, int);
-void put_label(void);
-size_t copy_sym(void);
-void n_sort_sym(size_t);
-void a_sort_sym(size_t);
-
 static int hash(char *);
 static int numcmp(int, int);
 static char *strsave(char *);
