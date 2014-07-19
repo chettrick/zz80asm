@@ -314,7 +314,7 @@ int op_misc(int op_code)
 		break;
 	default:
 		fatal(F_INTERN, "illegal opcode for function op_misc");
-		break;
+		/* NOTREACHED */
 	}
 	return(0);
 }
@@ -403,7 +403,7 @@ int op_cond(int op_code)
 		break;
 	default:
 		fatal(F_INTERN, "illegal opcode for function op_cond");
-		break;
+		/* NOTREACHED */
 	}
 	sd_flag = 2;
 	return(0);
@@ -424,7 +424,7 @@ int op_glob(int op_code)
 		break;
 	default:
 		fatal(F_INTERN, "illegal opcode for function op_glob");
-		break;
+		/* NOTREACHED */
 	}
 	return(0);
 }

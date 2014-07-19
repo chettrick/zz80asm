@@ -107,7 +107,7 @@ void lst_line(int val, int opanz)
 		goto no_data;
 	default:
 		fatal(F_INTERN, "illegal listflag for function lst_line");
-		break;
+		/* NOTREACHED */
 	}
 	if (opanz >= 1) fprintf(lstfp, "%02x ", ops[0] & 0xff);
 		else fprintf(lstfp, "   ");

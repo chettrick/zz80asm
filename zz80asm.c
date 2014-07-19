@@ -143,6 +143,7 @@ int main(int argc, char *argv[])
 	if (i == 0) {
 		printf("no input file\n");
 		usage();
+		/* NOTREACHED */
 	}
 
 	printf("Z80 - Assembler Release %s, %s\n", REL, COPYR);
@@ -187,6 +188,7 @@ static void init(void)
 static void usage(void)
 {
 	fatal(F_USAGE, NULL);
+	/* NOTREACHED */
 }
 
 /*
