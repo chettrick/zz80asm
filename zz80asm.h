@@ -52,8 +52,6 @@ struct opc {
 	int  op_c2;		/* second base opcode */
 };
 
-extern struct opc opctab[];
-
 /*
  *	structure operand table
  */
@@ -61,8 +59,6 @@ struct ope {
 	char *ope_name;		/* operand name */
 	int ope_sym;		/* symbol value operand */
 };
-
-extern struct ope opetab[];
 
 /*
  *	structure symbol table entries
