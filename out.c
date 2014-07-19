@@ -49,7 +49,7 @@ unsigned int page = 0;			/* no. of pages for listing */
 void asmerr(int i)
 {
 	if (pass == 1) {
-		fprintf(errfp, "Error in file: %s Line: %d\n", srcfn, c_line);
+		fprintf(errfp, "Error in file: %s Line: %zu\n", srcfn, c_line);
 		fprintf(errfp, "%s\n", errmsg[i]);
 	} else
 		errnum = i;
@@ -118,7 +118,7 @@ void lst_line(int val, int opanz)
 	if (opanz >= 4) fprintf(lstfp, "%02x ", ops[3] & 0xff);
 		else fprintf(lstfp, "   ");
 	no_data:
-	fprintf(lstfp, "%6d %6d %s", c_line, s_line, line);
+	fprintf(lstfp, "%6zu %6zu %s", c_line, s_line, line);
 	if (errnum) {
 		fprintf(errfp, "=> %s", errmsg[errnum]);
 		putc('\n', errfp);
@@ -151,7 +151,7 @@ void lst_line(int val, int opanz)
 			if (opanz-- > 0) fprintf(lstfp, "%02x ",
 						 ops[i++] & 0xff);
 				else fprintf(lstfp, "   ");
-			fprintf(lstfp, "%6d %6d\n", c_line, s_line);
+			fprintf(lstfp, "%6zu %6zu\n", c_line, s_line);
 			p_line++;
 		}
 	}

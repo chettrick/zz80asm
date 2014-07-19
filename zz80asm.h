@@ -24,8 +24,8 @@
 #define OBJEXTHEX	".hex"	/* filename extension hex */
 #define LSTEXT		".lst"	/* filename extension listing */
 #define OUTBIN		1	/* format of object: binary */
-#define OUTMOS		2	/*		     Mostek binary */
-#define OUTHEX		3	/*		     Intel hex */
+#define OUTMOS		2	/* format of object: Mostek binary */
+#define OUTHEX		3	/* format of object: Intel hex */
 #define OUTDEF		OUTHEX	/* default object format */
 #define COMMENT		';'	/* inline comment character */
 #define LINCOM		'*'	/* comment line if in column 1 */
@@ -41,42 +41,6 @@
 #define HASHSIZE	500	/* max. entries in symbol hash array */
 #define OPCARRAY	256	/* size of object buffer */
 #define SYMINC		100	/* start size of sorted symbol array */
-
-/*
- *	structure opcode table
- */
-struct opc {
-	char *op_name;		/* opcode name */
-	int (*op_fun) ();	/* function pointer code generation */
-	int  op_c1;		/* first base opcode */
-	int  op_c2;		/* second base opcode */
-};
-
-/*
- *	structure operand table
- */
-struct ope {
-	char *ope_name;		/* operand name */
-	int ope_sym;		/* symbol value operand */
-};
-
-/*
- *	structure symbol table entries
- */
-struct sym {
-	struct sym *sym_next;	/* next entry */
-	char *sym_name;		/* symbol name */
-	int  sym_val;		/* symbol value */
-};
-
-/*
- *	structure nested INCLUDE's
- */
-struct inc {
-	char *inc_fn;		/* filename */
-	FILE *inc_fp;		/* file pointer */
-	unsigned int inc_line;	/* line counter for listing */
-};
 
 /*
  *	definition of operand symbols
@@ -143,53 +107,87 @@ struct inc {
 #define F_INTERN	4	/* internal error */
 
 /*
+ *	structure opcode table
+ */
+struct opc {
+	char	*op_name;	/* opcode name */
+	int	 (*op_fun)();	/* function pointer code generation */
+	int	 op_c1;		/* first base opcode */
+	int	 op_c2;		/* second base opcode */
+};
+
+/*
+ *	structure operand table
+ */
+struct ope {
+	char	*ope_name;	/* operand name */
+	int	 ope_sym;	/* symbol value operand */
+};
+
+/*
+ *	structure symbol table entries
+ */
+struct sym {
+	struct	 sym *sym_next;	/* next entry */
+	char	*sym_name;	/* symbol name */
+	int	 sym_val;	/* symbol value */
+};
+
+/*
+ *	structure nested INCLUDE's
+ */
+struct inc {
+	char	*inc_fn;	/* filename */
+	FILE	*inc_fp;	/* file pointer */
+	size_t	 inc_line;	/* line counter for listing */
+};
+
+/*
  *	global variables other than CPU specific tables
  */
-char *srcfn,			/* filename of current processed source file */
-     line[MAXLINE],		/* buffer for one line source */
-     tmp[MAXLINE],		/* temporary buffer */
-     label[SYMSIZE+1],		/* buffer for label */
-     operand[MAXLINE],		/* buffer for operand */
-     title[MAXLINE];		/* buffer for title of source */
+FILE		*srcfp;		/* file pointer for current source */
+FILE		*objfp;		/* file pointer for object code */
+FILE		*lstfp;		/* file pointer for listing */
+FILE		*errfp;		/* file pointer for error output */
 
-int  ops[OPCARRAY];		/* buffer for generated object code */
+char		*srcfn;		/* filename of current processed source file */
+char		 line[MAXLINE];	/* buffer for one line source */
+char		 tmp[MAXLINE];	/* temporary buffer */
+char		 label[SYMSIZE + 1];	/* buffer for label */
+char		 operand[MAXLINE];	/* buffer for operand */
+char		 title[MAXLINE];	/* buffer for title of source */
 
-int  list_flag,			/* flag for option -l */
-     ver_flag,			/* flag for option -v */
-     dump_flag,			/* flag for option -x */
-     pc,			/* program counter */
-     pass,			/* processed pass */
-     iflevel,			/* IF nesting level */
-     gencode,			/* flag for conditional object code */
-     errors,			/* error counter */
-     sd_flag,			/* list flag for PSEUDO opcodes */
-				/* = 0: address from <val>, data from <ops> */
-				/* = 1: address from <sd_val>, data from <ops>*/
-				/* = 2: no address, data from <ops> */
-				/* = 3: address from <sd_val>, no data */
+int		 ops[OPCARRAY];	/* buffer for generated object code */
+
+uint8_t		list_flag;	/* flag for option -l */
+uint8_t		ver_flag;	/* flag for option -v */
+uint8_t		dump_flag;	/* flag for option -x */
+int		pc;		/* program counter */
+uint8_t		pass;		/* processed pass */
+int		iflevel;	/* IF nesting level */
+int		gencode;	/* flag for conditional object code */
+int		errors;		/* error counter */
+uint8_t		sd_flag;	/* list flag for PSEUDO opcodes */
+				/* = 0: addr from <val>, data from <ops> */
+				/* = 1: addr from <sd_val>, data from <ops> */
+				/* = 2: no addr, data from <ops> */
+				/* = 3: addr from <sd_val>, no data */
 				/* = 4: suppress whole line */
-     sd_val,			/* output value for PSEUDO opcodes */
-     prg_adr,			/* start address of program */
-     out_form;			/* format of object file */
+int		sd_val;		/* output value for PSEUDO opcodes */
+int		prg_adr;	/* start address of program */
+uint8_t		out_form;	/* format of object file */
 
-FILE *srcfp,			/* file pointer for current source */
-     *objfp,			/* file pointer for object code */
-     *lstfp,			/* file pointer for listing */
-     *errfp;			/* file pointer for error output */
+size_t		c_line;		/* current line no. in current source */
+size_t		s_line;		/* line no. counter for listing */
+size_t		p_line;		/* no. printed lines on page */
+size_t		ppl;		/* page length */
 
-unsigned int
-      c_line,			/* current line no. in current source */
-      s_line;			/* line no. counter for listing */
+struct sym	 *symtab[HASHSIZE];	/* symbol table */
+struct sym	**symarray;	/* sorted symbol table */
 
-size_t
-      p_line,			/* no. printed lines on page */
-      ppl;			/* page length */
-
-struct sym
-     *symtab[HASHSIZE],		/* symbol table */
-     **symarray;		/* sorted symbol table */
-
-/* prototypes */
+/*
+ *	function prototypes
+ */
 /* num.c */
 int eval(char *);
 int chk_v1(int);
