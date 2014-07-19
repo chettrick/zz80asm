@@ -352,7 +352,7 @@ int p2_line(void)
 		op_count = (*op->op_fun)(op->op_c1, op->op_c2);
 		if (gencode) {
 			lst_line(pc, op_count);
-			obj_writeb(op_count);
+			obj_writeb((size_t)op_count);
 			pc += op_count;
 		} else {
 			sd_flag = 2;
