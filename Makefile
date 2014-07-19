@@ -14,7 +14,7 @@ WARNINGS=	yes
 all: readme
 
 readme: ${PROG}.1
-	mandoc ${.CURDIR}/${PROG}.1 > ${.CURDIR}/README
+	mandoc ${.CURDIR}/${PROG}.1 | col -bx > ${.CURDIR}/README
 
 .PHONY: all readme
 .include <bsd.prog.mk>

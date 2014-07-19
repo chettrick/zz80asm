@@ -1,44 +1,44 @@
 ZZ80ASM(1)                 OpenBSD Reference Manual                 ZZ80ASM(1)
 
-NNAAMMEE
-     zzzz8800aassmm - z80 cross assembler
+NAME
+     zz80asm - z80 cross assembler
 
-SSYYNNOOPPSSIISS
-     zzzz8800aassmm [--dd _s_y_m_b_o_l _._._.] [--ff _b_|_m_|_h] [--l[_l_i_s_t_f_i_l_e]] [--oo _o_u_t_f_i_l_e] [--ss _a_|_n_|_u]
-             [--vv] [--xx] _f_i_l_e_n_a_m_e _._._.
+SYNOPSIS
+     zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n|u]
+             [-v] [-x] filename ...
 
-DDEESSCCRRIIPPTTIIOONN
-     The zzzz8800aassmm utility assembles the files _f_i_l_e_n_a_m_e _._._. and writes to the
-     output file _o_u_t_f_i_l_e, and optionally the listing file _l_i_s_t_f_i_l_e_.
+DESCRIPTION
+     The zz80asm utility assembles the files filename ... and writes to the
+     output file outfile, and optionally the listing file listfile.
 
      The options are as follows:
 
-     --dd _s_y_m_b_o_l _._._.
-             Pre-define one or more _s_y_m_b_o_l_s with a value of zero.
+     -d symbol ...
+             Pre-define one or more symbols with a value of zero.
 
-     --ff _b_|_m_|_h
-             Format _o_u_t_f_i_l_e as either binary, binary with Mostek header, or
+     -f b|m|h
+             Format outfile as either binary, binary with Mostek header, or
              Intel Hex, respectively.  Intel Hex is the default format.
 
-     --l[_l_i_s_t_f_i_l_e]
-             Generate listing file as _l_i_s_t_f_i_l_e, or as _f_i_l_e_n_a_m_e_._l_s_t by default.
+     -l[listfile]
+             Generate listing file as listfile, or as filename.lst by default.
 
-     --oo _o_u_t_f_i_l_e
-             Set output filename to _o_u_t_f_i_l_e instead of the default
-             _f_i_l_e_n_a_m_e_._b_i_n or _f_i_l_e_n_a_m_e_._h_e_x.
+     -o outfile
+             Set output filename to outfile instead of the default
+             filename.bin or filename.hex.
 
-     --ss _a_|_n_|_u
+     -s a|n|u
              Generate symbol table at end of listing file.  This option only
-             works in combination with _-_l.  _a and _n sort the symbol table by
-             address or name, respectively.  _u generates an unsorted table.
+             works in combination with -l.  a and n sort the symbol table by
+             address or name, respectively.  u generates an unsorted table.
 
-     --vv      Produce more verbose output.
+     -v      Produce more verbose output.
 
-     --xx      Do not output data into _o_u_t_f_i_l_e for DEFS in pass two of the
+     -x      Do not output data into outfile for DEFS in pass two of the
              assembler.
 
-PPSSEEUUDDOO OOPPEERRAATTIIOONNSS
-   SSyymmbbooll ddeeffiinniittiioonn aanndd mmeemmoorryy aallllooccaattiioonn::
+PSEUDO OPERATIONS
+   Symbol definition and memory allocation:
            ORG <expression>
                        Set program address.
 
@@ -60,7 +60,7 @@ PPSSEEUUDDOO OOPPEERRAATTIIOONNSS
            <symbol> DEFS <expression>
                        Reserve space in memory.
 
-   CCoonnddiittiioonnaall aasssseemmbbllyy::
+   Conditional assembly:
            IFDEF <symbol>
                        Assemble if symbol defined.
 
@@ -77,7 +77,7 @@ PPSSEEUUDDOO OOPPEERRAATTIIOONNSS
 
            ENDIF       End of conditional assembly.
 
-   MMaanniippuullaattiioonn ooff lliisstt ffiillee::
+   Manipulation of list file:
            TITLE <'string'>
                        Title for page header.
 
@@ -90,18 +90,18 @@ PPSSEEUUDDOO OOPPEERRAATTIIOONNSS
 
            NOLIST      Turn listing off.
 
-   MMiisscceellllaanneeoouuss::
+   Miscellaneous:
            INCLUDE <filename>
                        Include another source file.
 
            PRINT <'string'>
                        Print string to stdout in pass one of the assembler.
 
-EEXXIITT SSTTAATTUUSS
-     The zzzz8800aassmm utility exits 0 on success, and >0 if an error occurs.
+EXIT STATUS
+     The zz80asm utility exits 0 on success, and >0 if an error occurs.
 
-AAUUTTHHOORRSS
-     zzzz8800aassmm was written by Udo Munk <udo.munk@freenet.de> and updated by
+AUTHORS
+     zz80asm was written by Udo Munk <udo.munk@freenet.de> and updated by
      Chris Hettrick <chris@structfoo.com>.
 
 OpenBSD 5.5                      July 16, 2014                     OpenBSD 5.5
