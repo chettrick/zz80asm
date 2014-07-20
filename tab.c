@@ -107,7 +107,7 @@ int put_sym(const char * const sym_name, const int sym_val)
 	if (!gencode)
 		return(0);
 	if ((np = get_sym(sym_name)) == NULL) {
-		np = (struct sym *) malloc(sizeof (struct sym));
+		np = malloc(sizeof(struct sym));
 		if (np == NULL)
 			return(1);
 		if ((np->sym_name = strsave(sym_name)) == NULL)
@@ -174,7 +174,7 @@ size_t copy_sym(void)
 	size_t symsize;		/* size of symarray */
 	struct sym *np;
 
-	symarray = (struct sym **) malloc(SYMINC * sizeof(struct sym *));
+	symarray = malloc(SYMINC * sizeof(struct sym *));
 	if (symarray == NULL)
 		fatal(F_OUTMEM, "sorting symbol table");
 	symsize = SYMINC;
@@ -183,7 +183,7 @@ size_t copy_sym(void)
 			for (np = symtab[i]; np != NULL; np = np->sym_next) {
 				symarray[j++] = np;
 				if (j == symsize) {
-					symarray = (struct sym **) realloc((char *) symarray, symsize * sizeof(struct sym *) + SYMINC * sizeof(struct sym *));
+					symarray = realloc((char *)symarray, symsize * sizeof(struct sym *) + SYMINC * sizeof(struct sym *));
 					if (symarray == NULL)
 						fatal(F_OUTMEM, "sorting symbol table");
 					symsize += SYMINC;
