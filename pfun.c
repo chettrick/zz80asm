@@ -352,7 +352,8 @@ int op_cond(const int op_code)
 		}
 		condnest[iflevel++] = gencode;
 		p = operand;
-		if (!*p || !(p1 = strchr(operand, ','))) {
+		p1 = strchr(operand, ',');
+		if ((*p == 0) || (p1 == NULL)) {
 			asmerr(E_MISOPE);
 			break;
 		}
@@ -372,7 +373,8 @@ int op_cond(const int op_code)
 		}
 		condnest[iflevel++] = gencode;
 		p = operand;
-		if (!*p || !(p1 = strchr(operand, ','))) {
+		p1 = strchr(operand, ',');
+		if ((*p == 0) || (p1 == NULL)) {
 			asmerr(E_MISOPE);
 			break;
 		}
