@@ -54,9 +54,8 @@ int op_2b(const int b1, const int b2)
  */
 int op_im(void)
 {
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	if (pass == 2) {
 		ops[0] = 0xed;
 		switch(eval(operand)) {
@@ -85,9 +84,8 @@ int op_pupo(const int op_code)
 {
 	int len;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (get_reg(operand)) {
 	case REGAF:
 		if (pass == 2) {
@@ -169,9 +167,8 @@ int op_ex(void)
 {
 	int len;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	if (strncmp(operand, "DE,HL", 5) == 0) {
 		ops[0] = 0xeb;
 		len = 1;
@@ -359,9 +356,8 @@ int op_jp(void)
 	char *p1, *p2;
 	int i, len;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	p1 = operand;
 	p2 = tmp;
 	while (*p1 != ',' && *p1 != '\0')
@@ -550,9 +546,8 @@ int op_ld(void)
 	int len;
 	char *p1, *p2;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	p1 = operand;
 	p2 = tmp;
 	while (*p1 != ',' && *p1 != '\0')
@@ -1619,9 +1614,8 @@ int op_add(void)
 	int len;
 	char *p1, *p2;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	p1 = operand;
 	p2 = tmp;
 	while (*p1 != ',' && *p1 != '\0')
@@ -1820,9 +1814,8 @@ int op_adc(void)
 	int len;
 	char *p1, *p2;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	p1 = operand;
 	p2 = tmp;
 	while (*p1 != ',' && *p1 != '\0')
@@ -1948,9 +1941,8 @@ int op_sub(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* SUB A */
 	case REGB:			/* SUB B */
@@ -2007,9 +1999,8 @@ int op_sbc(void)
 	int len;
 	char *p1, *p2;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	p1 = operand;
 	p2 = tmp;
 	while (*p1 != ',' && *p1 != '\0')
@@ -2135,9 +2126,8 @@ int op_inc(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* INC A */
 	case REGB:			/* INC B */
@@ -2217,9 +2207,8 @@ int op_dec(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* DEC A */
 	case REGB:			/* DEC B */
@@ -2299,9 +2288,8 @@ int op_or(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* OR A */
 	case REGB:			/* OR B */
@@ -2357,9 +2345,8 @@ int op_xor(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* XOR A */
 	case REGB:			/* XOR B */
@@ -2415,9 +2402,8 @@ int op_and(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* AND A */
 	case REGB:			/* AND B */
@@ -2473,9 +2459,8 @@ int op_cp(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* CP A */
 	case REGB:			/* CP B */
@@ -2531,9 +2516,8 @@ int op_rl(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* RL A */
 	case REGB:			/* RL B */
@@ -2590,9 +2574,8 @@ int op_rr(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* RR A */
 	case REGB:			/* RR B */
@@ -2649,9 +2632,8 @@ int op_sla(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* SLA A */
 	case REGB:			/* SLA B */
@@ -2708,9 +2690,8 @@ int op_sra(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* SRA A */
 	case REGB:			/* SRA B */
@@ -2767,9 +2748,8 @@ int op_srl(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* SRL A */
 	case REGB:			/* SRL B */
@@ -2826,9 +2806,8 @@ int op_rlc(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* RLC A */
 	case REGB:			/* RLC B */
@@ -2885,9 +2864,8 @@ int op_rrc(void)
 {
 	int len, op;
 
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	switch (op = get_reg(operand)) {
 	case REGA:			/* RRC A */
 	case REGB:			/* RRC B */
@@ -3035,9 +3013,8 @@ int op_set(void)
 
 	len = 2;
 	i = 0;
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	ops[0] = 0xcb;
 	p1 = operand;
 	p2 = tmp;
@@ -3105,9 +3082,8 @@ int op_res(void)
 
 	len = 2;
 	i = 0;
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	ops[0] = 0xcb;
 	p1 = operand;
 	p2 = tmp;
@@ -3175,9 +3151,8 @@ int op_bit(void)
 
 	len = 2;
 	i = 0;
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	ops[0] = 0xcb;
 	p1 = operand;
 	p2 = tmp;
@@ -3244,8 +3219,7 @@ static char *get_second(const char * const s)
 
 	if ((p = strchr(s, ',')) != NULL)
 		return(p + 1);
-	else
-		return(NULL);
+	return(NULL);
 }
 
 /*

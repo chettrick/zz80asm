@@ -87,9 +87,8 @@ int op_ds(void)
 
 	if (!gencode)
 		return(0);
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	sd_val = pc;
 	sd_flag = 3;
 	val = eval(operand);
@@ -112,9 +111,8 @@ int op_db(void)
 		return(0);
 	i = 0;
 	p = operand;
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	while (*p) {
 		if (*p == STRSEP) {
 			p++;
@@ -156,9 +154,8 @@ int op_dm(void)
 		return(0);
 	i = 0;
 	p = operand;
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	if (*p != STRSEP) {
 		asmerr(E_MISHYP);
 		return(0);
@@ -189,9 +186,8 @@ int op_dw(void)
 		return(0);
 	p = operand;
 	i = len = 0;
-	if (pass == 1)
-		if (*label)
-			put_label();
+	if ((pass == 1) && *label)
+		put_label();
 	while (*p) {
 		s = tmp;
 		while (*p != ',' && *p != '\0')

@@ -286,10 +286,8 @@ int chk_v1(const int i)
 {
 	if (i >= -255 && i <= 255)
 		return(i);
-	else {
-		asmerr(E_VALOUT);
-		return(0);
-	}
+	asmerr(E_VALOUT);
+	return(0);
 }
 
 /*
@@ -300,8 +298,6 @@ int chk_v2(const int i)
 {
 	if (i >= -127 && i <= 127)
 		return(i);
-	else {
-		asmerr(E_VALOUT);
-		return(0);
-	}
+	asmerr(E_VALOUT);
+	return(0);
 }
