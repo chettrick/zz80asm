@@ -17,22 +17,24 @@
 /*
  *	definitions of operator symbols for expression parser
  */
-#define OPEDEC		1	/* decimal number */
-#define OPEHEX		2	/* hexadecimal number */
-#define OPEOCT		3	/* octal number */
-#define OPEBIN		4	/* binary number */
-#define OPESUB		5	/* arithmetical - */
-#define OPEADD		6	/* arithmetical + */
-#define OPEMUL		7	/* arithmetical * */
-#define OPEDIV		8	/* arithmetical / */
-#define OPEMOD		9	/* arithmetical modulo */
-#define OPESHL		10	/* logical shift left */
-#define OPESHR		11	/* logical shift right */
-#define OPELOR		12	/* logical OR */
-#define OPELAN		13	/* logical AND */
-#define OPEXOR		14	/* logical XOR */
-#define OPECOM		15	/* logical complement */
-#define OPESYM		99	/* symbol */
+enum {
+	OPEDEC		= 1,	/* decimal number */
+	OPEHEX		= 2,	/* hexadecimal number */
+	OPEOCT		= 3,	/* octal number */
+	OPEBIN		= 4,	/* binary number */
+	OPESUB		= 5,	/* arithmetical - */
+	OPEADD		= 6,	/* arithmetical + */
+	OPEMUL		= 7,	/* arithmetical * */
+	OPEDIV		= 8,	/* arithmetical / */
+	OPEMOD		= 9,	/* arithmetical modulo */
+	OPESHL		= 10,	/* logical shift left */
+	OPESHR		= 11,	/* logical shift right */
+	OPELOR		= 12,	/* logical OR */
+	OPELAN		= 13,	/* logical AND */
+	OPEXOR		= 14,	/* logical XOR */
+	OPECOM		= 15,	/* logical complement */
+	OPESYM		= 99	/* symbol */
+};
 
 static int strval(char *);
 static int isari(int);
