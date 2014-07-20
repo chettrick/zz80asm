@@ -109,15 +109,23 @@ void lst_line(const int val, int opanz)
 		fatal(F_INTERN, "illegal listflag for function lst_line");
 		/* NOTREACHED */
 	}
-	if (opanz >= 1) fprintf(lstfp, "%02X ", ops[0] & 0xff);
-		else fprintf(lstfp, "   ");
-	if (opanz >= 2) fprintf(lstfp, "%02X ", ops[1] & 0xff);
-		else fprintf(lstfp, "   ");
-	if (opanz >= 3) fprintf(lstfp, "%02X ", ops[2] & 0xff);
-		else fprintf(lstfp, "   ");
-	if (opanz >= 4) fprintf(lstfp, "%02X ", ops[3] & 0xff);
-		else fprintf(lstfp, "   ");
-	no_data:
+	if (opanz >= 1)
+		fprintf(lstfp, "%02X ", ops[0] & 0xff);
+	else
+		fprintf(lstfp, "   ");
+	if (opanz >= 2)
+		fprintf(lstfp, "%02X ", ops[1] & 0xff);
+	else
+		fprintf(lstfp, "   ");
+	if (opanz >= 3)
+		fprintf(lstfp, "%02X ", ops[2] & 0xff);
+	else
+		fprintf(lstfp, "   ");
+	if (opanz >= 4)
+		fprintf(lstfp, "%02X ", ops[3] & 0xff);
+	else
+		fprintf(lstfp, "   ");
+no_data:
 	fprintf(lstfp, "%6zu %6zu %s", c_line, s_line, line);
 	if (errnum) {
 		fprintf(errfp, "=> %s\n", errmsg[errnum]);
@@ -138,18 +146,22 @@ void lst_line(const int val, int opanz)
 			s_line++;
 			sd_val += 4;
 			fprintf(lstfp, "%04X  ", sd_val & 0xffff);
-			if (opanz-- > 0) fprintf(lstfp, "%02X ",
-						 ops[i++] & 0xff);
-				else fprintf(lstfp, "   ");
-			if (opanz-- > 0) fprintf(lstfp, "%02X ",
-						 ops[i++] & 0xff);
-				else fprintf(lstfp, "   ");
-			if (opanz-- > 0) fprintf(lstfp, "%02X ",
-						 ops[i++] & 0xff);
-				else fprintf(lstfp, "   ");
-			if (opanz-- > 0) fprintf(lstfp, "%02X ",
-						 ops[i++] & 0xff);
-				else fprintf(lstfp, "   ");
+			if (opanz-- > 0)
+				fprintf(lstfp, "%02X ", ops[i++] & 0xff);
+			else
+				fprintf(lstfp, "   ");
+			if (opanz-- > 0)
+				fprintf(lstfp, "%02X ", ops[i++] & 0xff);
+			else
+				fprintf(lstfp, "   ");
+			if (opanz-- > 0)
+				fprintf(lstfp, "%02X ", ops[i++] & 0xff);
+			else
+				fprintf(lstfp, "   ");
+			if (opanz-- > 0)
+				fprintf(lstfp, "%02X ", ops[i++] & 0xff);
+			else
+				fprintf(lstfp, "   ");
 			fprintf(lstfp, "%6zu %6zu\n", c_line, s_line);
 			p_line++;
 		}
