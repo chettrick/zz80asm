@@ -36,12 +36,12 @@ enum {
 	OPESYM		= 99	/* symbol */
 };
 
-static int strval(char *);
-static int isari(int);
-static int get_type(char *);
-static int axtoi(char *);
-static int abtoi(char *);
-static int aotoi(char *);
+static int strval(const char *);
+static int isari(const int);
+static int get_type(const char * const);
+static int axtoi(const char *);
+static int abtoi(const char *);
+static int aotoi(const char *);
 
 /*
  *	recursive expression parser
@@ -50,7 +50,7 @@ static int aotoi(char *);
  *
  *	Output: computed value
  */
-int eval(char *s)
+int eval(const char *s)
 {
 	char *p;
 	int val;
@@ -166,7 +166,7 @@ hyp_error:
  *
  *	Output: operand type
  */
-static int get_type(char *s)
+static int get_type(const char * const s)
 {
 	if (isdigit((int)*s)) {		/* numerical operand */
 		if (isdigit((int)*(s + strlen(s) - 1)))	/* decimal number */
@@ -206,7 +206,7 @@ static int get_type(char *s)
  *	check a character for arithmetical operators
  *	+, -, *, /, %, <, >, |, &, ~ and ^
  */
-static int isari(int c)
+static int isari(const int c)
 {
 	return((c) == '+' || (c) == '-' || (c) == '*' ||
 	       (c) == '/' || (c) == '%' || (c) == '<' ||
@@ -218,7 +218,7 @@ static int isari(int c)
  *	conversion of string with hexadecimal number to integer
  *	format: nnnnH or 0nnnnH if 1st digit > 9
  */
-static int axtoi(char *str)
+static int axtoi(const char *str)
 {
 	int num;
 
@@ -235,7 +235,7 @@ static int axtoi(char *str)
  *	conversion of string with octal number to integer
  *	format: nnnnO
  */
-static int aotoi(char *str)
+static int aotoi(const char *str)
 {
 	int num;
 
@@ -251,7 +251,7 @@ static int aotoi(char *str)
  *	conversion of string with binary number to integer
  *	format: nnnnnnnnnnnnnnnnB
  */
-int abtoi(char *str)
+int abtoi(const char *str)
 {
 	int num;
 
@@ -266,7 +266,7 @@ int abtoi(char *str)
 /*
  *	convert ASCII string to integer
  */
-static int strval(char *str)
+static int strval(const char *str)
 {
 	int num;
 
@@ -282,7 +282,7 @@ static int strval(char *str)
  *	check value for range -256 < value < 256
  *	Output: value if in range, otherwise 0 and error message
  */
-int chk_v1(int i)
+int chk_v1(const int i)
 {
 	if (i >= -255 && i <= 255)
 		return(i);
@@ -296,7 +296,7 @@ int chk_v1(int i)
  *	check value for range -128 < value < 128
  *	Output: value if in range, otherwise 0 and error message
  */
-int chk_v2(int i)
+int chk_v2(const int i)
 {
 	if (i >= -127 && i <= 127)
 		return(i);

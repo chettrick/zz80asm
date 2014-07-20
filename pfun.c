@@ -214,7 +214,7 @@ int op_dw(void)
 /*
  *	EJECT, LIST, NOLIST, PAGE, PRINT, TITLE, INCLUDE
  */
-int op_misc(int op_code)
+int op_misc(const int op_code)
 {
 	char *p, *d;
 	static char fn[LENFN];
@@ -322,7 +322,7 @@ int op_misc(int op_code)
 /*
  *	IFDEF, IFNDEF, IFEQ, IFNEQ, ELSE, ENDIF
  */
-int op_cond(int op_code)
+int op_cond(const int op_code)
 {
 	char *p, *p1, *p2;
 	static int condnest[IFNEST];
@@ -412,7 +412,7 @@ int op_cond(int op_code)
 /*
  *	EXTRN and PUBLIC
  */
-int op_glob(int op_code)
+int op_glob(const int op_code)
 {
 	if (!gencode)
 		return(0);

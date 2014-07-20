@@ -21,8 +21,8 @@ static void pass1(void);
 static void pass2(void);
 static int p1_line(void);
 static int p2_line(void);
-static void open_o_files(char *);
-static void get_fn(char *, char *, char *);
+static void open_o_files(const char * const);
+static void get_fn(char * const, char * const, const char * const);
 static char *get_label(char *, char *);
 static char *get_opcode(char *, char *);
 static char *get_arg(char *, char *);
@@ -194,7 +194,7 @@ static void usage(void)
 /*
  *	print error messages and abort
  */
-void fatal(enum fatal_type ft, char *arg)
+void fatal(enum fatal_type ft, const char * const arg)
 {
 	printf("%s %s\n", errmsg[ft], arg);
 	exit(1);
@@ -234,7 +234,7 @@ void pass1(void)
  *
  *	Input: name of source file
  */
-void p1_file(char *fn)
+void p1_file(char * const fn)
 {
 	c_line = 0;
 	srcfn = fn;
@@ -312,7 +312,7 @@ void pass2(void)
  *
  *	Input: name of source file
  */
-void p2_file(char *fn)
+void p2_file(char * const fn)
 {
 	c_line = 0;
 	srcfn = fn;
@@ -371,7 +371,7 @@ int p2_line(void)
  *	list and object filenames are build from source filename if
  *	not given by options
  */
-void open_o_files(char *source)
+void open_o_files(const char * const source)
 {
 	char *p;
 
@@ -411,7 +411,7 @@ void open_o_files(char *source)
 /*
  *	create a filename in "dest" from "src" and "ext"
  */
-void get_fn(char *dest, char *src, char *ext)
+void get_fn(char * const dest, char * const src, const char * const ext)
 {
 	int i;
 	char *sp, *dp;

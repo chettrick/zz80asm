@@ -12,8 +12,8 @@
 
 #include "zz80asm.h"
 
-static int calc_val(char *);
-static char *get_second(char *);
+static int calc_val(const char * const);
+static char *get_second(const char * const);
 static int lda(void), ldb(void), ldc(void), ldd(void), lde(void);
 static int ldh(void), ldl(void);
 static int ldbc(void), ldde(void), ldhl(void), ldix(void), ldiy(void);
@@ -24,7 +24,7 @@ static int adca(void), adchl(void), sbca(void), sbchl(void);
 /*
  *	process 1byte opcodes without arguments
  */
-int op_1b(int b1)
+int op_1b(const int b1)
 {
 	if (pass == 1) {		/* Pass 1 */
 		if (*label)
@@ -37,7 +37,7 @@ int op_1b(int b1)
 /*
  *	process 2byte opcodes without arguments
  */
-int op_2b(int b1, int b2)
+int op_2b(const int b1, const int b2)
 {
 	if (pass == 1) {		/* Pass 1 */
 		if (*label)
@@ -81,7 +81,7 @@ int op_im(void)
 /*
  *	PUSH and POP
  */
-int op_pupo(int op_code)
+int op_pupo(const int op_code)
 {
 	int len;
 
@@ -3238,7 +3238,7 @@ int op_bit(void)
  *	opcodes:	opcode destination,source
  *	if source is missing returns NULL
  */
-static char *get_second(char *s)
+static char *get_second(const char * const s)
 {
 	char *p;
 
@@ -3253,7 +3253,7 @@ static char *get_second(char *s)
  *	LD A,(IX+7)
  *		 --
  */
-int calc_val(char *s)
+int calc_val(const char * const s)
 {
 	char *p;
 

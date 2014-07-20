@@ -14,7 +14,7 @@
 
 static void flush_hex(void);
 static int chksum(void);
-static void btoh(unsigned char, char **);
+static void btoh(const unsigned char, char ** const);
 
 static char *errmsg[] = {		/* error messages for asmerr() */
 	"illegal opcode",		/* 0 */
@@ -80,7 +80,7 @@ void lst_attl(void)
 /*
  *	print one line into listfile, if -l option set
  */
-void lst_line(int val, int opanz)
+void lst_line(const int val, int opanz)
 {
 	int i;
 
@@ -191,7 +191,7 @@ void lst_sym(void)
 /*
  *	print sorted symbol table into listfile
  */
-void lst_sort_sym(size_t len)
+void lst_sort_sym(const size_t len)
 {
 	size_t i, j;
 
@@ -321,7 +321,7 @@ static void flush_hex(void)
  *	convert unsigned char into ASCII hex and copy to string at p
  *	increase p by 2
  */
-static void btoh(unsigned char byte, char **p)
+static void btoh(const unsigned char byte, char ** const p)
 {
 	unsigned char c;
 

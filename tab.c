@@ -14,9 +14,9 @@
 #include "zz80asm.h"
 #include "tab.h"
 
-static int hash(char *);
-static int numcmp(int, int);
-static char *strsave(char *);
+static int hash(const char *);
+static int numcmp(const int, const int);
+static char *strsave(const char * const);
 
 /*
  *	binary search in sorted table opctab
@@ -25,7 +25,7 @@ static char *strsave(char *);
  *
  *	Output: pointer to table element, or NULL if not found
  */
-struct opc *search_op(char *op_name)
+struct opc *search_op(const char * const op_name)
 {
 	int cond;
 	struct opc *low, *high, *mid;
@@ -52,7 +52,7 @@ struct opc *search_op(char *op_name)
  *	Output: symbol for operand, NOOPERA if empty operand,
  *		NOREG if operand not found
  */
-int get_reg(char *s)
+int get_reg(const char * const s)
 {
 	int cond;
 	struct ope *low, *high, *mid;
@@ -80,7 +80,7 @@ int get_reg(char *s)
  *
  *	Output: pointer to table element, or NULL if not found
  */
-struct sym *get_sym(char *sym_name)
+struct sym *get_sym(const char * const sym_name)
 {
 	struct sym *np;
 
@@ -99,7 +99,7 @@ struct sym *get_sym(char *sym_name)
  *	Output: 0 symbol added/modified
  *		1 out of memory
  */
-int put_sym(char *sym_name, int sym_val)
+int put_sym(const char * const sym_name, const int sym_val)
 {
 	int hashval;
 	struct sym *np;
@@ -139,7 +139,7 @@ void put_label(void)
  *
  *	Output: hash value
  */
-static int hash(char *name)
+static int hash(const char * name)
 {
 	int hashval;
 
@@ -155,7 +155,7 @@ static int hash(char *name)
  *
  *	Output: pointer to allocated memory with string
  */
-static char *strsave(char *s)
+static char *strsave(const char * const s)
 {
 	char *p;
 
@@ -197,7 +197,7 @@ size_t copy_sym(void)
 /*
  *	sort symbol table by name
  */
-void n_sort_sym(size_t len)
+void n_sort_sym(const size_t len)
 {
 	int gap, i, j;
 	struct sym *temp;
@@ -219,7 +219,7 @@ void n_sort_sym(size_t len)
 /*
  *	sort symbol table by address
  */
-void a_sort_sym(size_t len)
+void a_sort_sym(const size_t len)
 {
 	int gap, i, j;
 	struct sym *temp;
@@ -241,7 +241,7 @@ void a_sort_sym(size_t len)
 /*
  *	compares two 16bit values, result like strcmp()
  */
-static int numcmp(int n1, int n2)
+static int numcmp(const int n1, const int n2)
 {
 	if ((unsigned int)(n1 & 0xffff) < (unsigned int)(n2 & 0xffff))
 		return(-1);

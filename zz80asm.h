@@ -198,17 +198,17 @@ struct sym	**symarray;	/* sorted symbol table */
  *	function prototypes
  */
 /* num.c */
-int eval(char *);
-int chk_v1(int);
-int chk_v2(int);
+int eval(const char *);
+int chk_v1(const int);
+int chk_v2(const int);
 
 /* out.c */
 void asmerr(enum err_type);
 void lst_header(void);
 void lst_attl(void);
-void lst_line(int, int);
+void lst_line(const int, int);
 void lst_sym(void);
-void lst_sort_sym(size_t);
+void lst_sort_sym(const size_t);
 void obj_header(void);
 void obj_end(void);
 void obj_writeb(size_t);
@@ -222,12 +222,12 @@ int op_ds(void);
 int op_db(void);
 int op_dm(void);
 int op_dw(void);
-int op_misc(int);
-int op_cond(int);
-int op_glob(int);
+int op_misc(const int);
+int op_cond(const int);
+int op_glob(const int);
 
 /* rfun.c */
-int op_1b(int), op_2b(int, int), op_pupo(int);
+int op_1b(const int), op_2b(const int, const int), op_pupo(const int);
 int op_ex(void), op_ld(void), op_call(void), op_ret(void);
 int op_jp(void), op_jr(void), op_djnz(void), op_rst(void);
 int op_add(void), op_adc(void), op_sub(void), op_sbc(void), op_cp(void);
@@ -238,18 +238,18 @@ int op_out(void), op_in(void), op_im(void);
 int op_set(void), op_res(void), op_bit(void);
 
 /* tab.c */
-struct opc *search_op(char *);
-struct sym *get_sym(char *);
-int put_sym(char *, int);
-int get_reg(char *);
+struct opc *search_op(const char * const);
+struct sym *get_sym(const char * const);
+int put_sym(const char * const, const int);
+int get_reg(const char * const);
 void put_label(void);
 size_t copy_sym(void);
-void n_sort_sym(size_t);
-void a_sort_sym(size_t);
+void n_sort_sym(const size_t);
+void a_sort_sym(const size_t);
 
 /* zz80asm.c */
-void fatal(enum fatal_type, char *) __attribute__((noreturn));
-void p1_file(char *);
-void p2_file(char *);
+void fatal(enum fatal_type, const char * const) __attribute__((noreturn));
+void p1_file(char * const);
+void p2_file(char * const);
 
 #endif /* _ZZ80ASM_H_ */
