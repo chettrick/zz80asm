@@ -94,28 +94,28 @@ void lst_line(int val, int opanz)
 	}
 	switch (sd_flag) {
 	case 0:
-		fprintf(lstfp, "%04x  ", val & 0xffff);
+		fprintf(lstfp, "%04X  ", val & 0xffff);
 		break;
 	case 1:
-		fprintf(lstfp, "%04x  ", sd_val & 0xffff);
+		fprintf(lstfp, "%04X  ", sd_val & 0xffff);
 		break;
 	case 2:
 		fprintf(lstfp, "      ");
 		break;
 	case 3:
-		fprintf(lstfp, "%04x              ", sd_val & 0xffff);
+		fprintf(lstfp, "%04X              ", sd_val & 0xffff);
 		goto no_data;
 	default:
 		fatal(F_INTERN, "illegal listflag for function lst_line");
 		/* NOTREACHED */
 	}
-	if (opanz >= 1) fprintf(lstfp, "%02x ", ops[0] & 0xff);
+	if (opanz >= 1) fprintf(lstfp, "%02X ", ops[0] & 0xff);
 		else fprintf(lstfp, "   ");
-	if (opanz >= 2) fprintf(lstfp, "%02x ", ops[1] & 0xff);
+	if (opanz >= 2) fprintf(lstfp, "%02X ", ops[1] & 0xff);
 		else fprintf(lstfp, "   ");
-	if (opanz >= 3) fprintf(lstfp, "%02x ", ops[2] & 0xff);
+	if (opanz >= 3) fprintf(lstfp, "%02X ", ops[2] & 0xff);
 		else fprintf(lstfp, "   ");
-	if (opanz >= 4) fprintf(lstfp, "%02x ", ops[3] & 0xff);
+	if (opanz >= 4) fprintf(lstfp, "%02X ", ops[3] & 0xff);
 		else fprintf(lstfp, "   ");
 	no_data:
 	fprintf(lstfp, "%6zu %6zu %s", c_line, s_line, line);
@@ -138,17 +138,17 @@ void lst_line(int val, int opanz)
 			}
 			s_line++;
 			sd_val += 4;
-			fprintf(lstfp, "%04x  ", sd_val & 0xffff);
-			if (opanz-- > 0) fprintf(lstfp, "%02x ",
+			fprintf(lstfp, "%04X  ", sd_val & 0xffff);
+			if (opanz-- > 0) fprintf(lstfp, "%02X ",
 						 ops[i++] & 0xff);
 				else fprintf(lstfp, "   ");
-			if (opanz-- > 0) fprintf(lstfp, "%02x ",
+			if (opanz-- > 0) fprintf(lstfp, "%02X ",
 						 ops[i++] & 0xff);
 				else fprintf(lstfp, "   ");
-			if (opanz-- > 0) fprintf(lstfp, "%02x ",
+			if (opanz-- > 0) fprintf(lstfp, "%02X ",
 						 ops[i++] & 0xff);
 				else fprintf(lstfp, "   ");
-			if (opanz-- > 0) fprintf(lstfp, "%02x ",
+			if (opanz-- > 0) fprintf(lstfp, "%02X ",
 						 ops[i++] & 0xff);
 				else fprintf(lstfp, "   ");
 			fprintf(lstfp, "%6zu %6zu\n", c_line, s_line);
@@ -175,7 +175,7 @@ void lst_sym(void)
 					fputs("\n", lstfp);
 					p_line += 1;
 				}
-				fprintf(lstfp, "%-8s %04x\t", np->sym_name,
+				fprintf(lstfp, "%-8s %04X\t", np->sym_name,
 					np->sym_val & 0xffff);
 				if (++j == 4) {
 					fprintf(lstfp, "\n");
@@ -203,7 +203,7 @@ void lst_sort_sym(size_t len)
 			fputs("\n", lstfp);
 			p_line += 1;
 		}
-		fprintf(lstfp, "%-8s %04x\t", symarray[i]->sym_name,
+		fprintf(lstfp, "%-8s %04X\t", symarray[i]->sym_name,
 			symarray[i]->sym_val & 0xffff);
 		if (++j == 4) {
 			fprintf(lstfp, "\n");
