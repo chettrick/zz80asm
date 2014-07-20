@@ -120,8 +120,7 @@ void lst_line(const int val, int opanz)
 	no_data:
 	fprintf(lstfp, "%6zu %6zu %s", c_line, s_line, line);
 	if (errnum) {
-		fprintf(errfp, "=> %s", errmsg[errnum]);
-		putc('\n', errfp);
+		fprintf(errfp, "=> %s\n", errmsg[errnum]);
 		errnum = 0;
 		p_line++;
 	}
@@ -172,7 +171,7 @@ void lst_sym(void)
 			for (np = symtab[i]; np != NULL; np = np->sym_next) {
 				if (p_line == 0) {
 					lst_header();
-					fputs("\n", lstfp);
+					fprintf(lstfp, "\n");
 					p_line += 1;
 				}
 				fprintf(lstfp, "%-8s %04X\t", np->sym_name,
@@ -200,7 +199,7 @@ void lst_sort_sym(const size_t len)
 	while (i < len) {
 		if (p_line == 0) {
 			lst_header();
-			fputs("\n", lstfp);
+			fprintf(lstfp, "\n");
 			p_line += 1;
 		}
 		fprintf(lstfp, "%-8s %04X\t", symarray[i]->sym_name,

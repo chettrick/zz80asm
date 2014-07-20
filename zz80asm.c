@@ -141,12 +141,13 @@ int main(int argc, char *argv[])
 		i++;
 	}
 	if (i == 0) {
-		printf("no input file\n");
+		fprintf(errfp, "%s\n", "no input file");
 		usage();
 		/* NOTREACHED */
 	}
 
-	printf("Z80 - Assembler Release %s, %s\n", REL, COPYR);
+	if (ver_flag)
+		fprintf(stdout, "Z80 - Assembler Release %s, %s\n", REL, COPYR);
 	pass1();
 	pass2();
 	if (list_flag) {
@@ -196,7 +197,7 @@ static void usage(void)
  */
 void fatal(enum fatal_type ft, const char * const arg)
 {
-	printf("%s %s\n", errmsg[ft], arg);
+	fprintf(errfp, "%s %s\n", errmsg[ft], arg);
 	exit(1);
 }
 
@@ -212,18 +213,18 @@ void pass1(void)
 	pc = 0;
 	fi = 0;
 	if (ver_flag)
-		puts("Pass 1");
+		fprintf(stdout, "%s\n", "Pass 1");
 	open_o_files(infiles[fi]);
 	while (infiles[fi] != NULL) {
 		if (ver_flag)
-			printf("   Read    %s\n", infiles[fi]);
+			fprintf(stdout, "   Read    %s\n", infiles[fi]);
 		p1_file(infiles[fi]);
 		fi++;
 	}
 	if (errors) {
 		fclose(objfp);
 		unlink(objfn);
-		printf("%d error(s)\n", errors);
+		fprintf(errfp, "%d error(s)\n", errors);
 		fatal(F_HALT, NULL);
 	}
 }
@@ -293,17 +294,18 @@ void pass2(void)
 	pc = 0;
 	fi = 0;
 	if (ver_flag)
-		puts("Pass 2");
+		fprintf(stdout, "%s\n", "Pass 2");
 	obj_header();
 	while (infiles[fi] != NULL) {
 		if (ver_flag)
-			printf("   Read    %s\n", infiles[fi]);
+			fprintf(stdout, "   Read    %s\n", infiles[fi]);
 		p2_file(infiles[fi]);
 		fi++;
 	}
 	obj_end();
 	fclose(objfp);
-	printf("%d error(s)\n", errors);
+	if (ver_flag)
+		fprintf(stdout, "%d error(s)\n", errors);
 }
 
 /*

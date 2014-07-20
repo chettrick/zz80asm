@@ -246,11 +246,11 @@ int op_misc(const int op_code)
 			p = operand;
 			while (*p) {
 				if (*p != STRSEP)
-					putchar(*p++);
+					putc(*p++, stdout);
 				else
 					p++;
 			}
-			putchar('\n');
+			putc('\n', stdout);
 		}
 		break;
 	case 6:				/* INCLUDE */
@@ -275,20 +275,21 @@ int op_misc(const int op_code)
 		*d = '\0';
 		if (pass == 1) {	/* PASS 1 */
 			if (ver_flag)
-				printf("   Include %s\n", fn);
+				fprintf(stdout, "   Include %s\n", fn);
 			p1_file(fn);
 		} else {		/* PASS 2 */
 			sd_flag = 2;
 			lst_line(0, 0);
 			if (ver_flag)
-				printf("   Include %s\n", fn);
+				fprintf(stdout, "   Include %s\n", fn);
 			p2_file(fn);
 		}
 		incnest--;
 		c_line = incl[incnest].inc_line;
 		srcfn = incl[incnest].inc_fn;
 		srcfp = incl[incnest].inc_fp;
-		printf("   Resume  %s\n", srcfn);
+		if (ver_flag)
+			fprintf(stdout, "   Resume  %s\n", srcfn);
 		if (list_flag && (pass == 2)) {
 			lst_header();
 			lst_attl();
