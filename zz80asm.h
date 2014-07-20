@@ -23,10 +23,6 @@
 #define OBJEXTBIN	".bin"	/* filename extension object */
 #define OBJEXTHEX	".hex"	/* filename extension hex */
 #define LSTEXT		".lst"	/* filename extension listing */
-#define OUTBIN		1	/* format of object: binary */
-#define OUTMOS		2	/* format of object: Mostek binary */
-#define OUTHEX		3	/* format of object: Intel hex */
-#define OUTDEF		OUTHEX	/* default object format */
 #define COMMENT		';'	/* inline comment character */
 #define LINCOM		'*'	/* comment line if in column 1 */
 #define LABSEP		':'	/* label separator */
@@ -42,69 +38,82 @@
 #define OPCARRAY	256	/* size of object buffer */
 #define SYMINC		100	/* start size of sorted symbol array */
 
+enum {
+	OUTBIN		= 1,	/* format of object: binary */
+	OUTMOS		= 2,	/* format of object: Mostek binary */
+	OUTHEX		= 3,	/* format of object: Intel hex */
+	OUTDEF		= OUTHEX	/* default object format */
+};
+
 /*
  *	definition of operand symbols
  *	definitions for registers A, B, C, D, H, L and (HL)
  *	are defined as the bits used in operands and may not
  *	be changed!
  */
-#define REGB		0	/* register B */
-#define REGC		1	/* register C */
-#define REGD		2	/* register D */
-#define REGE		3	/* register E */
-#define REGH		4	/* register H */
-#define REGL		5	/* register L */
-#define REGIHL		6	/* register indirect HL */
-#define REGA		7	/* register A */
-#define REGI		8	/* register I */
-#define REGR		9	/* register R */
-#define REGAF		10	/* register pair AF */
-#define REGBC		11	/* register pair BC */
-#define REGDE		12	/* register pair DE */
-#define REGHL		13	/* register pair HL */
-#define REGIX		14	/* register IX */
-#define REGIY		15	/* register IY */
-#define REGSP		16	/* register SP */
-#define REGIBC		17	/* register indirect BC */
-#define REGIDE		18	/* register indirect DE */
-#define REGIIX		19	/* register indirect IX */
-#define REGIIY		20	/* register indirect IY */
-#define REGISP		21	/* register indirect SP */
-#define FLGNC		30	/* flag no carry */
-#define FLGNZ		31	/* flag not zero */
-#define FLGZ		32	/* flag zero */
-#define FLGM		33	/* flag minus */
-#define FLGP		34	/* flag plus */
-#define FLGPE		35	/* flag parity even */
-#define FLGPO		36	/* flag parity odd */
-#define NOOPERA		98	/* no operand */
-#define NOREG		99	/* operand isn't register */
+enum {
+	REGB		= 0,	/* register B */
+	REGC		= 1,	/* register C */
+	REGD		= 2,	/* register D */
+	REGE		= 3,	/* register E */
+	REGH		= 4,	/* register H */
+	REGL		= 5,	/* register L */
+	REGIHL		= 6,	/* register indirect HL */
+	REGA		= 7,	/* register A */
+	REGI		= 8,	/* register I */
+	REGR		= 9,	/* register R */
+	REGAF		= 10,	/* register pair AF */
+	REGBC		= 11,	/* register pair BC */
+	REGDE		= 12,	/* register pair DE */
+	REGHL		= 13,	/* register pair HL */
+	REGIX		= 14,	/* register IX */
+	REGIY		= 15,	/* register IY */
+	REGSP		= 16,	/* register SP */
+	REGIBC		= 17,	/* register indirect BC */
+	REGIDE		= 18,	/* register indirect DE */
+	REGIIX		= 19,	/* register indirect IX */
+	REGIIY		= 20,	/* register indirect IY */
+	REGISP		= 21,	/* register indirect SP */
+	FLGNC		= 30,	/* flag no carry */
+	FLGNZ		= 31,	/* flag not zero */
+	FLGZ		= 32,	/* flag zero */
+	FLGM		= 33,	/* flag minus */
+	FLGP		= 34,	/* flag plus */
+	FLGPE		= 35,	/* flag parity even */
+	FLGPO		= 36,	/* flag parity odd */
+	NOOPERA		= 98,	/* no operand */
+	NOREG		= 99	/* operand isn't register */
+};
 
 /*
  *	definitions of error numbers for error messages in listfile
  */
-#define E_ILLOPC	0	/* illegal opcode */
-#define E_ILLOPE	1	/* illegal operand */
-#define E_MISOPE	2	/* missing operand */
-#define E_MULSYM	3	/* multiple defined symbol */
-#define E_UNDSYM	4	/* undefined symbol */
-#define E_VALOUT	5	/* value out of bounds */
-#define E_MISPAR	6	/* missing paren */
-#define E_MISHYP	7	/* missing string separator */
-#define E_MEMOVR	8	/* memory override (ORG) */
-#define E_MISIFF	9	/* missing IF at ELSE or ENDIF */
-#define E_IFNEST	10	/* to many IF's nested */
-#define E_MISEIF	11	/* missing ENDIF */
-#define E_INCNEST	12	/* to many INCLUDE's nested */
+enum err_type {
+	E_ILLOPC	= 0,	/* illegal opcode */
+	E_ILLOPE	= 1,	/* illegal operand */
+	E_MISOPE	= 2,	/* missing operand */
+	E_MULSYM	= 3,	/* multiple defined symbol */
+	E_UNDSYM	= 4,	/* undefined symbol */
+	E_VALOUT	= 5,	/* value out of bounds */
+	E_MISPAR	= 6,	/* missing paren */
+	E_MISHYP	= 7,	/* missing string separator */
+	E_MEMOVR	= 8,	/* memory override (ORG) */
+	E_MISIFF	= 9,	/* missing IF at ELSE or ENDIF */
+	E_IFNEST	= 10,	/* to many IF's nested */
+	E_MISEIF	= 11,	/* missing ENDIF */
+	E_INCNEST	= 12	/* to many INCLUDE's nested */
+};
 
 /*
  *	definition fatal errors
  */
-#define F_OUTMEM	0	/* out of memory */
-#define F_USAGE		1	/* usage: .... */
-#define F_HALT		2	/* assembly halted */
-#define F_FOPEN		3	/* can't open file */
-#define F_INTERN	4	/* internal error */
+enum fatal_type {
+	F_OUTMEM	= 0,	/* out of memory */
+	F_USAGE		= 1,	/* usage: ... */
+	F_HALT		= 2,	/* assembly halted */
+	F_FOPEN		= 3,	/* can't open file */
+	F_INTERN	= 4	/* internal error */
+};
 
 /*
  *	structure opcode table
@@ -194,7 +203,7 @@ int chk_v1(int);
 int chk_v2(int);
 
 /* out.c */
-void asmerr(int);
+void asmerr(enum err_type);
 void lst_header(void);
 void lst_attl(void);
 void lst_line(int, int);
@@ -239,7 +248,7 @@ void n_sort_sym(size_t);
 void a_sort_sym(size_t);
 
 /* zz80asm.c */
-void fatal(int, char *) __attribute__((noreturn));
+void fatal(enum fatal_type, char *) __attribute__((noreturn));
 void p1_file(char *);
 void p2_file(char *);
 

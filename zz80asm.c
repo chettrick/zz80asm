@@ -194,9 +194,9 @@ static void usage(void)
 /*
  *	print error messages and abort
  */
-void fatal(int i, char *arg)
+void fatal(enum fatal_type ft, char *arg)
 {
-	printf("%s %s\n", errmsg[i], arg);
+	printf("%s %s\n", errmsg[ft], arg);
 	exit(1);
 }
 

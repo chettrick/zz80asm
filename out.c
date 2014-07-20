@@ -46,13 +46,13 @@ unsigned int page = 0;			/* no. of pages for listing */
 /*
  *	print error message to listfile and increase error counter
  */
-void asmerr(int i)
+void asmerr(enum err_type et)
 {
 	if (pass == 1) {
 		fprintf(errfp, "Error in file: %s Line: %zu\n", srcfn, c_line);
-		fprintf(errfp, "%s\n", errmsg[i]);
+		fprintf(errfp, "%s\n", errmsg[et]);
 	} else
-		errnum = i;
+		errnum = et;
 	errors++;
 }
 
