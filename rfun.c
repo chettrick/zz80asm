@@ -21,6 +21,8 @@ static int ldsp(void), ldihl(void), ldiix(void), ldiiy(void), ldinn(void);
 static int adda(void), addhl(void), addix(void), addiy(void);
 static int adca(void), adchl(void), sbca(void), sbchl(void);
 
+int	ops[OPCARRAY];	/* buffer for generated object code */
+
 /*
  *	process 1byte opcodes without arguments
  */

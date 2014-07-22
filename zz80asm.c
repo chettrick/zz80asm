@@ -27,6 +27,36 @@ static char *get_label(char *, char *);
 static char *get_opcode(char *, char *);
 static char *get_arg(char *, char *);
 
+FILE		*srcfp;		/* file pointer for current source */
+FILE		*objfp;		/* file pointer for object code */
+FILE		*lstfp;		/* file pointer for listing */
+FILE		*errfp;		/* file pointer for error output */
+
+char		*srcfn;		/* filename of current processed source file */
+char		line[MAXLINE];	/* buffer for one line source */
+char		tmp[MAXLINE];	/* temporary buffer */
+char		label[SYMSIZE + 1];	/* buffer for label */
+char		operand[MAXLINE];	/* buffer for operand */
+
+uint8_t		list_flag;	/* flag for option -l */
+uint8_t		ver_flag;	/* flag for option -v */
+uint8_t		dump_flag;	/* flag for option -x */
+int		pc;		/* program counter */
+uint8_t		pass;		/* processed pass */
+int		iflevel;	/* IF nesting level */
+int		gencode;	/* flag for conditional object code */
+int		errors;		/* error counter */
+uint8_t		sd_flag;	/* list flag for PSEUDO opcodes */
+				/* = 0: addr from <val>, data from <ops> */
+				/* = 1: addr from <sd_val>, data from <ops> */
+				/* = 2: no addr, data from <ops> */
+				/* = 3: addr from <sd_val>, no data */
+				/* = 4: suppress whole line */
+uint8_t		out_form;	/* format of object file */
+
+size_t		c_line;		/* current line no. in current source */
+size_t		s_line;		/* line no. counter for listing */
+
 static char *errmsg[] = {		/* error messages for fatal() */
 	"out of memory: %s",		/* 0 */
 	"usage: zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] "
@@ -36,10 +66,10 @@ static char *errmsg[] = {		/* error messages for fatal() */
 	"internal error: %s"		/* 4 */
 };
 
-char *infiles[MAXFN];		/* source filenames */
-char  objfn[LENFN + 1];		/* object filename */
-char  lstfn[LENFN + 1];		/* listing filename */
-char  opcode[MAXLINE];		/* buffer for opcode */
+static char	*infiles[MAXFN];	/* source filenames */
+static char	 objfn[LENFN + 1];	/* object filename */
+static char	 lstfn[LENFN + 1];	/* listing filename */
+static char	 opcode[MAXLINE];	/* buffer for opcode */
 
 int main(int argc, char *argv[])
 {
@@ -51,10 +81,10 @@ int main(int argc, char *argv[])
 
 	/* program defaults */
 	gencode = 1;
-	out_form = OUTDEF;
-	ppl = PLENGTH;
+	out_form = OUTHEX;		/* default object format */
 	dump_flag = 1;
 	ver_flag = 0;
+	iflevel = 0;			/* IF nesting level */
 
 	init();
 

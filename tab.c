@@ -14,6 +14,9 @@
 #include "zz80asm.h"
 #include "tab.h"
 
+struct sym *symtab[HASHSIZE];	/* symbol table */
+struct sym **symarray;		/* sorted symbol table */
+
 static int hash(const char *);
 static int numcmp(const int, const int);
 static char *strsave(const char * const);

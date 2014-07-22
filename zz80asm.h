@@ -39,10 +39,9 @@
 #define SYMINC		100	/* start size of sorted symbol array */
 
 enum {
-	OUTBIN,				/* format of object: binary */
-	OUTMOS,				/* format of object: Mostek binary */
-	OUTHEX,				/* format of object: Intel hex */
-	OUTDEF		= OUTHEX	/* default object format */
+	OUTBIN,			/* format of object: binary */
+	OUTMOS,			/* format of object: Mostek binary */
+	OUTHEX,			/* format of object: Intel hex */
 };
 
 /*
@@ -154,45 +153,45 @@ struct inc {
 /*
  *	global variables other than CPU specific tables
  */
-FILE		*srcfp;		/* file pointer for current source */
-FILE		*objfp;		/* file pointer for object code */
-FILE		*lstfp;		/* file pointer for listing */
-FILE		*errfp;		/* file pointer for error output */
+extern FILE	*srcfp;		/* file pointer for current source */
+extern FILE	*objfp;		/* file pointer for object code */
+extern FILE	*lstfp;		/* file pointer for listing */
+extern FILE	*errfp;		/* file pointer for error output */
 
-char		*srcfn;		/* filename of current processed source file */
-char		 line[MAXLINE];	/* buffer for one line source */
-char		 tmp[MAXLINE];	/* temporary buffer */
-char		 label[SYMSIZE + 1];	/* buffer for label */
-char		 operand[MAXLINE];	/* buffer for operand */
-char		 title[MAXLINE];	/* buffer for title of source */
+extern char	*srcfn;		/* filename of current processed source file */
+extern char	 line[MAXLINE];	/* buffer for one line source */
+extern char	 tmp[MAXLINE];	/* temporary buffer */
+extern char	 label[SYMSIZE + 1];	/* buffer for label */
+extern char	 operand[MAXLINE];	/* buffer for operand */
+extern char	 title[MAXLINE];	/* buffer for title of source */
 
-int		 ops[OPCARRAY];	/* buffer for generated object code */
+extern int	 ops[OPCARRAY];	/* buffer for generated object code */
 
-uint8_t		list_flag;	/* flag for option -l */
-uint8_t		ver_flag;	/* flag for option -v */
-uint8_t		dump_flag;	/* flag for option -x */
-int		pc;		/* program counter */
-uint8_t		pass;		/* processed pass */
-int		iflevel;	/* IF nesting level */
-int		gencode;	/* flag for conditional object code */
-int		errors;		/* error counter */
-uint8_t		sd_flag;	/* list flag for PSEUDO opcodes */
+extern uint8_t	 list_flag;	/* flag for option -l */
+extern uint8_t	 ver_flag;	/* flag for option -v */
+extern uint8_t	 dump_flag;	/* flag for option -x */
+extern int	 pc;		/* program counter */
+extern uint8_t	 pass;		/* processed pass */
+extern int	 iflevel;	/* IF nesting level */
+extern int	 gencode;	/* flag for conditional object code */
+extern int	 errors;	/* error counter */
+extern uint8_t	 sd_flag;	/* list flag for PSEUDO opcodes */
 				/* = 0: addr from <val>, data from <ops> */
 				/* = 1: addr from <sd_val>, data from <ops> */
 				/* = 2: no addr, data from <ops> */
 				/* = 3: addr from <sd_val>, no data */
 				/* = 4: suppress whole line */
-int		sd_val;		/* output value for PSEUDO opcodes */
-int		prg_adr;	/* start address of program */
-uint8_t		out_form;	/* format of object file */
+extern int	 sd_val;	/* output value for PSEUDO opcodes */
+extern int	 prg_adr;	/* start address of program */
+extern uint8_t	 out_form;	/* format of object file */
 
-size_t		c_line;		/* current line no. in current source */
-size_t		s_line;		/* line no. counter for listing */
-size_t		p_line;		/* no. printed lines on page */
-size_t		ppl;		/* page length */
+extern size_t	 c_line;	/* current line no. in current source */
+extern size_t	 s_line;	/* line no. counter for listing */
+extern size_t	 p_line;	/* no. printed lines on page */
+extern size_t	 ppl;		/* page length */
 
-struct sym	 *symtab[HASHSIZE];	/* symbol table */
-struct sym	**symarray;	/* sorted symbol table */
+extern struct sym *symtab[HASHSIZE];	/* symbol table */
+extern struct sym **symarray;	/* sorted symbol table */
 
 /*
  *	function prototypes

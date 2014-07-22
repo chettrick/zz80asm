@@ -11,7 +11,7 @@
  *	includes entries for all opcodes and pseudo ops other than END
  *	must be sorted in ascending order!
  */
-struct opc opctab[] = {
+static struct opc opctab[] = {
 	{ "ADC",	op_adc,		0,	0	},
 	{ "ADD",	op_add,		0,	0	},
 	{ "AND",	op_and,		0,	0	},
@@ -106,13 +106,13 @@ struct opc opctab[] = {
 /*
  *	compute no. of table entries for search_op()
  */
-int no_opcodes = sizeof(opctab) / sizeof(struct opc);
+static int no_opcodes = sizeof(opctab) / sizeof(struct opc);
 
 /*
  *	table with reserved operand words: registers and flags
  *	must be sorted in ascending order!
  */
-struct ope opetab[] = {
+static struct ope opetab[] = {
 	{ "(BC)",	REGIBC },
 	{ "(DE)",	REGIDE },
 	{ "(HL)",	REGIHL },
@@ -147,6 +147,6 @@ struct ope opetab[] = {
 /*
  *	compute no. of table entries
  */
-int no_operands = sizeof(opetab) / sizeof(struct ope);
+static int no_operands = sizeof(opetab) / sizeof(struct ope);
 
 #endif /* _TAB_H_ */
