@@ -106,13 +106,13 @@ int main(int argc, char *argv[])
 		case 's':
 			switch (*optarg) {
 			case 'u':
-				sym_flag = 1;
+				sym_flag = 'u';
 				break;
 			case 'n':
-				sym_flag = 2;
+				sym_flag = 'n';
 				break;
 			case 'a':
-				sym_flag = 3;
+				sym_flag = 'a';
 				break;
 			default:
 				usage();
@@ -152,22 +152,20 @@ int main(int argc, char *argv[])
 	pass2();
 	if (list_flag) {
 		switch (sym_flag) {
-		case 0:		/* no symbol table */
-			break;
-		case 1:		/* unsorted symbol table */
+		case 'u':	/* unsorted symbol table */
 			lst_sym();
 			break;
-		case 2:		/* symbol table sorted by name */
+		case 'n':	/* symbol table sorted by name */
 			len = copy_sym();
 			n_sort_sym(len);
 			lst_sort_sym(len);
 			break;
-		case 3:		/* symbol table sorted by address */
+		case 'a':	/* symbol table sorted by address */
 			len = copy_sym();
 			a_sort_sym(len);
 			lst_sort_sym(len);
 			break;
-		default:
+		default:	/* no symbol table */
 			break;
 		}
 		fclose(lstfp);

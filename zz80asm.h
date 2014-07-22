@@ -39,9 +39,9 @@
 #define SYMINC		100	/* start size of sorted symbol array */
 
 enum {
-	OUTBIN		= 1,	/* format of object: binary */
-	OUTMOS		= 2,	/* format of object: Mostek binary */
-	OUTHEX		= 3,	/* format of object: Intel hex */
+	OUTBIN,				/* format of object: binary */
+	OUTMOS,				/* format of object: Mostek binary */
+	OUTHEX,				/* format of object: Intel hex */
 	OUTDEF		= OUTHEX	/* default object format */
 };
 
