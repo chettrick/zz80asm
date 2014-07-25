@@ -165,8 +165,11 @@ int main(int argc, char *argv[])
 
 	i = 0;
 	while ((argc--) && (i < MAXFN)) {
-		if ((infiles[i] = malloc(LENFN + 1)) == NULL)
+		if ((infiles[i] = malloc(LENFN + 1)) == NULL) {
+			while (--i >= 0)
+				free(infiles[i]);
 			fatal(F_OUTMEM, "filenames");
+		}
 		get_fn(infiles[i], *argv++, SRCEXT);
 		i++;
 	}
@@ -180,6 +183,8 @@ int main(int argc, char *argv[])
 		fprintf(stdout, "Z80 - Assembler Release %s, %s\n", REL, COPYR);
 	pass1();
 	pass2();
+	while (i > 0)
+		free(infiles[i--]);
 	if (list_flag) {
 		switch (sym_flag) {
 		case 'u':	/* unsorted symbol table */

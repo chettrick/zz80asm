@@ -8,6 +8,7 @@
  */
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -162,9 +163,10 @@ static char *strsave(const char * const s)
 {
 	char *p;
 
-	if ((p = malloc((unsigned int)strlen(s)+1)) != NULL)
-		strlcpy(p, s, sizeof(p));
-	return(p);
+	if ((p = malloc(strlen(s) + 1)) == NULL)
+		return (NULL);
+	strlcpy(p, s, sizeof(p));
+	return (p);
 }
 
 /*
@@ -176,20 +178,31 @@ size_t copy_sym(void)
 	size_t i, j;
 	size_t symsize;		/* size of symarray */
 	struct sym *np;
+	size_t newsize;		/* new size of symarray */
+	struct sym **newarray;	/* new sorted symbol table */
 
-	symarray = malloc(SYMINC * sizeof(struct sym *));
+	symsize = SYMINC;
+	symarray = calloc(symsize, sizeof(struct sym *));
 	if (symarray == NULL)
 		fatal(F_OUTMEM, "sorting symbol table");
-	symsize = SYMINC;
 	for (i = 0, j = 0; i < HASHSIZE; i++) {
 		if (symtab[i] != NULL) {
 			for (np = symtab[i]; np != NULL; np = np->sym_next) {
 				symarray[j++] = np;
 				if (j == symsize) {
-					symarray = realloc((char *)symarray, symsize * sizeof(struct sym *) + SYMINC * sizeof(struct sym *));
-					if (symarray == NULL)
-						fatal(F_OUTMEM, "sorting symbol table");
-					symsize += SYMINC;
+					newsize = symsize + SYMINC;
+
+					if (sizeof(struct sym *) && newsize >
+					    SIZE_MAX / sizeof(struct sym *))
+						fatal(F_INTERN, "overflow");
+
+					newarray = realloc(symarray,
+					    newsize * sizeof(struct sym *));
+					if (newarray == NULL)
+						fatal(F_OUTMEM,
+						    "sorting symbol table");
+					symarray = newarray;
+					symsize = newsize;
 				}
 			}
 		}
