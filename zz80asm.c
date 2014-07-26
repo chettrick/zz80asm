@@ -16,7 +16,7 @@
 #include "zz80asm.h"
 
 static void init(void);
-static void usage(void) __attribute__((noreturn));
+static void usage(void) __attribute__((__noreturn__));
 static void pass1(void);
 static void pass2(void);
 static int p1_line(void);
@@ -59,11 +59,9 @@ size_t		s_line;		/* line no. counter for listing */
 
 static char *errmsg[] = {		/* error messages for fatal() */
 	"out of memory: %s",		/* 0 */
-	"usage: zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] "
-	    "[-o outfile] [-s a|n|u] [-v] [-x] filename ...",
-	"Assembly halted",		/* 2 */
-	"can't open file %s",		/* 3 */
-	"internal error: %s"		/* 4 */
+	"assembly halted",		/* 1 */
+	"can't open file %s",		/* 2 */
+	"internal error: %s"		/* 3 */
 };
 
 static char	*infiles[MAXFN];	/* source filenames */
@@ -214,24 +212,6 @@ int main(int argc, char *argv[])
 static void init(void)
 {
 	errfp = stdout;
-}
-
-/*
- *	error in options, print usage
- */
-static void usage(void)
-{
-	fatal(F_USAGE, NULL);
-	/* NOTREACHED */
-}
-
-/*
- *	print error messages and abort
- */
-void fatal(enum fatal_type ft, const char * const arg)
-{
-	fprintf(errfp, "%s %s\n", errmsg[ft], arg);
-	exit(1);
 }
 
 /*
@@ -538,4 +518,26 @@ char *get_arg(char *s, char *l)
 comment:
 	*s = '\0';
 	return(l);
+}
+
+/*
+ *	print error messages and abort
+ */
+void fatal(enum fatal_type ft, const char * const arg)
+{
+	fprintf(errfp, "%s %s\n", errmsg[ft], arg);
+	exit(1);
+}
+
+/*
+ *	error in options, print usage
+ */
+static void usage(void)
+{
+	extern char *__progname;
+
+	(void)fprintf(stderr,
+	    "usage: %s [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] "
+	    "[-s a|n|u] [-v] [-x] filename ...\n", __progname);
+	exit(1);
 }

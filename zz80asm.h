@@ -108,10 +108,9 @@ enum err_type {
  */
 enum fatal_type {
 	F_OUTMEM	= 0,	/* out of memory */
-	F_USAGE		= 1,	/* usage: ... */
-	F_HALT		= 2,	/* assembly halted */
-	F_FOPEN		= 3,	/* can't open file */
-	F_INTERN	= 4	/* internal error */
+	F_HALT		= 1,	/* assembly halted */
+	F_FOPEN		= 2,	/* can't open file */
+	F_INTERN	= 3	/* internal error */
 };
 
 /*
