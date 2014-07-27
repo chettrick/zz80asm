@@ -15,7 +15,6 @@
 
 #include "zz80asm.h"
 
-static void init(void);
 static void usage(void) __attribute__((__noreturn__));
 static void pass1(void);
 static void pass2(void);
@@ -83,8 +82,7 @@ int main(int argc, char *argv[])
 	dump_flag = 1;
 	ver_flag = 0;
 	iflevel = 0;			/* IF nesting level */
-
-	init();
+	errfp = stdout;
 
 	while ((ch = getopt(argc, argv, "d:f:l::o:s:vx")) != -1) {
 		switch (ch) {
@@ -202,14 +200,6 @@ int main(int argc, char *argv[])
 		fclose(lstfp);
 	}
 	return(errors);
-}
-
-/*
- *	initialization
- */
-static void init(void)
-{
-	errfp = stdout;
 }
 
 /*
