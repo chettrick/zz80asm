@@ -54,7 +54,7 @@ int eval(const char *s)
 {
 	char *p;
 	int val;
-	char word[MAXLINE];
+	char word[LINE_MAX];
 	struct sym *sp;
 
 	val = 0;

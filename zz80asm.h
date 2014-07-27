@@ -6,13 +6,7 @@
 #ifndef _ZZ80ASM_H_
 #define _ZZ80ASM_H_
 
-/*
- *	OS dependant definitions
- */
-#define LENFN		2048	/* max. filename length */
-#define READA		"r"	/* file open mode read ascii */
-#define WRITEA		"w"	/* file open mode write ascii */
-#define WRITEB		"w"	/* file open mode write binary */
+#include <limits.h>
 
 /*
  *	various constants
@@ -29,7 +23,6 @@
 #define STRSEP		'\''	/* string separator */
 #define ENDFILE		"END"	/* end of source */
 #define MAXFN		512	/* max. no. source files */
-#define MAXLINE		128	/* max. line length source */
 #define PLENGTH		65	/* default lines/page in listing */
 #define SYMSIZE		8	/* max. symbol length */
 #define INCNEST		5	/* max. INCLUDE nesting depth */
@@ -158,11 +151,11 @@ extern FILE	*lstfp;		/* file pointer for listing */
 extern FILE	*errfp;		/* file pointer for error output */
 
 extern char	*srcfn;		/* filename of current processed source file */
-extern char	 line[MAXLINE];	/* buffer for one line source */
-extern char	 tmp[MAXLINE];	/* temporary buffer */
+extern char	 line[LINE_MAX];	/* buffer for one line source */
+extern char	 tmp[LINE_MAX];		/* temporary buffer */
 extern char	 label[SYMSIZE + 1];	/* buffer for label */
-extern char	 operand[MAXLINE];	/* buffer for operand */
-extern char	 title[MAXLINE];	/* buffer for title of source */
+extern char	 operand[LINE_MAX];	/* buffer for operand */
+extern char	 title[LINE_MAX];	/* buffer for title of source */
 
 extern int	 ops[OPCARRAY];	/* buffer for generated object code */
 

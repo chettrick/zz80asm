@@ -16,7 +16,7 @@
 size_t		ppl = PLENGTH;		/* page length */
 int		sd_val;			/* output value for PSEUDO opcodes */
 int		prg_adr;		/* start address of program */
-char		title[MAXLINE];		/* buffer for title of source */
+char		title[LINE_MAX];	/* buffer for title of source */
 
 static int	prg_flag = 0;		/* flag for prg_adr valid */
 
@@ -218,7 +218,7 @@ int op_dw(void)
 int op_misc(const int op_code)
 {
 	char *p, *d;
-	static char fn[LENFN];
+	static char fn[PATH_MAX];
 	static int incnest;
 	static struct inc incl[INCNEST];
 

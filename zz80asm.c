@@ -33,10 +33,10 @@ FILE		*lstfp;		/* file pointer for listing */
 FILE		*errfp;		/* file pointer for error output */
 
 char		*srcfn;		/* filename of current processed source file */
-char		line[MAXLINE];	/* buffer for one line source */
-char		tmp[MAXLINE];	/* temporary buffer */
+char		line[LINE_MAX];	/* buffer for one line source */
+char		tmp[LINE_MAX];	/* temporary buffer */
 char		label[SYMSIZE + 1];	/* buffer for label */
-char		operand[MAXLINE];	/* buffer for operand */
+char		operand[LINE_MAX];	/* buffer for operand */
 
 uint8_t		list_flag;	/* flag for option -l */
 uint8_t		ver_flag;	/* flag for option -v */
@@ -65,9 +65,9 @@ static char *errmsg[] = {		/* error messages for fatal() */
 };
 
 static char	*infiles[MAXFN];	/* source filenames */
-static char	 objfn[LENFN + 1];	/* object filename */
-static char	 lstfn[LENFN + 1];	/* listing filename */
-static char	 opcode[MAXLINE];	/* buffer for opcode */
+static char	 objfn[PATH_MAX];	/* object filename */
+static char	 lstfn[PATH_MAX];	/* listing filename */
+static char	 opcode[LINE_MAX];	/* buffer for opcode */
 
 int main(int argc, char *argv[])
 {
@@ -161,15 +161,13 @@ int main(int argc, char *argv[])
 	argc -= optind;
 	argv += optind;
 
-	i = 0;
-	while ((argc--) && (i < MAXFN)) {
-		if ((infiles[i] = malloc(LENFN + 1)) == NULL) {
+	for (i = 0; (argc--) && (i < MAXFN); i++) {
+		if ((infiles[i] = malloc(PATH_MAX)) == NULL) {
 			while (--i >= 0)
 				free(infiles[i]);
 			fatal(F_OUTMEM, "filenames");
 		}
 		get_fn(infiles[i], *argv++, SRCEXT);
-		i++;
 	}
 	if (i == 0) {
 		fprintf(errfp, "%s\n", "no input file");
@@ -252,7 +250,7 @@ void p1_file(char * const fn)
 {
 	c_line = 0;
 	srcfn = fn;
-	if ((srcfp = fopen(fn, READA)) == NULL)
+	if ((srcfp = fopen(fn, "r")) == NULL)
 		fatal(F_FOPEN, fn);
 	while (p1_line())
 		;
@@ -274,7 +272,7 @@ int p1_line(void)
 	int i;
 	struct opc *op;
 
-	if ((p = fgets(line, MAXLINE, srcfp)) == NULL)
+	if ((p = fgets(line, LINE_MAX, srcfp)) == NULL)
 		return(0);
 	c_line++;
 	p = get_label(label, p);
@@ -331,7 +329,7 @@ void p2_file(char * const fn)
 {
 	c_line = 0;
 	srcfn = fn;
-	if ((srcfp = fopen(fn, READA)) == NULL)
+	if ((srcfp = fopen(fn, "r")) == NULL)
 		fatal(F_FOPEN, fn);
 	while (p2_line())
 		;
@@ -351,7 +349,7 @@ int p2_line(void)
 	int op_count;
 	struct opc *op;
 
-	if ((p = fgets(line, MAXLINE, srcfp)) == NULL)
+	if ((p = fgets(line, LINE_MAX, srcfp)) == NULL)
 		return(0);
 	c_line++;
 	s_line++;
@@ -404,11 +402,7 @@ void open_o_files(const char * const source)
 			strlcat(objfn, OBJEXTBIN, sizeof(objfn));
 	}
 
-	if (out_form == OUTHEX)
-		objfp = fopen(objfn, WRITEA);
-	else
-		objfp = fopen(objfn, WRITEB);
-	if (objfp == NULL)
+	if ((objfp = fopen(objfn, "w")) == NULL)
 		fatal(F_FOPEN, objfn);
 	if (list_flag) {
 		if (*lstfn == '\0')
@@ -417,7 +411,7 @@ void open_o_files(const char * const source)
 			strlcpy(p, LSTEXT, sizeof(p));
 		else
 			strlcat(lstfn, LSTEXT, sizeof(lstfn));
-		if ((lstfp = fopen(lstfn, WRITEA)) == NULL)
+		if ((lstfp = fopen(lstfn, "w")) == NULL)
 			fatal(F_FOPEN, lstfn);
 		errfp = lstfp;
 	}
@@ -434,12 +428,12 @@ void get_fn(char * const dest, char * const src, const char * const ext)
 	i = 0;
 	sp = src;
 	dp = dest;
-	while ((i++ < LENFN) && (*sp != '\0'))
+	while ((i++ < PATH_MAX) && (*sp != '\0'))
 		*dp++ = *sp++;
 	*dp = '\0';
 	if ((strrchr(dest,'.') == NULL) &&
-	    (strlen(dest) <= (LENFN - strlen(ext))))
-		strlcat(dest, ext, sizeof(dest));
+	    (strlen(dest) <= (PATH_MAX - strlen(ext))))
+		strlcat(dest, ext, sizeof(dest + 1));
 }
 
 /*
