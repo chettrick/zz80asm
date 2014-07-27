@@ -165,7 +165,7 @@ static char *strsave(const char * const s)
 
 	if ((p = malloc(strlen(s) + 1)) == NULL)
 		return (NULL);
-	strlcpy(p, s, sizeof(p));
+	strcpy(p, s);
 	return (p);
 }
 
