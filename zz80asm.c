@@ -114,9 +114,8 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case 'l':
-			if (optarg != '\0') {
+			if (optarg != '\0')
 				get_fn(lstfn, optarg, LSTEXT);
-			}
 			list_flag = 1;
 			break;
 		case 'o':
@@ -371,36 +370,38 @@ int p2_line(void)
 /*
  *	open output files:
  *	input is filename of source file
- *	list and object filenames are build from source filename if
+ *	list and object filenames are built from source filename if
  *	not given by options
  */
 void open_o_files(const char * const source)
 {
 	char *p;
 
-	if (*objfn == '\0')
+	if (*objfn == '\0') {
 		strlcpy(objfn, source, sizeof(objfn));
-	if ((p = strrchr(objfn, '.')) != NULL) {
-		if (out_form == OUTHEX)
-			strlcpy(p, OBJEXTHEX, sizeof(p));
-		else
-			strlcpy(p, OBJEXTBIN, sizeof(p));
-	} else {
-		if (out_form == OUTHEX)
-			strlcat(objfn, OBJEXTHEX, sizeof(objfn));
-		else
-			strlcat(objfn, OBJEXTBIN, sizeof(objfn));
+		if ((p = strrchr(objfn, '.')) != NULL) {
+			if (out_form == OUTHEX)
+				strlcpy(p, OBJEXTHEX, sizeof(objfn));
+			else
+				strlcpy(p, OBJEXTBIN, sizeof(objfn));
+		} else {
+			if (out_form == OUTHEX)
+				strlcat(objfn, OBJEXTHEX, sizeof(objfn));
+			else
+				strlcat(objfn, OBJEXTBIN, sizeof(objfn));
+		}
 	}
-
 	if ((objfp = fopen(objfn, "w")) == NULL)
 		fatal(F_FOPEN, objfn);
+
 	if (list_flag) {
-		if (*lstfn == '\0')
+		if (*lstfn == '\0') {
 			strlcpy(lstfn, source, sizeof(lstfn));
-		if ((p = strrchr(lstfn, '.')) != NULL)
-			strlcpy(p, LSTEXT, sizeof(p));
-		else
-			strlcat(lstfn, LSTEXT, sizeof(lstfn));
+			if ((p = strrchr(lstfn, '.')) != NULL)
+				strlcpy(p, LSTEXT, sizeof(lstfn));
+			else
+				strlcat(lstfn, LSTEXT, sizeof(lstfn));
+		}
 		if ((lstfp = fopen(lstfn, "w")) == NULL)
 			fatal(F_FOPEN, lstfn);
 		errfp = lstfp;
@@ -421,9 +422,9 @@ void get_fn(char * const dest, char * const src, const char * const ext)
 	while ((i++ < PATH_MAX) && (*sp != '\0'))
 		*dp++ = *sp++;
 	*dp = '\0';
-	if ((strrchr(dest,'.') == NULL) &&
+	if ((strrchr(dest, '.') == NULL) &&
 	    (strlen(dest) <= (PATH_MAX - strlen(ext))))
-		strlcat(dest, ext, sizeof(dest + 1));
+		strlcat(dest, ext, sizeof(dest));
 }
 
 /*
