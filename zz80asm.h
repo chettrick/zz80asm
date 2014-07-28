@@ -17,10 +17,6 @@
 #define OBJEXTBIN	".bin"	/* filename extension object */
 #define OBJEXTHEX	".hex"	/* filename extension hex */
 #define LSTEXT		".lst"	/* filename extension listing */
-#define COMMENT		';'	/* inline comment character */
-#define LINCOM		'*'	/* comment line if in column 1 */
-#define LABSEP		':'	/* label separator */
-#define STRSEP		'\''	/* string separator */
 #define ENDFILE		"END"	/* end of source */
 #define MAXFN		512	/* max. no. source files */
 #define PLENGTH		65	/* default lines/page in listing */
@@ -32,9 +28,16 @@
 #define SYMINC		100	/* start size of sorted symbol array */
 
 enum {
+	COMMENT		= ';',	/* inline comment character */
+	LINCOM		= '*',	/* comment line if in column 1 */
+	LABSEP		= ':',	/* label separator */
+	STRSEP		= '\''	/* string separator */
+};
+
+enum {
 	OUTBIN,			/* format of object: binary */
 	OUTMOS,			/* format of object: Mostek binary */
-	OUTHEX,			/* format of object: Intel hex */
+	OUTHEX			/* format of object: Intel hex */
 };
 
 /*
