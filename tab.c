@@ -20,7 +20,6 @@ struct sym **symarray;		/* sorted symbol table */
 
 static int hash(const char *);
 static int numcmp(const int, const int);
-static char *strsave(const char * const);
 
 /*
  *	binary search in sorted table opctab
@@ -114,7 +113,7 @@ int put_sym(const char * const sym_name, const int sym_val)
 		np = malloc(sizeof(struct sym));
 		if (np == NULL)
 			return(1);
-		if ((np->sym_name = strsave(sym_name)) == NULL)
+		if ((np->sym_name = strdup(sym_name)) == NULL)
 			return(1);
 		hashval = hash(sym_name);
 		np->sym_next = symtab[hashval];
@@ -150,23 +149,6 @@ static int hash(const char * name)
 	for (hashval = 0; *name;)
 		hashval += *name++;
 	return(hashval % HASHSIZE);
-}
-
-/*
- *	save string into allocated memory
- *
- *	Input: pointer to string
- *
- *	Output: pointer to allocated memory with string
- */
-static char *strsave(const char * const s)
-{
-	char *p;
-
-	if ((p = malloc(strlen(s) + 1)) == NULL)
-		return (NULL);
-	strcpy(p, s);
-	return (p);
 }
 
 /*
