@@ -26,6 +26,8 @@ static char *get_label(char *, char *);
 static char *get_opcode(char *, char *);
 static char *get_arg(char *, char *);
 
+extern char *__progname;
+
 FILE		*srcfp;		/* file pointer for current source */
 FILE		*objfp;		/* file pointer for object code */
 FILE		*lstfp;		/* file pointer for listing */
@@ -519,8 +521,6 @@ void fatal(enum fatal_type ft, const char * const arg)
  */
 static void usage(void)
 {
-	extern char *__progname;
-
 	(void)fprintf(stderr,
 	    "usage: %s [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] "
 	    "[-s a|n|u] [-v] [-x] filename ...\n", __progname);
