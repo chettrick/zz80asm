@@ -4,7 +4,7 @@ NAME
      zz80asm - z80 cross assembler
 
 SYNOPSIS
-     zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n|u]
+     zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n]
              [-v] [-x] filename ...
 
 DESCRIPTION
@@ -27,10 +27,9 @@ DESCRIPTION
              Set output filename to outfile instead of the default
              filename.bin or filename.hex.
 
-     -s a|n|u
-             Generate symbol table at end of listing file.  This option only
+     -s a|n  Generate symbol table at end of listing file.  This option only
              works in combination with -l.  a and n sort the symbol table by
-             address or name, respectively.  u generates an unsorted table.
+             address or name, respectively.
 
      -v      Produce more verbose output.
 
@@ -104,4 +103,4 @@ AUTHORS
      zz80asm was written by Udo Munk <udo.munk@freenet.de> and updated by
      Chris Hettrick <chris@structfoo.com>.
 
-OpenBSD 5.5                      July 16, 2014                     OpenBSD 5.5
+OpenBSD 5.6                      July 29, 2014                     OpenBSD 5.6

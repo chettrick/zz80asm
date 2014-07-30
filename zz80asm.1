@@ -18,7 +18,7 @@
 .\" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 .\" DEALINGS IN THE SOFTWARE.
 .\"
-.Dd $Mdocdate: July 16 2014 $
+.Dd $Mdocdate: July 29 2014 $
 .Dt ZZ80ASM 1
 .Os
 .Sh NAME
@@ -30,7 +30,7 @@
 .Op Fl f Ar b|m|h
 .Op Fl Pf l Op Ar listfile
 .Op Fl o Ar outfile
-.Op Fl s Ar a|n|u
+.Op Fl s Ar a|n
 .Op Fl v
 .Op Fl x
 .Ar filename ...
@@ -68,7 +68,7 @@ instead of the default
 .Ar filename.bin
 or
 .Ar filename.hex .
-.It Fl s Ar a|n|u
+.It Fl s Ar a|n
 Generate symbol table at end of listing file.
 This option only works in combination with
 .Ar -l .
@@ -76,8 +76,6 @@ This option only works in combination with
 and
 .Ar n
 sort the symbol table by address or name, respectively.
-.Ar u
-generates an unsorted table.
 .It Fl v
 Produce more verbose output.
 .It Fl x

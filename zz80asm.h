@@ -201,7 +201,6 @@ void asmerr(enum err_type);
 void lst_header(void);
 void lst_attl(void);
 void lst_line(const int, int);
-void lst_sym(void);
 void lst_sort_sym(const size_t);
 void obj_header(void);
 void obj_end(void);

@@ -32,7 +32,7 @@ static char *errmsg[] = {		/* error messages for asmerr() */
 	"INCLUDE nesting to deep"	/* 12 */
 };
 
-#define MAXHEX	32			/* max no bytes/hex record */
+#define MAXHEX	16			/* max no bytes/hex record */
 
 size_t	p_line;				/* no. printed lines on page */
 
@@ -40,7 +40,7 @@ static unsigned short hex_adr;		/* current address in hex record */
 static int hex_cnt;			/* current no bytes in hex buffer */
 
 static unsigned char hex_buf[MAXHEX];	/* buffer for one hex record */
-static char hex_out[MAXHEX*2+11];	/* ASCII buffer for one hex record */
+static char hex_out[MAXHEX * 2 + 11];	/* ASCII buffer for one hex record */
 
 static int errnum = 0;			/* error number in pass 2 */
 static unsigned int page = 0;		/* no. of pages for listing */
@@ -63,8 +63,8 @@ void asmerr(enum err_type et)
  */
 void lst_header(void)
 {
-	fprintf(lstfp, "\fZ80-Assembler\t\tRelease %s\t\t\t\tPage %d\n", REL,
-		++page);
+	fprintf(lstfp, "\fZ80-Assembler\t\tRelease %s\t\t\t\tPage %d\n",
+	    REL, ++page);
 	fprintf(lstfp, "Source file: %s\n", srcfn);
 	fprintf(lstfp, "Title:       %s\n", title);
 	p_line = 3;
@@ -80,7 +80,7 @@ void lst_attl(void)
 }
 
 /*
- *	print one line into listfile, if -l option set
+ *	print one line into listfile if -l option set
  */
 void lst_line(const int val, int opanz)
 {
@@ -166,37 +166,6 @@ no_data:
 				fprintf(lstfp, "   ");
 			fprintf(lstfp, "%6zu %6zu\n", c_line, s_line);
 			p_line++;
-		}
-	}
-}
-
-/*
- *	print symbol table into listfile unsorted
- */
-void lst_sym(void)
-{
-	int i, j;
-	struct sym *np;
-
-	p_line = j = 0;
-	strlcpy(title, "Symboltable", sizeof(title));
-	for (i = 0; i < HASHSIZE; i++) {
-		if (symtab[i] != NULL) {
-			for (np = symtab[i]; np != NULL; np = np->sym_next) {
-				if (p_line == 0) {
-					lst_header();
-					fprintf(lstfp, "\n");
-					p_line += 1;
-				}
-				fprintf(lstfp, "%-8s %04X\t", np->sym_name,
-					np->sym_val & 0xffff);
-				if (++j == 4) {
-					fprintf(lstfp, "\n");
-					if (p_line++ >= ppl)
-						p_line = 0;
-					j = 0;
-				}
-			}
 		}
 	}
 }
