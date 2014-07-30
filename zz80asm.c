@@ -517,6 +517,6 @@ static void usage(void)
 {
 	(void)fprintf(stderr,
 	    "usage: %s [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] "
-	    "[-s a|n|u] [-v] [-x] filename ...\n", __progname);
+	    "[-s a|n] [-v] [-x] filename ...\n", __progname);
 	exit(1);
 }
