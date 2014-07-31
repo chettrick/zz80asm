@@ -157,6 +157,12 @@ int main(int argc, char *argv[])
 	argc -= optind;
 	argv += optind;
 
+	/* The symbol table is dependent on the listing file. */
+	if (sym_flag && !list_flag) {
+		usage();
+		/* NOTREACHED */
+	}
+
 	for (i = 0; (argc--) && (i < MAXFN); i++) {
 		if ((infiles[i] = malloc(PATH_MAX)) == NULL) {
 			while (--i >= 0)
@@ -177,23 +183,13 @@ int main(int argc, char *argv[])
 	pass2();
 	while (i > 0)
 		free(infiles[i--]);
-	if (list_flag) {
-		switch (sym_flag) {
-		case 'a':	/* symbol table sorted by address */
-			len = copy_sym();
-			a_sort_sym(len);
-			lst_sort_sym(len);
-			break;
-		case 'n':	/* symbol table sorted by name */
-			len = copy_sym();
-			n_sort_sym(len);
-			lst_sort_sym(len);
-			break;
-		default:	/* no symbol table */
-			break;
-		}
-		fclose(lstfp);
+	if (list_flag && sym_flag) {
+		len = copy_sym();
+		sort_sym(len, sym_flag);
+		lst_sort_sym(len);
 	}
+	if (lstfp)
+		fclose(lstfp);
 	return(errors);
 }
 

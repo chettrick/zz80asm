@@ -237,8 +237,7 @@ int put_sym(const char * const, const int);
 int get_reg(const char * const);
 void put_label(void);
 size_t copy_sym(void);
-void n_sort_sym(const size_t);
-void a_sort_sym(const size_t);
+void sort_sym(const size_t, int);
 
 /* zz80asm.c */
 void fatal(enum fatal_type, const char * const) __attribute__((noreturn));

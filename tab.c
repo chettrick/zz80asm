@@ -193,9 +193,9 @@ size_t copy_sym(void)
 }
 
 /*
- *	sort symbol table by name
+ *	sort symbol table by address or name
  */
-void n_sort_sym(const size_t len)
+void sort_sym(const size_t len, int flag)
 {
 	int gap, i, j;
 	struct sym *temp;
@@ -203,31 +203,16 @@ void n_sort_sym(const size_t len)
 	for (gap = (int)(len / 2); gap > 0; gap /= 2) {
 		for (i = gap; i < (int)len; i++) {
 			for (j = i - gap; j >= 0; j -= gap) {
-				if (strcmp(symarray[j]->sym_name,
-				    symarray[j + gap]->sym_name) <= 0)
-					break;
-				temp = symarray[j];
-				symarray[j] = symarray[j + gap];
-				symarray[j + gap] = temp;
-			}
-		}
-	}
-}
-
-/*
- *	sort symbol table by address
- */
-void a_sort_sym(const size_t len)
-{
-	int gap, i, j;
-	struct sym *temp;
-
-	for (gap = (int)(len / 2); gap > 0; gap /= 2) {
-		for (i = gap; i < (int)len; i++) {
-			for (j = i - gap; j >= 0; j -= gap) {
-				if (numcmp(symarray[j]->sym_val,
-				    symarray[j + gap]->sym_val) <= 0)
-					break;
+				if (flag == 'a') {
+					if (numcmp(symarray[j]->sym_val,
+					    symarray[j + gap]->sym_val) <= 0)
+						break;
+				} else if (flag == 'n') {
+					if (strcmp(symarray[j]->sym_name,
+					    symarray[j + gap]->sym_name) <= 0)
+						break;
+				} else
+					fatal(F_INTERN, "illegal flag");
 				temp = symarray[j];
 				symarray[j] = symarray[j + gap];
 				symarray[j + gap] = temp;
