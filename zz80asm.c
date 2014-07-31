@@ -431,14 +431,11 @@ char *get_label(char *s, char *l)
 {
 	int i;
 
-	i = 0;
 	if (*l == LINCOM)
 		goto comment;
-	while (!isspace(*l) && *l != COMMENT && *l != LABSEP &&
-	    i < SYMSIZE) {
+	for (i = 0; !isspace(*l) && *l != COMMENT && *l != LABSEP &&
+	    i < SYMSIZE; i++)
 		*s++ = islower(*l) ? (char)toupper(*l++) : *l++;
-		i++;
-	}
 comment:
 	*s = '\0';
 	return(l);

@@ -177,23 +177,22 @@ void lst_sort_sym(const size_t len)
 {
 	size_t i, j;
 
-	p_line = i = j = 0;
+	p_line = j = 0;
 	strlcpy(title, "Symboltable", sizeof(title));
-	while (i < len) {
+	for (i = 0; i < len; i++) {
 		if (p_line == 0) {
 			lst_header();
 			fprintf(lstfp, "\n");
-			p_line += 1;
+			p_line++;
 		}
 		fprintf(lstfp, "%-8s %04X\t", symarray[i]->sym_name,
-			symarray[i]->sym_val & 0xffff);
+		    symarray[i]->sym_val & 0xffff);
 		if (++j == 4) {
 			fprintf(lstfp, "\n");
 			if (p_line++ >= ppl)
 				p_line = 0;
 			j = 0;
 		}
-	i++;
 	}
 }
 
