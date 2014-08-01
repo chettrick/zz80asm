@@ -7,6 +7,7 @@
 #define _ZZ80ASM_H_
 
 #include <limits.h>
+#include <stdint.h>
 
 /*
  *	various constants
