@@ -17,6 +17,7 @@ size_t		ppl = PLENGTH;		/* page length */
 int		sd_val;			/* output value for PSEUDO opcodes */
 int		prg_adr;		/* start address of program */
 char		title[LINE_MAX];	/* buffer for title of source */
+char		tmp[LINE_MAX];		/* temporary buffer */
 
 static int	prg_flag = 0;		/* flag for prg_adr valid */
 

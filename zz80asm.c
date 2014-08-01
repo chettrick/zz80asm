@@ -35,7 +35,6 @@ FILE		*errfp;		/* file pointer for error output */
 
 char		*srcfn;		/* filename of current processed source file */
 char		line[LINE_MAX];	/* buffer for one line source */
-char		tmp[LINE_MAX];	/* temporary buffer */
 char		label[SYMSIZE + 1];	/* buffer for label */
 char		operand[LINE_MAX];	/* buffer for operand */
 
@@ -72,7 +71,6 @@ static char	 opcode[LINE_MAX];	/* buffer for opcode */
 
 int main(int argc, char *argv[])
 {
-	char *t;
 	int i, ch;
 	size_t len;
 
@@ -86,19 +84,8 @@ int main(int argc, char *argv[])
 	iflevel = 0;			/* IF nesting level */
 	errfp = stdout;
 
-	while ((ch = getopt(argc, argv, "d:f:l::o:s:vx")) != -1) {
+	while ((ch = getopt(argc, argv, "f:l::o:s:vx")) != -1) {
 		switch (ch) {
-		case 'd':
-			if (optarg == '\0') {
-				usage();
-				/* NOTREACHED */
-			}
-			t = tmp;
-			*t = islower(*optarg) ? (char)toupper(*optarg) :
-			    *optarg;
-			if (put_sym(tmp, 0) != 0)
-				fatal(F_OUTMEM, "symbols");
-			break;
 		case 'f':
 			switch (*optarg) {
 			case 'b':
@@ -509,7 +496,7 @@ void fatal(enum fatal_type ft, const char * const arg)
 static void usage(void)
 {
 	(void)fprintf(stderr,
-	    "usage: %s [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] "
-	    "[-s a|n] [-v] [-x] filename ...\n", __progname);
+	    "usage: %s [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n] [-v] "
+	    "[-x] filename ...\n", __progname);
 	exit(1);
 }

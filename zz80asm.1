@@ -18,7 +18,7 @@
 .\" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 .\" DEALINGS IN THE SOFTWARE.
 .\"
-.Dd $Mdocdate: July 29 2014 $
+.Dd $Mdocdate: July 31 2014 $
 .Dt ZZ80ASM 1
 .Os
 .Sh NAME
@@ -26,7 +26,6 @@
 .Nd z80 cross assembler
 .Sh SYNOPSIS
 .Nm zz80asm
-.Op Fl d Ar symbol ...
 .Op Fl f Ar b|m|h
 .Op Fl Pf l Op Ar listfile
 .Op Fl o Ar outfile
@@ -46,10 +45,6 @@ and optionally the listing file
 .Pp
 The options are as follows:
 .Bl -tag -width Ds
-.It Fl d Ar symbol ...
-Pre-define one or more
-.Ar symbols
-with a value of zero.
 .It Fl f Ar b|m|h
 Format
 .Ar outfile

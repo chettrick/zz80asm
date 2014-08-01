@@ -4,17 +4,14 @@ NAME
      zz80asm - z80 cross assembler
 
 SYNOPSIS
-     zz80asm [-d symbol ...] [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n]
-             [-v] [-x] filename ...
+     zz80asm [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n] [-v] [-x]
+             filename ...
 
 DESCRIPTION
      The zz80asm utility assembles the files filename ... and writes to the
      output file outfile, and optionally the listing file listfile.
 
      The options are as follows:
-
-     -d symbol ...
-             Pre-define one or more symbols with a value of zero.
 
      -f b|m|h
              Format outfile as either binary, binary with Mostek header, or
@@ -103,4 +100,4 @@ AUTHORS
      zz80asm was written by Udo Munk <udo.munk@freenet.de> and updated by
      Chris Hettrick <chris@structfoo.com>.
 
-OpenBSD 5.6                      July 29, 2014                     OpenBSD 5.6
+OpenBSD 5.6                      July 31, 2014                     OpenBSD 5.6
