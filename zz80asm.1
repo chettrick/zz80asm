@@ -18,7 +18,7 @@
 .\" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 .\" DEALINGS IN THE SOFTWARE.
 .\"
-.Dd $Mdocdate: July 31 2014 $
+.Dd $Mdocdate: August 3 2014 $
 .Dt ZZ80ASM 1
 .Os
 .Sh NAME
@@ -26,8 +26,8 @@
 .Nd z80 cross assembler
 .Sh SYNOPSIS
 .Nm zz80asm
-.Op Fl f Ar b|m|h
-.Op Fl Pf l Op Ar listfile
+.Op Fl f Ar b|h|m
+.Op Fl l Ns Op Ar listfile
 .Op Fl o Ar outfile
 .Op Fl s Ar a|n
 .Op Fl v
@@ -45,12 +45,12 @@ and optionally the listing file
 .Pp
 The options are as follows:
 .Bl -tag -width Ds
-.It Fl f Ar b|m|h
+.It Fl f Ar b|h|m
 Format
 .Ar outfile
 as either binary, binary with Mostek header, or Intel Hex, respectively.
 Intel Hex is the default format.
-.It Fl Pf l Op Ar listfile
+.It Fl l Ns Op Ar listfile
 Generate listing file as
 .Ar listfile ,
 or as

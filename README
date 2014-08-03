@@ -4,7 +4,7 @@ NAME
      zz80asm - z80 cross assembler
 
 SYNOPSIS
-     zz80asm [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n] [-v] [-x]
+     zz80asm [-f b|h|m] [-l[listfile]] [-o outfile] [-s a|n] [-v] [-x]
              filename ...
 
 DESCRIPTION
@@ -13,7 +13,7 @@ DESCRIPTION
 
      The options are as follows:
 
-     -f b|m|h
+     -f b|h|m
              Format outfile as either binary, binary with Mostek header, or
              Intel Hex, respectively.  Intel Hex is the default format.
 
@@ -100,4 +100,4 @@ AUTHORS
      zz80asm was written by Udo Munk <udo.munk@freenet.de> and updated by
      Chris Hettrick <chris@structfoo.com>.
 
-OpenBSD 5.6                      July 31, 2014                     OpenBSD 5.6
+OpenBSD 5.6                     August 3, 2014                     OpenBSD 5.6

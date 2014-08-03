@@ -496,7 +496,7 @@ void fatal(enum fatal_type ft, const char * const arg)
 static void usage(void)
 {
 	(void)fprintf(stderr,
-	    "usage: %s [-f b|m|h] [-l[listfile]] [-o outfile] [-s a|n] [-v] "
+	    "usage: %s [-f b|h|m] [-l[listfile]] [-o outfile] [-s a|n] [-v] "
 	    "[-x] filename ...\n", __progname);
 	exit(1);
 }
