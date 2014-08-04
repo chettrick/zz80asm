@@ -20,7 +20,6 @@
 #define LSTEXT		".lst"	/* filename extension listing */
 #define ENDFILE		"END"	/* end of source */
 #define MAXFN		512	/* max. no. source files */
-#define PLENGTH		65	/* default lines/page in listing */
 #define SYMSIZE		8	/* max. symbol length */
 #define INCNEST		5	/* max. INCLUDE nesting depth */
 #define IFNEST		5	/* max IF.. nesting depth */

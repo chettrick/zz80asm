@@ -93,7 +93,7 @@ void lst_line(const int val, int opanz)
 		sd_flag = 0;
 		return;
 	}
-	if ((p_line >= ppl) || (c_line == 1)) {
+	if ((ppl != 0) && ((p_line >= ppl) || (c_line == 1))) {
 		lst_header();
 		lst_attl();
 	}
@@ -144,7 +144,7 @@ no_data:
 		i = 4;
 		sd_val = val;
 		while (opanz > 0) {
-			if (p_line >= ppl) {
+			if ((ppl != 0) && (p_line >= ppl)) {
 				lst_header();
 				lst_attl();
 			}
@@ -182,8 +182,10 @@ void lst_sort_sym(const size_t len)
 
 	p_line = j = 0;
 	strlcpy(title, "Symbol table", sizeof(title));
+	if (ppl == 0)
+		fprintf(lstfp, "\n");
 	for (i = 0; i < len; i++) {
-		if (p_line == 0) {
+		if ((ppl != 0) && (p_line == 0)) {
 			lst_header();
 			fprintf(lstfp, "\n");
 			p_line++;

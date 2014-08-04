@@ -13,7 +13,7 @@
 
 #include "zz80asm.h"
 
-size_t		ppl = PLENGTH;		/* page length */
+size_t		ppl = 0;		/* lines per page in listing file */
 int		sd_val;			/* output value for PSEUDO opcodes */
 int		prg_adr;		/* start address of program */
 char		title[LINE_MAX];	/* buffer for title of source */
