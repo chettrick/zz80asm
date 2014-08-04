@@ -15,6 +15,8 @@
 
 #include "zz80asm.h"
 
+extern const char *__progname;
+
 static void usage(void) __attribute__((__noreturn__));
 static void pass1(void);
 static void pass2(void);
@@ -25,8 +27,6 @@ static void get_fn(char * const, char * const, const char * const);
 static char *get_label(char *, char *);
 static char *get_opcode(char *, char *);
 static char *get_arg(char *, char *);
-
-extern char *__progname;
 
 FILE		*srcfp;		/* file pointer for current source */
 FILE		*objfp;		/* file pointer for object code */
@@ -165,7 +165,7 @@ int main(int argc, char *argv[])
 	}
 
 	if (ver_flag)
-		fprintf(stdout, "Z80 - Assembler Release %s, %s\n", REL, COPYR);
+		fprintf(stdout, "%s Release %s, %s\n", __progname, REL, COPYR);
 	pass1();
 	pass2();
 	while (i > 0)

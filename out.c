@@ -12,6 +12,8 @@
 
 #include "zz80asm.h"
 
+extern const char *__progname;
+
 static void flush_hex(void);
 static int chksum(void);
 static void btoh(const unsigned char, char ** const);
@@ -43,7 +45,6 @@ static unsigned char hex_buf[MAXHEX];	/* buffer for one hex record */
 static char hex_out[MAXHEX * 2 + 11];	/* ASCII buffer for one hex record */
 
 static int errnum = 0;			/* error number in pass 2 */
-static unsigned int page = 0;		/* no. of pages for listing */
 
 /*
  *	print error message to listfile and increase error counter
@@ -63,10 +64,12 @@ void asmerr(enum err_type et)
  */
 void lst_header(void)
 {
-	fprintf(lstfp, "\fZ80-Assembler\t\tRelease %s\t\t\t\tPage %d\n",
-	    REL, ++page);
-	fprintf(lstfp, "Source file: %s\n", srcfn);
-	fprintf(lstfp, "Title:       %s\n", title);
+	static size_t page = 0;		/* no. of pages for listing */
+
+	fprintf(lstfp, "\f%s\t\tRelease %s\t\t\t\tPage %zu\n",
+	    __progname, REL, ++page);
+	fprintf(lstfp, "File:  %s\n", srcfn);
+	fprintf(lstfp, "Title: %s\n", title);
 	p_line = 3;
 }
 
@@ -178,7 +181,7 @@ void lst_sort_sym(const size_t len)
 	size_t i, j;
 
 	p_line = j = 0;
-	strlcpy(title, "Symboltable", sizeof(title));
+	strlcpy(title, "Symbol table", sizeof(title));
 	for (i = 0; i < len; i++) {
 		if (p_line == 0) {
 			lst_header();
