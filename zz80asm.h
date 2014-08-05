@@ -184,6 +184,7 @@ extern size_t	 c_line;	/* current line no. in current source */
 extern size_t	 s_line;	/* line no. counter for listing */
 extern size_t	 p_line;	/* no. printed lines on page */
 extern size_t	 ppl;		/* page length */
+extern size_t	 datalen;	/* number of bytes per hex record */
 
 extern struct sym *symtab[HASHSIZE];	/* symbol table */
 extern struct sym **symarray;	/* sorted symbol table */

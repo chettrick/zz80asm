@@ -18,7 +18,6 @@
 #include "zz80asm.h"
 
 extern const char *__progname;
-extern size_t datalen;
 
 static void usage(void) __attribute__((__noreturn__));
 static void pass1(void);
@@ -59,6 +58,7 @@ uint8_t		out_form;	/* format of object file */
 
 size_t		c_line;		/* current line no. in current source */
 size_t		s_line;		/* line no. counter for listing */
+size_t		datalen;	/* number of bytes per hex record */
 
 static char *errmsg[] = {		/* error messages for fatal() */
 	"out of memory: %s",		/* 0 */
