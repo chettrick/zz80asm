@@ -18,7 +18,7 @@
 .\" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 .\" DEALINGS IN THE SOFTWARE.
 .\"
-.Dd $Mdocdate: August 3 2014 $
+.Dd $Mdocdate: August 4 2014 $
 .Dt ZZ80ASM 1
 .Os
 .Sh NAME
@@ -26,6 +26,7 @@
 .Nd z80 cross assembler
 .Sh SYNOPSIS
 .Nm zz80asm
+.Op Fl b Ar length
 .Op Fl f Ar b|h|m
 .Op Fl l Ns Op Ar listfile
 .Op Fl o Ar outfile
@@ -45,6 +46,25 @@ and optionally the listing file
 .Pp
 The options are as follows:
 .Bl -tag -width Ds
+.It Fl b Ar length
+Set
+.Ar length
+bytes per record in Intel Hex formatted
+.Ar outfile .
+By default,
+.Ar length
+is interpreted as a decimal number.
+With a leading
+.Cm 0x
+or
+.Cm 0X ,
+.Ar length
+is interpreted as a hexadecimal number,
+otherwise, with a leading
+.Cm 0 ,
+.Ar length
+is interpreted as an octal number.
+The default length is 16 decimal.
 .It Fl f Ar b|h|m
 Format
 .Ar outfile

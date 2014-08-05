@@ -4,14 +4,21 @@ NAME
      zz80asm - z80 cross assembler
 
 SYNOPSIS
-     zz80asm [-f b|h|m] [-l[listfile]] [-o outfile] [-s a|n] [-v] [-x]
-             filename ...
+     zz80asm [-b length] [-f b|h|m] [-l[listfile]] [-o outfile] [-s a|n] [-v]
+             [-x] filename ...
 
 DESCRIPTION
      The zz80asm utility assembles the files filename ... and writes to the
      output file outfile, and optionally the listing file listfile.
 
      The options are as follows:
+
+     -b length
+             Set length bytes per record in Intel Hex formatted outfile.  By
+             default, length is interpreted as a decimal number.  With a
+             leading 0x or 0X, length is interpreted as a hexadecimal number,
+             otherwise, with a leading 0, length is interpreted as an octal
+             number.  The default length is 16 decimal.
 
      -f b|h|m
              Format outfile as either binary, binary with Mostek header, or
@@ -100,4 +107,4 @@ AUTHORS
      zz80asm was written by Udo Munk <udo.munk@freenet.de> and updated by
      Chris Hettrick <chris@structfoo.com>.
 
-OpenBSD 5.6                     August 3, 2014                     OpenBSD 5.6
+OpenBSD 5.6                     August 4, 2014                     OpenBSD 5.6

@@ -34,12 +34,13 @@ static char *errmsg[] = {		/* error messages for asmerr() */
 	"INCLUDE nesting to deep"	/* 12 */
 };
 
-#define MAXHEX	16			/* max no bytes/hex record */
+#define MAXHEX 255			/* max num of bytes per hex record */
 
 size_t	p_line;				/* no. printed lines on page */
+size_t datalen;				/* number of bytes per hex record */
 
 static unsigned short hex_adr;		/* current address in hex record */
-static int hex_cnt;			/* current no bytes in hex buffer */
+static size_t hex_cnt;			/* current no bytes in hex buffer */
 
 static unsigned char hex_buf[MAXHEX];	/* buffer for one hex record */
 static char hex_out[MAXHEX * 2 + 11];	/* ASCII buffer for one hex record */
@@ -250,7 +251,7 @@ void obj_writeb(size_t opanz)
 		break;
 	case OUTHEX:
 		for (i = 0; opanz; opanz--) {
-			if (hex_cnt >= MAXHEX)
+			if (hex_cnt >= datalen)
 				flush_hex();
 			hex_buf[hex_cnt++] = (unsigned char)ops[i++];
 		}
@@ -282,7 +283,7 @@ void obj_fill(int count)
 static void flush_hex(void)
 {
 	char *p;
-	int i;
+	size_t i;
 
 	if (!hex_cnt)
 		return;
@@ -322,14 +323,12 @@ static void btoh(const unsigned char byte, char ** const p)
  */
 static int chksum(void)
 {
-	int i, j, sum;
+	size_t i, sum;
 
 	sum = hex_cnt;
 	sum += hex_adr >> 8;
 	sum += hex_adr & 0xff;
-	for (i = 0; i < hex_cnt; i++) {
-		j = hex_buf[i];
-		sum += j & 0xff;
-	}
+	for (i = 0; i < hex_cnt; i++)
+		sum += hex_buf[i] & 0xff;
 	return (0x100 - (sum & 0xff));
 }

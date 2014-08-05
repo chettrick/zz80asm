@@ -8,6 +8,8 @@
  */
 
 #include <ctype.h>
+#include <err.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,6 +18,7 @@
 #include "zz80asm.h"
 
 extern const char *__progname;
+extern size_t datalen;
 
 static void usage(void) __attribute__((__noreturn__));
 static void pass1(void);
@@ -83,9 +86,19 @@ int main(int argc, char *argv[])
 	ver_flag = 0;
 	iflevel = 0;			/* IF nesting level */
 	errfp = stdout;
+	datalen = 16;			/* default num of bytes/hex record */
 
-	while ((ch = getopt(argc, argv, "f:l::o:s:vx")) != -1) {
+
+	while ((ch = getopt(argc, argv, "b:f:l::o:s:vx")) != -1) {
 		switch (ch) {
+		case 'b':
+			errno = 0;
+			datalen = strtoul(optarg, NULL, 0);
+			if ((datalen <= 0) || (datalen > 255) || (errno != 0)) {
+				errx(1, "%s: bad length value", optarg);
+				/* NOTREACHED */
+			}
+			break;
 		case 'f':
 			switch (*optarg) {
 			case 'b':
@@ -496,7 +509,7 @@ void fatal(enum fatal_type ft, const char * const arg)
 static void usage(void)
 {
 	(void)fprintf(stderr,
-	    "usage: %s [-f b|h|m] [-l[listfile]] [-o outfile] [-s a|n] [-v] "
-	    "[-x] filename ...\n", __progname);
+	    "usage: %s [-b length] [-f b|h|m] [-l[listfile]] [-o outfile] "
+	    "[-s a|n] [-v] [-x] filename ...\n", __progname);
 	exit(1);
 }
