@@ -248,7 +248,7 @@ int op_misc(const int op_code)
 			p = operand;
 			while (*p) {
 				if (*p != STRSEP)
-					putc(*p++, stdout);
+					fputc(*p++, stdout);
 				else
 					p++;
 			}
