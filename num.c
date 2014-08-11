@@ -155,7 +155,7 @@ hyp_error:
 			goto eval_break;
 		}
 	}
-	eval_break:
+eval_break:
 	return(val);
 }
 
