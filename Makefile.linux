@@ -28,4 +28,8 @@ install: ${PROG}
 	install ${PROG} ${BINDIR}
 	install ${PROG}.1 ${MANDIR}
 
-.PHONY: all clean install
+uninstall:
+	rm ${BINDIR}/${PROG} 
+	rm ${MANDIR}/${PROG}.1 
+
+.PHONY: all clean install uninstall
