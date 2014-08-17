@@ -14,6 +14,10 @@ CFLAGS+=	-Wfloat-equal -Wcast-align -Wstrict-aliasing=2
 
 all: readme
 
+uninstall:
+	rm ${BINDIR}/${PROG}
+	rm ${MANDIR}1/${PROG}.1
+
 readme: ${PROG}.1
 	mandoc ${.CURDIR}/${PROG}.1 | col -bx > ${.CURDIR}/README
 
