@@ -14,11 +14,11 @@
 
 extern const char *__progname;
 
-static void flush_hex(void);
-static int chksum(void);
-static void btoh(const unsigned char, char ** const);
+static void	flush_hex(void);
+static int	chksum(void);
+static void	btoh(const unsigned char, char ** const);
 
-static char *errmsg[] = {		/* error messages for asmerr() */
+static char	*errmsg[] = {		/* error messages for asmerr() */
 	"illegal opcode",		/* 0 */
 	"illegal operand",		/* 1 */
 	"missing operand",		/* 2 */
@@ -36,21 +36,22 @@ static char *errmsg[] = {		/* error messages for asmerr() */
 
 #define MAXHEX 255			/* max num of bytes per hex record */
 
-size_t	p_line;				/* no. printed lines on page */
-size_t datalen;				/* number of bytes per hex record */
+size_t		p_line;			/* no. printed lines on page */
+size_t		datalen;		/* number of bytes per hex record */
 
-static unsigned short hex_adr;		/* current address in hex record */
-static size_t hex_cnt;			/* current no bytes in hex buffer */
+static unsigned	short hex_adr;		/* current address in hex record */
+static size_t	hex_cnt;		/* current no bytes in hex buffer */
 
-static unsigned char hex_buf[MAXHEX];	/* buffer for one hex record */
-static char hex_out[MAXHEX * 2 + 11];	/* ASCII buffer for one hex record */
+static unsigned	char hex_buf[MAXHEX];	/* buffer for one hex record */
+static char	hex_out[MAXHEX * 2 + 11]; /* ASCII buffer for one hex record */
 
-static int errnum = 0;			/* error number in pass 2 */
+static int	errnum = 0;		/* error number in pass 2 */
 
 /*
  *	print error message to listfile and increase error counter
  */
-void asmerr(enum err_type et)
+void
+asmerr(enum err_type et)
 {
 	if (pass == 1) {
 		fprintf(errfp, "Error in file: %s Line: %zu\n", srcfn, c_line);
@@ -63,9 +64,10 @@ void asmerr(enum err_type et)
 /*
  *	begin new page in listfile
  */
-void lst_header(void)
+void
+lst_header(void)
 {
-	static size_t page = 0;		/* no. of pages for listing */
+	static size_t	page = 0;	/* no. of pages for listing */
 
 	fprintf(lstfp, "\f%s\t\tRelease %s\t\t\t\tPage %zu\n",
 	    __progname, REL, ++page);
@@ -77,7 +79,8 @@ void lst_header(void)
 /*
  *	print header for source lines
  */
-void lst_attl(void)
+void
+lst_attl(void)
 {
 	fprintf(lstfp, "\nLOC   OBJECT CODE   LINE   STMT SOURCE CODE\n");
 	p_line += 2;
@@ -86,9 +89,10 @@ void lst_attl(void)
 /*
  *	print one line into listfile if -l option set
  */
-void lst_line(const int val, int opanz)
+void
+lst_line(const int val, int opanz)
 {
-	int i;
+	int	i;
 
 	if (!list_flag || sd_flag == 4) {
 		sd_flag = 0;
@@ -177,9 +181,10 @@ no_data:
 /*
  *	print sorted symbol table into listfile
  */
-void lst_sort_sym(const size_t len)
+void
+lst_sort_sym(const size_t len)
 {
-	size_t i, j;
+	size_t	i, j;
 
 	p_line = j = 0;
 	strlcpy(title, "Symbol table", sizeof(title));
@@ -205,7 +210,8 @@ void lst_sort_sym(const size_t len)
 /*
  *	write header record into object file
  */
-void obj_header(void)
+void
+obj_header(void)
 {
 	switch (out_form) {
 	case OUTBIN:
@@ -224,7 +230,8 @@ void obj_header(void)
 /*
  *	write end record into object file
  */
-void obj_end(void)
+void
+obj_end(void)
 {
 	switch (out_form) {
 	case OUTBIN:
@@ -240,9 +247,10 @@ void obj_end(void)
 /*
  *	write opcodes in ops[] into object file
  */
-void obj_writeb(size_t opanz)
+void
+obj_writeb(size_t opanz)
 {
-	int i;
+	int	i;
 
 	switch (out_form) {
 	case OUTBIN:
@@ -262,7 +270,8 @@ void obj_writeb(size_t opanz)
 /*
  *	write <count> bytes 0xff into object file
  */
-void obj_fill(int count)
+void
+obj_fill(int count)
 {
 	switch (out_form) {
 	case OUTBIN:
@@ -280,18 +289,19 @@ void obj_fill(int count)
 /*
  *	create a hex record in ASCII and write into object file
  */
-static void flush_hex(void)
+static void
+flush_hex(void)
 {
-	char *p;
-	size_t i;
+	char	*p;
+	size_t	 i;
 
 	if (!hex_cnt)
 		return;
 	p = hex_out;
 	*p++ = ':';
-	btoh((unsigned char) hex_cnt, &p);
-	btoh((unsigned char) (hex_adr >> 8), &p);
-	btoh((unsigned char) (hex_adr & 0xff), &p);
+	btoh((unsigned char)hex_cnt, &p);
+	btoh((unsigned char)(hex_adr >> 8), &p);
+	btoh((unsigned char)(hex_adr & 0xff), &p);
 	*p++ = '0';
 	*p++ = '0';
 	for (i = 0; i < hex_cnt; i++)
@@ -308,9 +318,10 @@ static void flush_hex(void)
  *	convert unsigned char into ASCII hex and copy to string at p
  *	increase p by 2
  */
-static void btoh(const unsigned char byte, char ** const p)
+static void
+btoh(const unsigned char byte, char ** const p)
 {
-	unsigned char c;
+	unsigned char	c;
 
 	c = byte >> 4;
 	*(*p)++ = (c < 10) ? (char)(c + '0') : (char)(c - 10 + 'A');
@@ -321,9 +332,10 @@ static void btoh(const unsigned char byte, char ** const p)
 /*
  *	compute checksum for Intel hex record
  */
-static int chksum(void)
+static int
+chksum(void)
 {
-	size_t i, sum;
+	size_t	i, sum;
 
 	sum = hex_cnt;
 	sum += hex_adr >> 8;

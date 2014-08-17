@@ -14,11 +14,11 @@
 #include "zz80asm.h"
 #include "tab.h"
 
-struct sym *symtab[HASHSIZE];	/* symbol table */
-struct sym **symarray;		/* sorted symbol table */
+struct sym	 *symtab[HASHSIZE];	/* symbol table */
+struct sym	**symarray;		/* sorted symbol table */
 
-static int hash(const char *);
-static int numcmp(const int, const int);
+static int 	hash(const char *);
+static int 	numcmp(const int, const int);
 
 /*
  *	binary search in sorted table opctab
@@ -27,10 +27,11 @@ static int numcmp(const int, const int);
  *
  *	Output: pointer to table element, or NULL if not found
  */
-struct opc *search_op(const char * const op_name)
+struct opc *
+search_op(const char * const op_name)
 {
-	int cond;
-	struct opc *low, *high, *mid;
+	int		 cond;
+	struct opc	*low, *mid, *high;
 
 	low = &opctab[0];
 	high = &opctab[no_opcodes - 1];
@@ -41,9 +42,9 @@ struct opc *search_op(const char * const op_name)
 		else if (cond > 0)
 			low = mid + 1;
 		else
-			return(mid);
+			return (mid);
 	}
-	return(NULL);
+	return (NULL);
 }
 
 /*
@@ -54,13 +55,14 @@ struct opc *search_op(const char * const op_name)
  *	Output: symbol for operand, NOOPERA if empty operand,
  *		NOREG if operand not found
  */
-int get_reg(const char * const s)
+int
+get_reg(const char * const s)
 {
-	int cond;
-	struct ope *low, *high, *mid;
+	int		 cond;
+	struct ope	*low, *mid, *high;
 
 	if (s == NULL || *s == '\0')
-		return(NOOPERA);
+		return (NOOPERA);
 	low = &opetab[0];
 	high = &opetab[no_operands - 1];
 	while (low <= high) {
@@ -70,9 +72,9 @@ int get_reg(const char * const s)
 		else if (cond > 0)
 			low = mid + 1;
 		else
-			return(mid->ope_sym);
+			return (mid->ope_sym);
 	}
-	return(NOREG);
+	return (NOREG);
 }
 
 /*
@@ -82,14 +84,15 @@ int get_reg(const char * const s)
  *
  *	Output: pointer to table element, or NULL if not found
  */
-struct sym *get_sym(const char * const sym_name)
+struct sym *
+get_sym(const char * const sym_name)
 {
-	struct sym *np;
+	struct sym	*np;
 
 	for (np = symtab[hash(sym_name)]; np != NULL; np = np->sym_next)
 		if (strcmp(sym_name, np->sym_name) == 0)
-			return(np);
-	return(NULL);
+			return (np);
+	return (NULL);
 }
 
 /*
@@ -101,31 +104,33 @@ struct sym *get_sym(const char * const sym_name)
  *	Output: 0 symbol added/modified
  *		1 out of memory
  */
-int put_sym(const char * const sym_name, const int sym_val)
+int
+put_sym(const char * const sym_name, const int sym_val)
 {
-	int hashval;
-	struct sym *np;
+	int		 hashval;
+	struct sym	*np;
 
 	if (!gencode)
-		return(0);
+		return (0);
 	if ((np = get_sym(sym_name)) == NULL) {
 		np = malloc(sizeof(struct sym));
 		if (np == NULL)
-			return(1);
+			return (1);
 		if ((np->sym_name = strdup(sym_name)) == NULL)
-			return(1);
+			return (1);
 		hashval = hash(sym_name);
 		np->sym_next = symtab[hashval];
 		symtab[hashval] = np;
 	}
 	np->sym_val = sym_val;
-	return(0);
+	return (0);
 }
 
 /*
  *	add label to symbol table, error if symbol already exists
  */
-void put_label(void)
+void
+put_label(void)
 {
 	if (get_sym(label) == NULL) {
 		if (put_sym(label, pc))
@@ -141,26 +146,28 @@ void put_label(void)
  *
  *	Output: hash value
  */
-static int hash(const char * name)
+static int
+hash(const char * name)
 {
-	int hashval;
+	int 	hashval;
 
 	for (hashval = 0; *name;)
 		hashval += *name++;
-	return(hashval % HASHSIZE);
+	return (hashval % HASHSIZE);
 }
 
 /*
  *	copy whole symbol hash table into allocated pointer array
  *	used for sorting the symbol table later
  */
-size_t copy_sym(void)
+size_t
+copy_sym(void)
 {
-	size_t i, j;
-	size_t symsize;		/* size of symarray */
-	struct sym *np;
-	size_t newsize;		/* new size of symarray */
-	struct sym **newarray;	/* new sorted symbol table */
+	size_t		  i, j;
+	size_t		  symsize;	/* size of symarray */
+	struct sym	 *np;
+	size_t		  newsize;	/* new size of symarray */
+	struct sym	**newarray;	/* new sorted symbol table */
 
 	symsize = SYMINC;
 	symarray = calloc(symsize, sizeof(struct sym *));
@@ -188,16 +195,17 @@ size_t copy_sym(void)
 			}
 		}
 	}
-	return(j);
+	return (j);
 }
 
 /*
  *	sort symbol table by address or name
  */
-void sort_sym(const size_t len, int flag)
+void
+sort_sym(const size_t len, int flag)
 {
-	int gap, i, j;
-	struct sym *temp;
+	int		 gap, i, j;
+	struct sym	*temp;
 
 	for (gap = (int)(len / 2); gap > 0; gap /= 2) {
 		for (i = gap; i < (int)len; i++) {
@@ -223,12 +231,13 @@ void sort_sym(const size_t len, int flag)
 /*
  *	compares two 16bit values, result like strcmp()
  */
-static int numcmp(const int n1, const int n2)
+static int
+numcmp(const int n1, const int n2)
 {
 	if ((unsigned int)(n1 & 0xffff) < (unsigned int)(n2 & 0xffff))
-		return(-1);
+		return (-1);
 	else if ((unsigned int)(n1 & 0xffff) > (unsigned int)(n2 & 0xffff))
-		return(1);
+		return (1);
 	else
-		return(0);
+		return (0);
 }

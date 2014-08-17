@@ -106,7 +106,7 @@ static struct opc opctab[] = {
 /*
  *	compute no. of table entries for search_op()
  */
-static int no_opcodes = sizeof(opctab) / sizeof(struct opc);
+static int	no_opcodes = sizeof(opctab) / sizeof(struct opc);
 
 /*
  *	table with reserved operand words: registers and flags
@@ -147,6 +147,6 @@ static struct ope opetab[] = {
 /*
  *	compute no. of table entries
  */
-static int no_operands = sizeof(opetab) / sizeof(struct ope);
+static int	no_operands = sizeof(opetab) / sizeof(struct ope);
 
 #endif /* _TAB_H_ */

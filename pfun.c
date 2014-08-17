@@ -24,16 +24,17 @@ static int	prg_flag = 0;		/* flag for prg_adr valid */
 /*
  *	ORG
  */
-int op_org(void)
+int
+op_org(void)
 {
-	int i;
+	int	i;
 
 	if (!gencode)
-		return(0);
+		return (0);
 	i = eval(operand);
 	if (i < pc) {
 		asmerr(E_MEMOVR);
-		return(0);
+		return (0);
 	}
 	if (pass == 1) {		/* PASS 1 */
 		if (!prg_flag) {
@@ -46,16 +47,17 @@ int op_org(void)
 		sd_flag = 2;
 	}
 	pc = i;
-	return(0);
+	return (0);
 }
 
 /*
  *	EQU
  */
-int op_equ(void)
+int
+op_equ(void)
 {
 	if (!gencode)
-		return(0);
+		return (0);
 	if (pass == 1) {		/* Pass 1 */
 		if (get_sym(label) == NULL) {
 			sd_val = eval(operand);
@@ -67,32 +69,34 @@ int op_equ(void)
 		sd_flag = 1;
 		sd_val = eval(operand);
 	}
-	return(0);
+	return (0);
 }
 
 /*
  *	DEFL
  */
-int op_dl(void)
+int
+op_dl(void)
 {
 	if (!gencode)
-		return(0);
+		return (0);
 	sd_flag = 1;
 	sd_val = eval(operand);
 	if (put_sym(label, sd_val))
 		fatal(F_OUTMEM, "symbols");
-	return(0);
+	return (0);
 }
 
 /*
  *	DEFS
  */
-int op_ds(void)
+int
+op_ds(void)
 {
-	int val;
+	int	val;
 
 	if (!gencode)
-		return(0);
+		return (0);
 	if ((pass == 1) && *label)
 		put_label();
 	sd_val = pc;
@@ -101,20 +105,20 @@ int op_ds(void)
 	if ((pass == 2) && dump_flag)
 		obj_fill(val);
 	pc += val;
-	return(0);
+	return (0);
 }
 
 /*
  *	DEFB
  */
-int op_db(void)
+int
+op_db(void)
 {
-	int i;
-	char *p;
-	char *s;
+	int	 i;
+	char	*p, *s;
 
 	if (!gencode)
-		return(0);
+		return (0);
 	i = 0;
 	p = operand;
 	if ((pass == 1) && *label)
@@ -128,8 +132,10 @@ int op_db(void)
 					goto hyp_error;
 				}
 				ops[i++] = *p++;
-				if (i >= OPCARRAY)
-				    fatal(F_INTERN, "Op-Code buffer overflow");
+				if (i >= OPCARRAY) {
+					fatal(F_INTERN,
+					    "Op-Code buffer overflow");
+				}
 			}
 			p++;
 		} else {
@@ -145,26 +151,27 @@ int op_db(void)
 			p++;
 	}
 hyp_error:
-	return(i);
+	return (i);
 }
 
 /*
  *	DEFM
  */
-int op_dm(void)
+int
+op_dm(void)
 {
-	int i;
-	char *p;
+	int	 i;
+	char	*p;
 
 	if (!gencode)
-		return(0);
+		return (0);
 	i = 0;
 	p = operand;
 	if ((pass == 1) && *label)
 		put_label();
 	if (*p != STRSEP) {
 		asmerr(E_MISHYP);
-		return(0);
+		return (0);
 	}
 	p++;
 	while (*p != STRSEP) {
@@ -176,20 +183,20 @@ int op_dm(void)
 		if (i >= OPCARRAY)
 			fatal(F_INTERN, "Op-Code buffer overflow");
 	}
-	return(i);
+	return (i);
 }
 
 /*
  *	DEFW
  */
-int op_dw(void)
+int
+op_dw(void)
 {
-	int i, len, temp;
-	char *p;
-	char *s;
+	int	 i, len, temp;
+	char	*p, *s;
 
 	if (!gencode)
-		return(0);
+		return (0);
 	p = operand;
 	i = len = 0;
 	if ((pass == 1) && *label)
@@ -210,23 +217,24 @@ int op_dw(void)
 		if (*p == ',')
 			p++;
 	}
-	return(len);
+	return (len);
 }
 
 /*
  *	EJECT, LIST, NOLIST, PAGE, PRINT, TITLE, INCLUDE
  */
-int op_misc(const int op_code)
+int
+op_misc(const int op_code)
 {
-	char *p, *d;
-	static char fn[PATH_MAX];
-	static int incnest;
-	static struct inc incl[INCNEST];
+	char		*p, *d;
+	static char	 fn[PATH_MAX];
+	static int	 incnest;
+	static struct	 inc incl[INCNEST];
 
 	if (!gencode)
-		return(0);
+		return (0);
 	sd_flag = 2;
-	switch(op_code) {
+	switch (op_code) {
 	case 1:				/* EJECT */
 		if (pass == 2)
 			p_line = ppl;
@@ -266,13 +274,13 @@ int op_misc(const int op_code)
 		incnest++;
 		p = line;
 		d = fn;
-		while(isspace((int)*p))	/* ignore white space until INCLUDE */
+		while (isspace((int)*p))	/* no white space to INCLUDE */
 			p++;
-		while(!isspace((int)*p))/* ignore INCLUDE */
+		while (!isspace((int)*p))	/* ignore INCLUDE */
 			p++;
-		while(isspace((int)*p))	/* ignore white space until filename */
+		while (isspace((int)*p))	/* no white space to filename */
 			p++;
-		while(!isspace((int)*p) && *p != COMMENT) /* get filename */
+		while (!isspace((int)*p) && *p != COMMENT) /* get filename */
 			*d++ = *p++;
 		*d = '\0';
 		if (pass == 1) {	/* PASS 1 */
@@ -302,11 +310,11 @@ int op_misc(const int op_code)
 		if (pass == 2) {
 			p = line;
 			d = title;
-			while (isspace((int)*p)) /* ignore white space until TITLE */
+			while (isspace((int)*p)) /* no white space to TITLE */
 				p++;
-			while (!isspace((int)*p))/* ignore TITLE */
+			while (!isspace((int)*p))	/* ignore TITLE */
 				p++;
-			while (isspace((int)*p)) /* ignore white space until text */
+			while (isspace((int)*p)) /* no white space to text */
 				p++;
 			if (*p == STRSEP)
 				p++;
@@ -319,18 +327,19 @@ int op_misc(const int op_code)
 		fatal(F_INTERN, "illegal opcode for function op_misc");
 		/* NOTREACHED */
 	}
-	return(0);
+	return (0);
 }
 
 /*
  *	IFDEF, IFNDEF, IFEQ, IFNEQ, ELSE, ENDIF
  */
-int op_cond(const int op_code)
+int
+op_cond(const int op_code)
 {
-	char *p, *p1, *p2;
-	static int condnest[IFNEST];
+	char		*p, *p1, *p2;
+	static int	 condnest[IFNEST];
 
-	switch(op_code) {
+	switch (op_code) {
 	case 1:				/* IFDEF */
 		if (iflevel >= IFNEST) {
 			asmerr(E_IFNEST);
@@ -396,9 +405,8 @@ int op_cond(const int op_code)
 	case 98:			/* ELSE */
 		if (!iflevel)
 			asmerr(E_MISIFF);
-		else
-			if ((iflevel == 0) || (condnest[iflevel - 1] == 1))
-				gencode = !gencode;
+		else if ((iflevel == 0) || (condnest[iflevel - 1] == 1))
+			gencode = !gencode;
 		break;
 	case 99:			/* ENDIF */
 		if (!iflevel)
@@ -411,18 +419,19 @@ int op_cond(const int op_code)
 		/* NOTREACHED */
 	}
 	sd_flag = 2;
-	return(0);
+	return (0);
 }
 
 /*
  *	EXTRN and PUBLIC
  */
-int op_glob(const int op_code)
+int
+op_glob(const int op_code)
 {
 	if (!gencode)
-		return(0);
+		return (0);
 	sd_flag = 2;
-	switch(op_code) {
+	switch (op_code) {
 	case 1:				/* EXTRN */
 		break;
 	case 2:				/* PUBLIC */
@@ -431,5 +440,5 @@ int op_glob(const int op_code)
 		fatal(F_INTERN, "illegal opcode for function op_glob");
 		/* NOTREACHED */
 	}
-	return(0);
+	return (0);
 }
