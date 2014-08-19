@@ -28,10 +28,10 @@
 #define SYMINC		100	/* start size of sorted symbol array */
 
 enum {
-	COMMENT		= ';',	/* inline comment character */
-	LINCOM		= '*',	/* comment line if in column 1 */
-	LABSEP		= ':',	/* label separator */
-	STRSEP		= '\''	/* string separator */
+	COMMENT = ';',		/* inline comment character */
+	LINCOM = '*',		/* comment line if in column 1 */
+	LABSEP = ':',		/* label separator */
+	STRSEP = '\''		/* string separator */
 };
 
 enum {
@@ -47,66 +47,66 @@ enum {
  *	be changed!
  */
 enum {
-	REGB		= 0,	/* register B */
-	REGC		= 1,	/* register C */
-	REGD		= 2,	/* register D */
-	REGE		= 3,	/* register E */
-	REGH		= 4,	/* register H */
-	REGL		= 5,	/* register L */
-	REGIHL		= 6,	/* register indirect HL */
-	REGA		= 7,	/* register A */
-	REGI		= 8,	/* register I */
-	REGR		= 9,	/* register R */
-	REGAF		= 10,	/* register pair AF */
-	REGBC		= 11,	/* register pair BC */
-	REGDE		= 12,	/* register pair DE */
-	REGHL		= 13,	/* register pair HL */
-	REGIX		= 14,	/* register IX */
-	REGIY		= 15,	/* register IY */
-	REGSP		= 16,	/* register SP */
-	REGIBC		= 17,	/* register indirect BC */
-	REGIDE		= 18,	/* register indirect DE */
-	REGIIX		= 19,	/* register indirect IX */
-	REGIIY		= 20,	/* register indirect IY */
-	REGISP		= 21,	/* register indirect SP */
-	FLGNC		= 30,	/* flag no carry */
-	FLGNZ		= 31,	/* flag not zero */
-	FLGZ		= 32,	/* flag zero */
-	FLGM		= 33,	/* flag minus */
-	FLGP		= 34,	/* flag plus */
-	FLGPE		= 35,	/* flag parity even */
-	FLGPO		= 36,	/* flag parity odd */
-	NOOPERA		= 98,	/* no operand */
-	NOREG		= 99	/* operand isn't register */
+	REGB = 0,		/* register B */
+	REGC = 1,		/* register C */
+	REGD = 2,		/* register D */
+	REGE = 3,		/* register E */
+	REGH = 4,		/* register H */
+	REGL = 5,		/* register L */
+	REGIHL = 6,		/* register indirect HL */
+	REGA = 7,		/* register A */
+	REGI = 8,		/* register I */
+	REGR = 9,		/* register R */
+	REGAF = 10,		/* register pair AF */
+	REGBC = 11,		/* register pair BC */
+	REGDE = 12,		/* register pair DE */
+	REGHL = 13,		/* register pair HL */
+	REGIX = 14,		/* register IX */
+	REGIY = 15,		/* register IY */
+	REGSP = 16,		/* register SP */
+	REGIBC = 17,		/* register indirect BC */
+	REGIDE = 18,		/* register indirect DE */
+	REGIIX = 19,		/* register indirect IX */
+	REGIIY = 20,		/* register indirect IY */
+	REGISP = 21,		/* register indirect SP */
+	FLGNC = 30,		/* flag no carry */
+	FLGNZ = 31,		/* flag not zero */
+	FLGZ = 32,		/* flag zero */
+	FLGM = 33,		/* flag minus */
+	FLGP = 34,		/* flag plus */
+	FLGPE = 35,		/* flag parity even */
+	FLGPO = 36,		/* flag parity odd */
+	NOOPERA = 98,		/* no operand */
+	NOREG = 99		/* operand isn't register */
 };
 
 /*
  *	definitions of error numbers for error messages in listfile
  */
 enum err_type {
-	E_ILLOPC	= 0,	/* illegal opcode */
-	E_ILLOPE	= 1,	/* illegal operand */
-	E_MISOPE	= 2,	/* missing operand */
-	E_MULSYM	= 3,	/* multiple defined symbol */
-	E_UNDSYM	= 4,	/* undefined symbol */
-	E_VALOUT	= 5,	/* value out of bounds */
-	E_MISPAR	= 6,	/* missing paren */
-	E_MISHYP	= 7,	/* missing string separator */
-	E_MEMOVR	= 8,	/* memory override (ORG) */
-	E_MISIFF	= 9,	/* missing IF at ELSE or ENDIF */
-	E_IFNEST	= 10,	/* to many IF's nested */
-	E_MISEIF	= 11,	/* missing ENDIF */
-	E_INCNEST	= 12	/* to many INCLUDE's nested */
+	E_ILLOPC = 0,		/* illegal opcode */
+	E_ILLOPE = 1,		/* illegal operand */
+	E_MISOPE = 2,		/* missing operand */
+	E_MULSYM = 3,		/* multiple defined symbol */
+	E_UNDSYM = 4,		/* undefined symbol */
+	E_VALOUT = 5,		/* value out of bounds */
+	E_MISPAR = 6,		/* missing paren */
+	E_MISHYP = 7,		/* missing string separator */
+	E_MEMOVR = 8,		/* memory override (ORG) */
+	E_MISIFF = 9,		/* missing IF at ELSE or ENDIF */
+	E_IFNEST = 10,		/* to many IF's nested */
+	E_MISEIF = 11,		/* missing ENDIF */
+	E_INCNEST = 12		/* to many INCLUDE's nested */
 };
 
 /*
  *	definition fatal errors
  */
 enum fatal_type {
-	F_OUTMEM	= 0,	/* out of memory */
-	F_HALT		= 1,	/* assembly halted */
-	F_FOPEN		= 2,	/* can't open file */
-	F_INTERN	= 3	/* internal error */
+	F_OUTMEM = 0,		/* out of memory */
+	F_HALT = 1,		/* assembly halted */
+	F_FOPEN = 2,		/* can't open file */
+	F_INTERN = 3		/* internal error */
 };
 
 /*
@@ -186,63 +186,63 @@ extern size_t	 p_line;	/* no. printed lines on page */
 extern size_t	 ppl;		/* page length */
 extern size_t	 datalen;	/* number of bytes per hex record */
 
-extern struct sym *symtab[HASHSIZE];	/* symbol table */
-extern struct sym **symarray;	/* sorted symbol table */
+extern struct sym	 *symtab[HASHSIZE];	/* symbol table */
+extern struct sym	**symarray;		/* sorted symbol table */
 
 /*
  *	function prototypes
  */
 /* num.c */
-int eval(const char *);
-int chk_v1(const int);
-int chk_v2(const int);
+int	eval(const char *);
+int	chk_v1(const int);
+int	chk_v2(const int);
 
 /* out.c */
-void asmerr(enum err_type);
-void lst_header(void);
-void lst_attl(void);
-void lst_line(const int, int);
-void lst_sort_sym(const size_t);
-void obj_header(void);
-void obj_end(void);
-void obj_writeb(size_t);
-void obj_fill(int);
+void 	asmerr(enum err_type);
+void 	lst_header(void);
+void 	lst_attl(void);
+void 	lst_line(const int, int);
+void 	lst_sort_sym(const size_t);
+void 	obj_header(void);
+void 	obj_end(void);
+void 	obj_writeb(size_t);
+void 	obj_fill(int);
 
 /* pfun.c */
-int op_org(void);
-int op_equ(void);
-int op_dl(void);
-int op_ds(void);
-int op_db(void);
-int op_dm(void);
-int op_dw(void);
-int op_misc(const int);
-int op_cond(const int);
-int op_glob(const int);
+int 	op_org(void);
+int 	op_equ(void);
+int 	op_dl(void);
+int 	op_ds(void);
+int 	op_db(void);
+int 	op_dm(void);
+int 	op_dw(void);
+int 	op_misc(const int);
+int 	op_cond(const int);
+int 	op_glob(const int);
 
 /* rfun.c */
-int op_1b(const int), op_2b(const int, const int), op_pupo(const int);
-int op_ex(void), op_ld(void), op_call(void), op_ret(void);
-int op_jp(void), op_jr(void), op_djnz(void), op_rst(void);
-int op_add(void), op_adc(void), op_sub(void), op_sbc(void), op_cp(void);
-int op_inc(void), op_dec(void), op_or(void), op_xor(void), op_and(void);
-int op_rl(void), op_rr(void), op_sla(void), op_sra(void), op_srl(void);
-int op_rlc(void), op_rrc(void);
-int op_out(void), op_in(void), op_im(void);
-int op_set(void), op_res(void), op_bit(void);
+int 	op_1b(const int), op_2b(const int, const int), op_pupo(const int);
+int 	op_ex(void), op_ld(void), op_call(void), op_ret(void);
+int 	op_jp(void), op_jr(void), op_djnz(void), op_rst(void);
+int 	op_add(void), op_adc(void), op_sub(void), op_sbc(void), op_cp(void);
+int 	op_inc(void), op_dec(void), op_or(void), op_xor(void), op_and(void);
+int 	op_rl(void), op_rr(void), op_sla(void), op_sra(void), op_srl(void);
+int 	op_rlc(void), op_rrc(void);
+int 	op_out(void), op_in(void), op_im(void);
+int 	op_set(void), op_res(void), op_bit(void);
 
 /* tab.c */
-struct opc *search_op(const char * const);
-struct sym *get_sym(const char * const);
-int put_sym(const char * const, const int);
-int get_reg(const char * const);
-void put_label(void);
-size_t copy_sym(void);
-void sort_sym(const size_t, int);
+struct opc	*search_op(const char * const);
+struct sym	*get_sym(const char * const);
+int		 put_sym(const char * const, const int);
+int		 get_reg(const char * const);
+void		 put_label(void);
+size_t		 copy_sym(void);
+void		 sort_sym(const size_t, int);
 
 /* zz80asm.c */
-void fatal(enum fatal_type, const char * const) __attribute__((noreturn));
-void p1_file(char * const);
-void p2_file(char * const);
+void 	fatal(enum fatal_type, const char * const)__attribute__((noreturn));
+void 	p1_file(char * const);
+void 	p2_file(char * const);
 
 #endif /* _ZZ80ASM_H_ */
