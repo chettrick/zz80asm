@@ -19,66 +19,66 @@
 
 extern const char *__progname;
 
-static void 	usage(void) __attribute__((__noreturn__));
-static void 	pass1(void);
-static void 	pass2(void);
-static int 	p1_line(void);
-static int 	p2_line(void);
-static void 	open_o_files(const char *const);
-static void 	get_fn(char *const, char *const, const char *const);
-static char    *get_label(char *, char *);
-static char    *get_opcode(char *, char *);
-static char    *get_arg(char *, char *);
+static void	 usage(void)__attribute__((__noreturn__));
+static void 	 pass1(void);
+static void 	 pass2(void);
+static int 	 p1_line(void);
+static int 	 p2_line(void);
+static void 	 open_o_files(const char * const);
+static void 	 get_fn(char * const, char * const, const char * const);
+static char	*get_label(char *, char *);
+static char	*get_opcode(char *, char *);
+static char	*get_arg(char *, char *);
 
-FILE           *srcfp;		/* file pointer for current source */
-FILE           *objfp;		/* file pointer for object code */
-FILE           *lstfp;		/* file pointer for listing */
-FILE           *errfp;		/* file pointer for error output */
+FILE		*srcfp;		/* file pointer for current source */
+FILE		*objfp;		/* file pointer for object code */
+FILE		*lstfp;		/* file pointer for listing */
+FILE		*errfp;		/* file pointer for error output */
 
-char           *srcfn;		/* filename of current processed source file */
-char 		line     [LINE_MAX];	/* buffer for one line source */
-char 		label    [SYMSIZE + 1];	/* buffer for label */
-char 		operand  [LINE_MAX];	/* buffer for operand */
+char		*srcfn;		/* filename of current processed source file */
+char		 line[LINE_MAX];	/* buffer for one line source */
+char		 label[SYMSIZE + 1];	/* buffer for label */
+char		 operand[LINE_MAX];	/* buffer for operand */
 
-uint8_t 	list_flag;	/* flag for option -l */
-uint8_t 	ver_flag;	/* flag for option -v */
-uint8_t 	dump_flag;	/* flag for option -x */
-int 		pc;		/* program counter */
-uint8_t 	pass;		/* processed pass */
-int 		iflevel;	/* IF nesting level */
-int 		gencode;	/* flag for conditional object code */
-int 		errors;		/* error counter */
-uint8_t 	sd_flag;	/* list flag for PSEUDO opcodes */
-/* = 0: addr from <val>, data from <ops> */
-/* = 1: addr from <sd_val>, data from <ops> */
-/* = 2: no addr, data from <ops> */
-/* = 3: addr from <sd_val>, no data */
-/* = 4: suppress whole line */
-uint8_t 	out_form;	/* format of object file */
+uint8_t		 list_flag;	/* flag for option -l */
+uint8_t		 ver_flag;	/* flag for option -v */
+uint8_t		 dump_flag;	/* flag for option -x */
+int		 pc;		/* program counter */
+uint8_t		 pass;		/* processed pass */
+int		 iflevel;	/* IF nesting level */
+int		 gencode;	/* flag for conditional object code */
+int		 errors;	/* error counter */
+uint8_t		 sd_flag;	/* list flag for PSEUDO opcodes */
+				/* = 0: addr from <val>, data from <ops> */
+				/* = 1: addr from <sd_val>, data from <ops> */
+				/* = 2: no addr, data from <ops> */
+				/* = 3: addr from <sd_val>, no data */
+				/* = 4: suppress whole line */
+uint8_t		 out_form;	/* format of object file */
 
-size_t 		c_line;		/* current line no. in current source */
-size_t 		s_line;		/* line no. counter for listing */
-size_t 		datalen;	/* number of bytes per hex record */
+size_t		 c_line;	/* current line no. in current source */
+size_t		 s_line;	/* line no. counter for listing */
+size_t		 datalen;	/* number of bytes per hex record */
 
-static char    *errmsg[] = {	/* error messages for fatal() */
+static char	*errmsg[] = {	/* error messages for fatal() */
 	"out of memory: %s",	/* 0 */
 	"assembly halted",	/* 1 */
 	"can't open file %s",	/* 2 */
 	"internal error: %s"	/* 3 */
 };
 
-static char    *infiles[MAXFN];	/* source filenames */
-static char 	objfn[PATH_MAX];/* object filename */
-static char 	lstfn[PATH_MAX];/* listing filename */
-static char 	opcode[LINE_MAX];	/* buffer for opcode */
+static char	*infiles[MAXFN];	/* source filenames */
+static char	 objfn[PATH_MAX];	/* object filename */
+static char	 lstfn[PATH_MAX];	/* listing filename */
+static char	 opcode[LINE_MAX];	/* buffer for opcode */
 
-int 
+int
 main(int argc, char *argv[])
 {
-	int 		i        , ch;
-	size_t 		len;
+	int	i, ch;
+	size_t	len;
 
-	int 		sym_flag = 0;	/* flag for option -s */
+	int	sym_flag = 0;	/* flag for option -s */
 
 	/* program defaults */
 	gencode = 1;
@@ -199,7 +199,7 @@ main(int argc, char *argv[])
 void 
 pass1(void)
 {
-	int 		fi;
+	int	fi;
 
 	pass = 1;
 	pc = 0;
@@ -227,14 +227,15 @@ pass1(void)
  *
  *	Input: name of source file
  */
-void 
-p1_file(char *const fn)
+void
+p1_file(char * const fn)
 {
 	c_line = 0;
 	srcfn = fn;
 	if ((srcfp = fopen(fn, "r")) == NULL)
 		fatal(F_FOPEN, fn);
-	while (p1_line());
+	while (p1_line())
+		;
 	fclose(srcfp);
 	if (iflevel)
 		asmerr(E_MISEIF);
@@ -247,12 +248,12 @@ p1_file(char *const fn)
  *	Output: 1 line processed
  *		0 EOF
  */
-int 
+int
 p1_line(void)
 {
-	char           *p;
-	int 		i;
-	struct opc     *op;
+	char		*p;
+	int		 i;
+	struct opc	*op;
 
 	if ((p = fgets(line, LINE_MAX, srcfp)) == NULL)
 		return (0);
@@ -264,7 +265,7 @@ p1_line(void)
 		return (0);
 	if (*opcode) {
 		if ((op = search_op(opcode)) != NULL) {
-			i = (*op->op_fun) (op->op_c1, op->op_c2);
+			i = (*op->op_fun)(op->op_c1, op->op_c2);
 			if (gencode)
 				pc += i;
 		} else
@@ -278,10 +279,10 @@ p1_line(void)
  *	Pass 2:
  *	  - process all source files
  */
-void 
+void
 pass2(void)
 {
-	int 		fi;
+	int	fi;
 
 	pass = 2;
 	pc = 0;
@@ -307,14 +308,15 @@ pass2(void)
  *
  *	Input: name of source file
  */
-void 
-p2_file(char *const fn)
+void
+p2_file(char * const fn)
 {
 	c_line = 0;
 	srcfn = fn;
 	if ((srcfp = fopen(fn, "r")) == NULL)
 		fatal(F_FOPEN, fn);
-	while (p2_line());
+	while (p2_line())
+		;
 	fclose(srcfp);
 }
 
@@ -325,12 +327,12 @@ p2_file(char *const fn)
  *	Output: 1 line processed
  *		0 EOF
  */
-int 
+int
 p2_line(void)
 {
-	char           *p;
-	int 		op_count;
-	struct opc     *op;
+	char		*p;
+	int		 op_count;
+	struct opc	*op;
 
 	if ((p = fgets(line, LINE_MAX, srcfp)) == NULL)
 		return (0);
@@ -345,10 +347,10 @@ p2_line(void)
 	}
 	if (*opcode) {
 		op = search_op(opcode);
-		op_count = (*op->op_fun) (op->op_c1, op->op_c2);
+		op_count = (*op->op_fun)(op->op_c1, op->op_c2);
 		if (gencode) {
 			lst_line(pc, op_count);
-			obj_writeb((size_t) op_count);
+			obj_writeb((size_t)op_count);
 			pc += op_count;
 		} else {
 			sd_flag = 2;
@@ -367,10 +369,10 @@ p2_line(void)
  *	list and object filenames are built from source filename if
  *	not given by options
  */
-void 
-open_o_files(const char *const source)
+void
+open_o_files(const char * const source)
 {
-	char           *p;
+	char	*p;
 
 	if (*objfn == '\0') {
 		strlcpy(objfn, source, sizeof(objfn));
@@ -406,11 +408,11 @@ open_o_files(const char *const source)
 /*
  *	create a filename in "dest" from "src" and "ext"
  */
-void 
-get_fn(char *const dest, char *const src, const char *const ext)
+void
+get_fn(char * const dest, char * const src, const char * const ext)
 {
-	int 		i;
-	char           *sp, *dp;
+	int	 i;
+	char	*sp, *dp;
 
 	i = 0;
 	sp = src;
@@ -427,16 +429,16 @@ get_fn(char *const dest, char *const src, const char *const ext)
  *	get labels, constants and variables from source line
  *	convert names to upper case and truncate length of name
  */
-char           *
+char *
 get_label(char *s, char *l)
 {
-	int 		i;
+	int	i;
 
 	if (*l == LINCOM)
 		goto comment;
 	for (i = 0; !isspace(*l) && *l != COMMENT && *l != LABSEP &&
 	     i < SYMSIZE; i++)
-		*s++ = islower(*l) ? (char) toupper(*l++) : *l++;
+		*s++ = islower(*l) ? (char)toupper(*l++) : *l++;
 comment:
 	*s = '\0';
 	return (l);
@@ -446,7 +448,7 @@ comment:
  *	get opcode into s from source line l
  *	converts to upper case
  */
-char           *
+char *
 get_opcode(char *s, char *l)
 {
 	if (*l == LINCOM)
@@ -458,7 +460,7 @@ get_opcode(char *s, char *l)
 	while (*l == ' ' || *l == '\t')
 		l++;
 	while (!isspace(*l) && *l != COMMENT)
-		*s++ = islower(*l) ? (char) toupper(*l++) : *l++;
+		*s++ = islower(*l) ? (char)toupper(*l++) : *l++;
 comment:
 	*s = '\0';
 	return (l);
@@ -469,7 +471,7 @@ comment:
  *	converts to upper case
  *	strings inside of 's are copied without changes
  */
-char           *
+char *
 get_arg(char *s, char *l)
 {
 	if (*l == LINCOM)
@@ -482,7 +484,7 @@ get_arg(char *s, char *l)
 			continue;
 		}
 		if (*l != STRSEP) {
-			*s++ = islower(*l) ? (char) toupper(*l) : *l;
+			*s++ = islower(*l) ? (char)toupper(*l) : *l;
 			l++;
 			continue;
 		}
@@ -504,8 +506,8 @@ comment:
 /*
  *	print error messages and abort
  */
-void 
-fatal(enum fatal_type ft, const char *const arg)
+void
+fatal(enum fatal_type ft, const char * const arg)
 {
 	fprintf(errfp, "%s %s\n", errmsg[ft], arg);
 	exit(1);
@@ -514,11 +516,11 @@ fatal(enum fatal_type ft, const char *const arg)
 /*
  *	error in options, print usage
  */
-static void 
+static void
 usage(void)
 {
-	(void) fprintf(stderr,
-	     "usage: %s [-b length] [-f b|h|m] [-l[listfile]] [-o outfile] "
-		       "[-s a|n] [-v] [-x] filename ...\n", __progname);
+	(void)fprintf(stderr,
+	    "usage: %s [-b length] [-f b|h|m] [-l[listfile]] [-o outfile] "
+	    "[-s a|n] [-v] [-x] filename ...\n", __progname);
 	exit(1);
 }
