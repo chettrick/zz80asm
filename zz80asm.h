@@ -28,10 +28,10 @@
 #define SYMINC		100	/* start size of sorted symbol array */
 
 enum {
-	COMMENT = ';',		/* inline comment character */
-	LINCOM = '*',		/* comment line if in column 1 */
-	LABSEP = ':',		/* label separator */
-	STRSEP = '\''		/* string separator */
+	COMMENT		= ';',	/* inline comment character */
+	LINCOM		= '*',	/* comment line if in column 1 */
+	LABSEP		= ':',	/* label separator */
+	STRSEP		= '\''	/* string separator */
 };
 
 enum {
@@ -47,66 +47,66 @@ enum {
  *	be changed!
  */
 enum {
-	REGB = 0,		/* register B */
-	REGC = 1,		/* register C */
-	REGD = 2,		/* register D */
-	REGE = 3,		/* register E */
-	REGH = 4,		/* register H */
-	REGL = 5,		/* register L */
-	REGIHL = 6,		/* register indirect HL */
-	REGA = 7,		/* register A */
-	REGI = 8,		/* register I */
-	REGR = 9,		/* register R */
-	REGAF = 10,		/* register pair AF */
-	REGBC = 11,		/* register pair BC */
-	REGDE = 12,		/* register pair DE */
-	REGHL = 13,		/* register pair HL */
-	REGIX = 14,		/* register IX */
-	REGIY = 15,		/* register IY */
-	REGSP = 16,		/* register SP */
-	REGIBC = 17,		/* register indirect BC */
-	REGIDE = 18,		/* register indirect DE */
-	REGIIX = 19,		/* register indirect IX */
-	REGIIY = 20,		/* register indirect IY */
-	REGISP = 21,		/* register indirect SP */
-	FLGNC = 30,		/* flag no carry */
-	FLGNZ = 31,		/* flag not zero */
-	FLGZ = 32,		/* flag zero */
-	FLGM = 33,		/* flag minus */
-	FLGP = 34,		/* flag plus */
-	FLGPE = 35,		/* flag parity even */
-	FLGPO = 36,		/* flag parity odd */
-	NOOPERA = 98,		/* no operand */
-	NOREG = 99		/* operand isn't register */
+	REGB		= 0,	/* register B */
+	REGC		= 1,	/* register C */
+	REGD		= 2,	/* register D */
+	REGE		= 3,	/* register E */
+	REGH		= 4,	/* register H */
+	REGL		= 5,	/* register L */
+	REGIHL		= 6,	/* register indirect HL */
+	REGA		= 7,	/* register A */
+	REGI		= 8,	/* register I */
+	REGR		= 9,	/* register R */
+	REGAF		= 10,	/* register pair AF */
+	REGBC		= 11,	/* register pair BC */
+	REGDE		= 12,	/* register pair DE */
+	REGHL		= 13,	/* register pair HL */
+	REGIX		= 14,	/* register IX */
+	REGIY		= 15,	/* register IY */
+	REGSP		= 16,	/* register SP */
+	REGIBC		= 17,	/* register indirect BC */
+	REGIDE		= 18,	/* register indirect DE */
+	REGIIX		= 19,	/* register indirect IX */
+	REGIIY		= 20,	/* register indirect IY */
+	REGISP		= 21,	/* register indirect SP */
+	FLGNC		= 30,	/* flag no carry */
+	FLGNZ		= 31,	/* flag not zero */
+	FLGZ		= 32,	/* flag zero */
+	FLGM		= 33,	/* flag minus */
+	FLGP		= 34,	/* flag plus */
+	FLGPE		= 35,	/* flag parity even */
+	FLGPO		= 36,	/* flag parity odd */
+	NOOPERA		= 98,	/* no operand */
+	NOREG		= 99	/* operand isn't register */
 };
 
 /*
  *	definitions of error numbers for error messages in listfile
  */
 enum err_type {
-	E_ILLOPC = 0,		/* illegal opcode */
-	E_ILLOPE = 1,		/* illegal operand */
-	E_MISOPE = 2,		/* missing operand */
-	E_MULSYM = 3,		/* multiple defined symbol */
-	E_UNDSYM = 4,		/* undefined symbol */
-	E_VALOUT = 5,		/* value out of bounds */
-	E_MISPAR = 6,		/* missing paren */
-	E_MISHYP = 7,		/* missing string separator */
-	E_MEMOVR = 8,		/* memory override (ORG) */
-	E_MISIFF = 9,		/* missing IF at ELSE or ENDIF */
-	E_IFNEST = 10,		/* to many IF's nested */
-	E_MISEIF = 11,		/* missing ENDIF */
-	E_INCNEST = 12		/* to many INCLUDE's nested */
+	E_ILLOPC	= 0,	/* illegal opcode */
+	E_ILLOPE	= 1,	/* illegal operand */
+	E_MISOPE	= 2,	/* missing operand */
+	E_MULSYM	= 3,	/* multiple defined symbol */
+	E_UNDSYM	= 4,	/* undefined symbol */
+	E_VALOUT	= 5,	/* value out of bounds */
+	E_MISPAR	= 6,	/* missing paren */
+	E_MISHYP	= 7,	/* missing string separator */
+	E_MEMOVR	= 8,	/* memory override (ORG) */
+	E_MISIFF	= 9,	/* missing IF at ELSE or ENDIF */
+	E_IFNEST	= 10,	/* to many IF's nested */
+	E_MISEIF	= 11,	/* missing ENDIF */
+	E_INCNEST	= 12	/* to many INCLUDE's nested */
 };
 
 /*
  *	definition fatal errors
  */
 enum fatal_type {
-	F_OUTMEM = 0,		/* out of memory */
-	F_HALT = 1,		/* assembly halted */
-	F_FOPEN = 2,		/* can't open file */
-	F_INTERN = 3		/* internal error */
+	F_OUTMEM	= 0,	/* out of memory */
+	F_HALT		= 1,	/* assembly halted */
+	F_FOPEN		= 2,	/* can't open file */
+	F_INTERN	= 3	/* internal error */
 };
 
 /*
@@ -186,8 +186,8 @@ extern size_t	 p_line;	/* no. printed lines on page */
 extern size_t	 ppl;		/* page length */
 extern size_t	 datalen;	/* number of bytes per hex record */
 
-extern struct sym	 *symtab[HASHSIZE];	/* symbol table */
-extern struct sym	**symarray;		/* sorted symbol table */
+extern struct	sym *symtab[HASHSIZE];	/* symbol table */
+extern struct	sym **symarray;		/* sorted symbol table */
 
 /*
  *	function prototypes
