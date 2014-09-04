@@ -1,5 +1,6 @@
-BINDIR?=	/usr/local/bin
-MANDIR?=	/usr/local/man/man
+PREFIX?=	/usr/local
+BINDIR?=	${PREFIX}/bin
+MANDIR?=	${PREFIX}/man/man
 
 PROG=		zz80asm
 
@@ -21,5 +22,5 @@ uninstall:
 readme: ${PROG}.1
 	mandoc ${.CURDIR}/${PROG}.1 | col -bx > ${.CURDIR}/README
 
-.PHONY: all readme
+.PHONY: all readme uninstall
 .include <bsd.prog.mk>

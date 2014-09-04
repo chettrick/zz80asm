@@ -1,5 +1,6 @@
-BINDIR?=	/usr/local/bin
-MANDIR?=	/usr/local/share/man/man1
+PREFIX?=	/usr/local
+BINDIR?=	${PREFIX}/bin
+MANDIR?=	${PREFIX}/share/man/man1
 
 PROG=		zz80asm
 
