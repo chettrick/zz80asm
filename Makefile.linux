@@ -15,7 +15,7 @@ CFLAGS+=	-Wfloat-equal -Wcast-align -Wstrict-aliasing=2
 
 CFLAGS+=	-Wno-char-subscripts -Wno-implicit-function-declaration
 
-all: ${PROG}
+all: ${PROG} readme
 
 ${PROG}: ${SRCS}
 	${CC} ${CFLAGS} ${SRCS} -o $@
@@ -30,7 +30,10 @@ install: ${PROG}
 	install ${PROG}.1 ${MANDIR}
 
 uninstall:
-	rm ${BINDIR}/${PROG} 
-	rm ${MANDIR}/${PROG}.1 
+	rm ${BINDIR}/${PROG}
+	rm ${MANDIR}/${PROG}.1
 
-.PHONY: all clean install uninstall
+readme: ${PROG}.1
+	mandoc ${.CURDIR}/${PROG}.1 | col -bx > ${.CURDIR}/README
+
+.PHONY: all clean install uninstall readme
