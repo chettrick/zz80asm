@@ -18,7 +18,7 @@
 .\" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 .\" DEALINGS IN THE SOFTWARE.
 .\"
-.Dd $Mdocdate: August 4 2014 $
+.Dd $Mdocdate: November 12 2017 $
 .Dt ZZ80ASM 1
 .Os
 .Sh NAME
@@ -28,7 +28,7 @@
 .Nm zz80asm
 .Op Fl b Ar length
 .Op Fl f Ar b|h|m
-.Op Fl l Ns Op Ar listfile
+.Op Fl l Op Ar listfile
 .Op Fl o Ar outfile
 .Op Fl s Ar a|n
 .Op Fl v
@@ -68,9 +68,9 @@ The default length is 16 decimal.
 .It Fl f Ar b|h|m
 Format
 .Ar outfile
-as either binary, binary with Mostek header, or Intel Hex, respectively.
+as either binary, Intex Hex, or binary with Mostek header, respectively.
 Intel Hex is the default format.
-.It Fl l Ns Op Ar listfile
+.It Fl l Op Ar listfile
 Generate listing file as
 .Ar listfile ,
 or as
@@ -80,9 +80,9 @@ by default.
 Set output filename to
 .Ar outfile
 instead of the default
-.Ar filename.bin
+.Ar filename.hex
 or
-.Ar filename.hex .
+.Ar filename.bin .
 .It Fl s Ar a|n
 Generate symbol table at end of listing file.
 This option only works in combination with

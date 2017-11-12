@@ -1,10 +1,10 @@
-ZZ80ASM(1)                 OpenBSD Reference Manual                 ZZ80ASM(1)
+ZZ80ASM(1)                  General Commands Manual                 ZZ80ASM(1)
 
 NAME
      zz80asm - z80 cross assembler
 
 SYNOPSIS
-     zz80asm [-b length] [-f b|h|m] [-l[listfile]] [-o outfile] [-s a|n] [-v]
+     zz80asm [-b length] [-f b|h|m] [-l [listfile]] [-o outfile] [-s a|n] [-v]
              [-x] filename ...
 
 DESCRIPTION
@@ -21,15 +21,15 @@ DESCRIPTION
              number.  The default length is 16 decimal.
 
      -f b|h|m
-             Format outfile as either binary, binary with Mostek header, or
-             Intel Hex, respectively.  Intel Hex is the default format.
+             Format outfile as either binary, Intex Hex, or binary with Mostek
+             header, respectively.  Intel Hex is the default format.
 
-     -l[listfile]
+     -l [listfile]
              Generate listing file as listfile, or as filename.lst by default.
 
      -o outfile
              Set output filename to outfile instead of the default
-             filename.bin or filename.hex.
+             filename.hex or filename.bin.
 
      -s a|n  Generate symbol table at end of listing file.  This option only
              works in combination with -l.  a and n sort the symbol table by
@@ -107,4 +107,4 @@ AUTHORS
      zz80asm was written by Udo Munk <udo.munk@freenet.de> and updated by
      Chris Hettrick <chris@structfoo.com>.
 
-OpenBSD 5.5                     August 4, 2014                     OpenBSD 5.5
+OpenBSD 6.2                    November 12, 2017                   OpenBSD 6.2
