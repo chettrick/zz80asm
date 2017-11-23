@@ -537,7 +537,7 @@ static void
 usage(void)
 {
 	(void)fprintf(stderr,
-	    "usage: %s [-b length] [-f b|h|m] [-l[listfile]] [-o outfile] "
+	    "usage: %s [-b length] [-f b|h|m] [-l [listfile]] [-o outfile] "
 	    "[-s a|n] [-v] [-x] filename ...\n", __progname);
 	exit(1);
 }
