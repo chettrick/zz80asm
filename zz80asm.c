@@ -213,7 +213,7 @@ main(int argc, char *argv[])
  *	Pass 1:
  *	  - process all source files
  */
-void 
+static void
 pass1(void)
 {
 	int	fi;
@@ -265,7 +265,7 @@ p1_file(char * const fn)
  *	Output: 1 line processed
  *		0 EOF
  */
-int
+static int
 p1_line(void)
 {
 	char		*p;
@@ -296,7 +296,7 @@ p1_line(void)
  *	Pass 2:
  *	  - process all source files
  */
-void
+static void
 pass2(void)
 {
 	int	fi;
@@ -344,7 +344,7 @@ p2_file(char * const fn)
  *	Output: 1 line processed
  *		0 EOF
  */
-int
+static int
 p2_line(void)
 {
 	char		*p;
@@ -386,7 +386,7 @@ p2_line(void)
  *	list and object filenames are built from source filename if
  *	not given by options
  */
-void
+static void
 open_o_files(const char * const source)
 {
 	char	*p;
@@ -425,7 +425,7 @@ open_o_files(const char * const source)
 /*
  *	create a filename in "dest" from "src" and "ext"
  */
-void
+static void
 get_fn(char * const dest, char * const src, const char * const ext)
 {
 	int	 i;
@@ -446,7 +446,7 @@ get_fn(char * const dest, char * const src, const char * const ext)
  *	get labels, constants and variables from source line
  *	convert names to upper case and truncate length of name
  */
-char *
+static char *
 get_label(char *s, char *l)
 {
 	int	i;
@@ -465,7 +465,7 @@ comment:
  *	get opcode into s from source line l
  *	converts to upper case
  */
-char *
+static char *
 get_opcode(char *s, char *l)
 {
 	if (*l == LINCOM)
@@ -488,7 +488,7 @@ comment:
  *	converts to upper case
  *	strings inside of 's are copied without changes
  */
-char *
+static char *
 get_arg(char *s, char *l)
 {
 	if (*l == LINCOM)

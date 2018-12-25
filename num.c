@@ -274,7 +274,7 @@ aotoi(const char *str)
  *	conversion of string with binary number to integer
  *	format: nnnnnnnnnnnnnnnnB
  */
-int
+static int
 abtoi(const char *str)
 {
 	int 	num;
