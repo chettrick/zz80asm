@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _TAB_H_
-#define _TAB_H_
+#ifndef TAB_H
+#define TAB_H
 
 /*
  *	opcode table:
@@ -166,4 +166,4 @@ static struct ope opetab[] = {
  */
 static int	no_operands = sizeof(opetab) / sizeof(struct ope);
 
-#endif /* _TAB_H_ */
+#endif /* TAB_H */
