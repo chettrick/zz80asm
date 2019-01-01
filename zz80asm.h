@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _ZZ80ASM_H_
-#define _ZZ80ASM_H_
+#ifndef ZZ80ASM_H
+#define ZZ80ASM_H
 
 #include <limits.h>
 #include <stdint.h>
@@ -262,4 +262,4 @@ void 	fatal(enum fatal_type, const char * const)__attribute__((noreturn));
 void 	p1_file(char * const);
 void 	p2_file(char * const);
 
-#endif /* _ZZ80ASM_H_ */
+#endif /* ZZ80ASM_H */
