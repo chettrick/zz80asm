@@ -25,7 +25,7 @@ utility assembles the files
 and writes to the output file
 *outfile*,
 and optionally the listing file
-*listfile.*
+*listfile*.
 
 The options are as follows:
 
@@ -96,7 +96,7 @@ The options are as follows:
 
 # PSEUDO OPERATIONS
 
-## Symbol definition and memory allocation:
+## Symbol definition and memory allocation
 
 ORG &lt;expression&gt;
 
@@ -126,7 +126,7 @@ ORG &lt;expression&gt;
 
 > Reserve space in memory.
 
-## Conditional assembly:
+## Conditional assembly
 
 IFDEF &lt;symbol&gt;
 
@@ -152,7 +152,7 @@ ENDIF
 
 > End of conditional assembly.
 
-## Manipulation of list file:
+## Manipulation of list file
 
 TITLE &lt;'string'&gt;
 
@@ -174,7 +174,7 @@ NOLIST
 
 > Turn listing off.
 
-## Miscellaneous:
+## Miscellaneous
 
 INCLUDE &lt;filename&gt;
 

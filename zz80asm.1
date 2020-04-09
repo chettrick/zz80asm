@@ -42,7 +42,7 @@ utility assembles the files
 and writes to the output file
 .Ar outfile ,
 and optionally the listing file
-.Ar listfile.
+.Ar listfile .
 .Pp
 The options are as follows:
 .Bl -tag -width Ds
@@ -99,7 +99,7 @@ Do not output data into
 for DEFS in pass two of the assembler.
 .El
 .Sh PSEUDO OPERATIONS
-.Ss Symbol definition and memory allocation:
+.Ss Symbol definition and memory allocation
 .Bl -tag -width autoselect -offset indent
 .It ORG Ao expression Ac
 Set program address.
@@ -116,7 +116,7 @@ Write character string in memory.
 .It Ao symbol Ac DEFS Ao expression Ac
 Reserve space in memory.
 .El
-.Ss Conditional assembly:
+.Ss Conditional assembly
 .Bl -tag -width autoselect -offset indent
 .It IFDEF Ao symbol Ac
 Assemble if symbol defined.
@@ -131,7 +131,7 @@ Else clause for all conditionals.
 .It ENDIF
 End of conditional assembly.
 .El
-.Ss Manipulation of list file:
+.Ss Manipulation of list file
 .Bl -tag -width autoselect -offset indent
 .It TITLE Ao 'string' Ac
 Title for page header.
@@ -144,7 +144,7 @@ Turn listing on.
 .It NOLIST
 Turn listing off.
 .El
-.Ss Miscellaneous:
+.Ss Miscellaneous
 .Bl -tag -width autoselect -offset indent
 .It INCLUDE Ao filename Ac
 Include another source file.
